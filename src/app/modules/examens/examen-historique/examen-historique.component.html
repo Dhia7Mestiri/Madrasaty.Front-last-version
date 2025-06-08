@@ -1,0 +1,269 @@
+<!-- <p-toast></p-toast>
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <form [formGroup]="examenSearchForm">
+                <p-dropdown class="me-2" [options]="ExamensListForsearch" optionValue="Id" formControlName="ExamenId"
+                    placeholder="Sélectionnez le nom d'Examen..." optionLabel="Wording"></p-dropdown>
+                <p-dropdown class="me-2" [options]="teachers" optionValue="Id" formControlName="TeacherId"
+                    placeholder="Sélectionnez le nom d'enseignant..." optionLabel="FullName"></p-dropdown>
+                <p-dropdown class="me-2" [options]="ExamensDatesForsearch" optionValue="DateExamen"
+                    formControlName="ExamenDate" placeholder="Sélectionnez la date d'Examen..."
+                    optionLabel="DateExamen"></p-dropdown>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <p-button pRipple label="Clear" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="ResetForm()"
+                class="me-2"></p-button>
+            <p-button pRipple label="filtre" icon="pi pi-filter" styleClass="p-button-outlined"
+                (click)="submitFilter()"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Examens" [rows]="7" responsiveLayout="scroll" rowExpandMode="single" [rowHover]="true"
+        dataKey="Id">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Gérer Examens Historique</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                </th>
+                <th style="width: 3rem"> </th>
+                <th pSortableColumn="RecitationTitle">Titre d'Examen<p-sortIcon field="RecitationTitle"></p-sortIcon>
+                </th>
+                <th pSortableColumn="Teacher">Nom de enseignant<p-sortIcon field="Teacher"></p-sortIcon></th>
+                <th pSortableColumn="Coefficient">Coefficient<p-sortIcon field="Coefficient"></p-sortIcon></th>
+                <th pSortableColumn="StartDate">Date <p-sortIcon field="StartDate"></p-sortIcon></th>
+
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="symbol symbol-50px me-5">
+                            <img class="img" [src]="getStudentPhoto(item.TeacherPhoto)" />
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="item"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                        (click)="getExamenNotes(item)"></button>
+                </td>
+
+                <td>{{item.Wording}}</td>
+                <td>{{item.Teacher}}</td>
+                <td>{{item.Coefficient}}</td>
+                <td> Le {{item.StartDate | date }} de {{item.StartDate | date:'HH:mm' }} vers {{item.StartDate |
+                    date:'HH:mm'}}</td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success p-button-outlined mr-2"
+                        (click)="editProduct(item)"></button>
+                    <button pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger p-button-outlined"
+                        (click)="deleteItem(item.Id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-item>
+            <tr>
+                <td colspan="9">
+                    <p-table dataKey="ExamenId" [value]="noteHistorique" [scrollable]="true" scrollHeight="300px"
+                        styleClass="p-datatable-striped">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="customer"></th>
+                                <th pSortableColumn="customer"> Nom d'élève <p-sortIcon field="customer"></p-sortIcon></th>
+                                <th pSortableColumn="customer"> Note<p-sortIcon field="customer"></p-sortIcon></th>
+                                <th pSortableColumn="customer"> Observation<p-sortIcon field="customer"></p-sortIcon></th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-note>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="symbol symbol-50px me-5">
+                                            <img class="img" [src]="getStudentPhoto(note.StudentPhoto)" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ note.StudentFullName }}
+                                </td>
+                                <td>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="note.Note" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{note.Note}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <textarea class="form-control" [(ngModel)]="note.Observation"></textarea>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{note.Observation}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td>
+                                    <button pButton pRipple type="button" icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-success p-button-outlined mr-2"
+                                        (click)="editProduct(item)"></button>
+                                    <button pButton pRipple type="button" icon="pi pi-trash"
+                                        class="p-button-rounded p-button-danger p-button-outlined"
+                                        (click)="deleteExamen(item)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Au total il y a {{Examens ? Examens.length : 0 }} Examens.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="ExamenDialog" [style]="{width: '600px',height:'680px'}"
+    header="Modifier les Detailes de Moutoun pour" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="ExamenForm" (ngSubmit)="saveExamen()">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Nom" required="false" type="text"
+                            formControlName="Wording">
+                        <label for="Nom">Nom</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Coefficient" required="false" type="text"
+                            formControlName="Coefficient">
+                        <label for="Coefficient">Coefficient</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+
+                        <select class="form-select" formControlName="SubjectId" id="SubjectId" required>
+                            <option *ngFor="let opt of Subjects" [value]="opt.Id">{{opt.Name}}</option>
+                        </select>
+                        <label for="SubjectId">Matière</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" formControlName="TeacherId" id="TeacherId" required>
+                            <option *ngFor="let opt of teachers" [value]="opt.Id">{{opt.FullName}}</option>
+                        </select>
+                        <label for="TeacherId">Enseignant</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+
+                        <select class="form-select" formControlName="DisciplineId" id="DisciplineId" required
+                            (ngModelChange)="refreshLevels($event)">
+                            <option *ngFor="let opt of disciplinesList" [value]="opt.Id">{{opt.Wording}}</option>
+                        </select>
+                        <label for="DisciplineId">Discipline</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+
+                        <select class="form-select" formControlName="SchoolYearPeriodicityId" id="Périodicité" required>
+                            <option *ngFor="let opt of Periodicities" [value]="opt.Id">{{opt.Wording}}</option>
+                        </select>
+                        <label for="Périodicité">Périodicité</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="StartDate">date début</label>
+                    <p-calendar formControlName="StartDate" [showIcon]="true" inputId="icon"></p-calendar>
+                </div>
+
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-6">
+                    <label>Heure de début</label>
+                    <ngb-timepicker formControlName="StartDate"></ngb-timepicker>
+
+                </div>
+                <div class="col-6">
+                    <label>heure de fin</label>
+                    <ngb-timepicker formControlName="EndDate"></ngb-timepicker>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveExamen()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<div class="mt-5">
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="paginate($event)"></p-paginator>
+</div> -->
+
+
+<div class="card card-page">
+    <div class="card-body">  
+
+    <app-data-table   #table [pageTitle]="pageTitle" [columns]="columns"
+    urlPath="examens" [urlParams]="urlParams" dataKey="Id" [page]="page"
+    [permissions]="permissions" (GridButtonClick)="editExamen($event)" >
+</app-data-table>
+
+    </div>
+</div>
+
+
+<app-generic-modal-dialog   [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="'general.ok' | translate" [backButtonCaption]="'general.cancel' | translate"
+    [page]="page" [saveAction]="saveAction">   
+    <app-edit-examen   #edit ></app-edit-examen>   
+</app-generic-modal-dialog>
+

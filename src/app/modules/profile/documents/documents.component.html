@@ -1,0 +1,115 @@
+<div class="d-flex flex-wrap flex-stack mb-6">
+  <div class="flex align-items-center">
+  <h3 class="fw-bolder my-2 me-3">
+    Mes documents
+  </h3>
+  <p-multiSelect  (onChange)="selectRolesForSearch($event)"  [options]="membersRole" defaultLabel="Select a role" optionLabel="label" optionValue="value" display="chip"></p-multiSelect>  
+</div>
+  <div class="d-flex my-2">
+    <div class="d-flex align-items-center position-relative me-4">
+  
+      <span
+        [inlineSVG]="'./assets/media/icons/duotune/general/gen021.svg'"
+        class="svg-icon svg-icon-3 position-absolute ms-3"
+      ></span>
+        <input type="text"
+        id="kt_filter_search" class="form-control ps-12"   placeholder="Rechercher..." />        
+    </div>
+    <button (click)="OpenDialog(-1)"  pTooltip="Ajouter" tooltipPosition="bottom" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn btn-icon btn-light-twitter  btn-lg me-2"  >
+      <i class="bi bi-plus fs-1"></i>
+    </button>   
+    
+  </div>
+</div>
+
+
+<app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+
+<ng-template #callAPIDialog>
+<form [formGroup]="DocumentForm" >
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="Name" required="false" formControlName="Name">
+    <label for="Name">Nom</label>
+  </div>
+  <div class="form-floating mb-3">   
+    <textarea class="form-control" id="Description" required="false" formControlName="Description" style="height: 130px;"  ></textarea>
+    <label for="Description">Description</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="URL" required="false" formControlName="DocumentUrl">
+    <label for="URL">Url</label>
+  </div>
+
+  <div class="card-footer py-6">
+
+  
+    <div class="col-lg-9">
+      <button
+        type="button"
+        (click)=" this.DocumentForm.reset()"
+        class=" btn btn-active-light btn-color-muted me-2 "      
+      >          
+          <span class="indicator-label">annuler</span>       
+
+      </button>
+
+      <button
+      data-bs-dismiss="offcanvas"
+      type="submit"
+      (click)="saveDocument()"      
+        class="btn btn-primary" >
+        <ng-container >
+          <span class="indicator-label">Confirmer</span>
+        </ng-container>
+
+        
+      </button>
+    </div>
+  </div>
+</form>
+</ng-template>
+
+
+
+
+
+<div class="row">
+<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6" *ngFor="let item of docsList">
+  <!--begin::Card-->
+  <div class="card card-custom gutter-b card-stretch">
+    <!--begin::Body-->
+    <div class="card-body text-center pt-4">  
+      <div class="mt-3">
+        <a type="submit" class="symbol symbol-75px mb-3 ">
+          <img  pTooltip="Cliquez pour ouvrir le lien"  (click)="openDocment(item.DocumentUrl,item.Name)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAADpCAMAAABx2AnXAAAAllBMVEX///8REiQAAADa2tsvLDm0tLf6+volIjF6eoAxMDpeXWYyLzxDQk6Qj5MtKzfv7/A+PUhvbnWcnKAAABoAABc2NEArKDcAABULDCCLipBnZm2kpKeYl53Q0NFVU12sq6/m5eZMSlS+vsEgHS26urxCQEyBgIfi4uLJyMt3dnxbWWOOjZQZGypiY2vV1dkAAB8AAA4bFypxuXDeAAAIoklEQVR4nO2djXaiPBCGASMgwUDABFDkRysVUbd7/zf3gbbdtitYdfjZfnl6PKLUwAvJMJkMQZIEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAsFVrA98/fwN1L73v4YVTe13WCxJMbNvIqXLvjVcIuMTTN5Z65KUa+QmMONF3yr+JuAsDcd/KOuiNb6N6YZpYd86vnLUGH24jVgRWycAOwNJgDWAtp9gPLRTluIcohiK5xDFALLBU4hidGxAFAOICSXsAFEMIEJYM0JYZwhhzWQ4gigGECBhMcIDc4SBhFmMmc8QBYEBJEwarxnKnGbiEcimvgeUMGmh4WsQbnR3VsGESUlgXumQMszQEWhrV4ETdh1rUbbEruIIXQqTpCdO4o421a0wKWVddW86FhZgs6MtdSxsijcdbalzYT/2jAlhDyKEwSCEPYwQBoMQ9jBC2BdWq7t+Nnhho/X6rn7+8IUhJIR9RAh7mP+ZMNVIm4MuV4WpqXGphL6FPctXhl6vCptj+VIMsW9hUoBQ42j5NWEhQsGl73sXJhmMN12CrwhbcXZ5TLp/YRZjvCEe3SzsmTNmXVzTvzBpyVmDAWkUpqaM1wwqDUCYFPOGFJBGYTnmdfHeIQiTMswXdeuahC04zurWDUKYGjFtW7OuQdhWY1FtHR6EMCnBdTagQVhpdXBSW+QwhElbUnfwa4WVp5nUnWZpMMIkhxDn4ooR55eF1f7izFCESdS7bN8szi9X0nhGm8objDCppo1Jap19qPvBmeEIA0YIexghDAYh7GGEMBiEsLtRz5yEqZ1xEva2DI81zjfaK7bNtA5htv22uMnHzV7KzcQbjieodyYTvoFMrFLnnPF0euMNRy0wTcsdmYPVSCvC2GjoMHXJ0sA4gqqOc8wvRjLPqMvqCF66XRFo818IONTNPuOGQEsJ/Z1L0gJfSA4FuWfpbzLMxxDlqCZrzI+f/y4PYL4m/C8YxOYvEMHknK54Y+C6vBDU3cmYAGz9nj36Jhm+MjzUOWra2Da+iwFzfx8kOcQtdWo6aQoh9YIzAahEqtkYG+sFhwBYDzXCDRexfghwfUD8+wzv5lfpgBsDkd8kwClAKaCkIJUoRnZLztG9WDaCcPGX/L70jPYYobrBz9uKwXwgnv0bW44hDnV54msHKfthAdQ4YJoqIFDmbA5iXAGBugBNB+YFlz4wzOQtY4QGZe8thEA6mqUR0gZl70cakJlONALRrwNjRbQEpqQ1HpS9X+A1UEkmSIcVjAwslk8nO6CSQNhNoC4/DuZAJYHAMVTPd4zWA7L31hrI2lf+fU1KTS+MOIhvX2FpaED2foU0qPqj2mhA8RwH2WAenoF1qKIeB3KeLn1Is9tEgEc5xJ3NPHEV1QScC++JswSssAdJGH8CK6w2hbIHQPclYQTuKD3IEwGsParZfNdKl4QIsr3vhmPvdQzpkYMMSMEAO1znIHMgbrBlgnpBK1KTgN05FgeNUxzhPOoHKXsakPNvlf49VB/oQcZwvv0JuF7rg0D35qOhpA7kwP54NoBhzVFlNWBSPP6w6D+eY7Hf26pNwMY4V7z3GcFHWmmZEw0k2+hTqX0Pa644foYfR7B47/bewUwFt/bVmFSnKekXOI1jwo/VzXtPYzllrcDvRv9pLHYV64AfD4caqb+bk1fXQgYDUG7F/Rwra99CzskzJ/3690/VyMiSNM3ScBeW3dncr5dZYCxJMQFvEL2nLebV6CNMouJn+k5jiSrvt43cyTYO1i3gskfYSrVpoXrfQoLIuJ2GvkXgBukWTqOqzxzBu+Ij1Kt//4RwUl5MW8gJVVGvaSwhKr3fBUYttHMbKOfsPvLqkSEFtlsoul///jRa3M4udDfX9wXOkW2gp019IUYQTx27kwTzlaRqIGnpX9mSHtMWlxwdpZHWNLXO3YAHiG5hTJhVpa4kLZSt4lYqwvcIqwYeI9xKY4h6TFs8jWO29TClvMe0xdNB3U3aGUCYtnJ5/BZlM1hULkI7IcAY1U1+1jonw2Wxlhp5aXL7CntkrAp4wNyE9DeW3dMTPdWQVE0sxG31CGmLTymydFpLiplpVdlhbQUntrw9Bz/+3fCsLn6wKte+vQ4hZVpbYy5WXn/GgkrQWGPtRZMsm9XP5NkuC87ajLmMbIaiVedOvrqKELNbdcETgzNCDL1TDEIYN5I2dZXEZvVgvkmXYKyZXfjfSyc3OiV3BpLvJBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAMltEPRVJ+KJL8QxHC/jVehfmvL/nDuyy7ruz/+VQtuX8+DpyzMN/2ZZ/sz8vsbd1sF3nEfpOyT31Z27F/RdlZmDs/uLNi5s3kmacEe9/zXN9T4hLqKJ6i+L6iTJaKwgLz3xLm7wtvnelhpmRhnoU4DHXTiUapolBrNz0uuXk8plvzSMxOz1jZDs5txK+W/df3t29O79Vn1/dd3y3bTfkqFz8Kk72pPKf5jNK5ogS/prJC893LZjnKaMiXyiFe2QpJjq7vd6jLJ9RgmrtfmzPu+maR2uW7vM9KJROXlEtr72CG6cKkhR3KYXYIoixgxdz9KMw1jMAID3PddL3Ad168eZa6L8qvURamY8V+2r68kGSpdVsP/UCnCxqksZHnsVnYMc3nRfpEFd2gVC9KKboS2nnmKA7dRbTwc6fUST8Jk/2Fvi98zkN/bxyoIRe7yHXodGuP0Iiu8ulYN7fp6KVTYbMsy2lamKF+KBw+L5zgkDn2IuNFmh2m88B2opRSIwz0Q2aHRUazwjlkweyTMJdqLglynwf5y0GZBxrCfhRmM89If4UH74VOOVVyu9tTttc8U+ZsL9su8U2f/Np4GtMI89KZ6WpctstvPVv2N7NUY2vP9Ijmmp/b2OkK5c/c06v8m1WtyS2tZNUyvfJ/Xa9slT1cxXz5bDTe//y3z6cP70uvy/77Vfinex4/DyHsX+M/GrvX8l0h7TcAAAAASUVORK5CYII=" alt=""  />
+        </a>
+        <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
+          <span class="font-size-h3 font-weight-boldest">JB</span>
+        </div>
+      </div>
+      <!--end::User-->
+      <!--begin::Name-->
+      <div class="my-2">
+        <h4 class="text-dark font-weight-bold text-hover-primary font-size-h3">{{item.Name}}</h4>
+      </div>
+      <!--end::Name-->
+      <!--begin::Label-->
+      <span  class="label label-inline label-lg label-light-warning btn-sm font-weight-bold ">{{item.Description | truncateString:90}}</span>
+      <!--end::Label-->
+      <!--begin::Buttons-->
+      <div class="mt-9 mb-6">
+        <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDialog(item.Id)"  (btnDeleteClick)="DeleteDocument('top',item.Id)"  ></app-shared-buttons>  
+
+      </div>
+      <!--end::Buttons-->
+    </div>
+    <!--end::Body-->
+  </div>
+  <!--end::Card-->
+</div>
+</div>
+<p-toast></p-toast>
+<p-confirmDialog [position]="position"  [style]="{width: '20vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<div class="mt-5">    
+  <p-paginator  [rows]="10"  [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
+  </div>

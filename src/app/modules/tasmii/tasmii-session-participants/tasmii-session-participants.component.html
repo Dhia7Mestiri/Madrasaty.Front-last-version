@@ -1,0 +1,100 @@
+<div class="card mb-5 mb-xl-8" style="width: 105%">
+    <div class="card-header border-0 pt-5">
+        <div class="card-toolbar">
+            <h4>List des Participants</h4>
+        </div>
+    </div>
+    <!-- end::Header -->
+    <!-- begin::Body -->
+    <div class="card-body py-3">
+        <!-- begin::Table container -->
+        <div class="table-responsive">
+
+
+            <p-table [value]="students" [reorderableColumns]="true" responsiveLayout="scroll">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th style="width:3rem"></th>
+                        <th style="width: 9%;"></th>
+                        <th>Etudiant</th>
+                        <th>Email</th>
+                        <th>Heure Début</th>
+                        <th>Contact</th>
+                        <th>Evaluation</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-index="rowIndex">
+                    <tr [pReorderableRow]="index">
+                        <td>
+                             <span class="pi pi-bars" pReorderableRowHandle></span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="symbol symbol-50px me-5">
+                                    <img class="img" [src]="getmemberPhotos(item.PhotoPath)" />
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+
+                            <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ">
+                                {{item.FullName}}
+                            </a>
+
+                        </td>
+                        <td>
+                            <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6 ">
+                                {{item.Email}}
+                            </a>
+
+                        </td>
+                        <td>
+                            <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" *ngIf="item.StartTime">
+  Le {{ item.StartTime.split('T')[0] }} à {{ item.StartTime.split('T')[1] }}
+</a>
+<a class="text-muted" *ngIf="!item.StartTime">
+  Heure non définie
+</a>
+
+                        </td>
+                        <td>
+                            <a style="border-radius:12px"
+                                class="btn btn-icon btn-light-facebook btn-sm me-3 h-45px w-45px">
+                                <span class="material-icons"></span>
+                            </a>
+                            <a style="border-radius:12px"
+                                class="btn btn-icon btn-light-twitter btn-sm me-3 h-45px w-45px">
+                                <i class="bi bi-skype fs-4"></i>
+                            </a>
+                        </td>
+
+                        <td>
+
+                            <div>
+                                <a [routerLink]="['/tasmii/tasmii/evaluation-detaillee/'+item.Id+'/'+sessionId]"
+                                    style="border-radius:12px;"
+                                    class="btn btn-icon btn-light-info btn-sm h-45px w-45px">
+                                    <span class="material-icons">Start</span>
+                                </a>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </ng-template>
+
+            </p-table>
+            <a matTooltip="Retour à la page des sessions de Moutoun"
+                class="btn btn-icon btn-bg btn-active-color-primary btn-sm mt-3"
+                [routerLink]="['/crafted/evaluation/TasmiiSession']">
+                <i class="fas fa-arrow-left" style="font-size: 30px"></i>
+            </a>
+            <button class="btn btn-primary align-self-center mt-3" style="float: right;"
+                matTooltip="update l'ordre de passage" (click)="UpdateOrder()"><i class="fa fa-refresh"
+                    aria-hidden="true"></i></button>
+        </div>
+
+
+    </div>
+</div>

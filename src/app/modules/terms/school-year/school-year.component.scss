@@ -1,0 +1,33 @@
+
+
+table {
+  width: 80%;
+}
+
+.mat-form-field{
+  width: 100%;
+}
+
+.table.gs-0 th:first-child, .table.gs-0 td:first-child {
+  padding-left: 1rem;
+}
+.table.gs-0 th:last-child, .table.gs-0 td:last-child {
+  padding-right: 1rem;
+}
+.cardAnimation {
+  transition: transform 400ms;
+  will-change: transform;
+
+}
+.cardAnimation:hover,
+.cardAnimation:focus {
+  transform: translateY(10px);
+}
+a:hover {
+  text-decoration:none!important;
+}
+:host ::ng-deep .p-calendar {
+  height: 3.7rem;
+  width: 20rem;
+}
+

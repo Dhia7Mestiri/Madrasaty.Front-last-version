@@ -1,0 +1,29 @@
+  table {
+    width: 80%;
+  }
+  .table.gs-0 th:first-child, .table.gs-0 td:first-child {
+    padding-left: 2rem;
+  }
+  .table.gs-0 th:last-child, .table.gs-0 td:last-child {
+    padding-right: 3rem;
+  }
+
+  .cardAnimation {
+    transition: transform 400ms;
+    will-change: transform;
+  
+  }
+  .cardAnimation:hover,
+  .cardAnimation:focus {
+    transform: translateY(10px);
+  }
+  
+  .mat-form-field{
+    width: 90%;
+  }
+  a:hover {
+    text-decoration:none!important;
+  }
+  
+  
+  

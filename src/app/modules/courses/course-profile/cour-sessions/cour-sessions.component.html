@@ -1,0 +1,109 @@
+<ng-container >
+    <app-tool-bar   
+    (BtnOpenClick)="OpenDiag(-1)" 
+    ToolBarName="Séance" 
+    ButtonName="Add Séance"  
+    ModalTarget="#kt_modal_Séance"                             
+    IsButtonExist="true"   
+    TableHref="#kt_Seance_table_pane"
+    CardHref="#kt_Seance_card_pane"                      
+    >
+</app-tool-bar>
+</ng-container>
+<div class="tab-content">
+    <div id="kt_Seance_card_pane" class="tab-pane fade  show active " role="tabpanel"> 
+<div class="row g-6 g-xl-9">
+    <div class="col-4" *ngFor="let item of SeancesByCourse">
+ 
+        <a  class="card border-hover-primary">     
+      
+            <div class="card-body d-flex flex-center flex-column  p-6 ">                                          
+                <div class="symbol symbol-65px symbol-circle mb-5 me-3">                                                      
+                    <img src="assets/media/svg/exam.svg" alt="image">                                                
+                </div>   
+                                                
+                <a href="javascript:;" class="fs-5 fw-bold text-dark mb-4"
+                    pTooltip="Voir Les details de {{item.Title}}"  [routerLink]="['/cour-session-profile/', item.Id]"
+                    >
+                        {{item.Title}}
+                </a>
+                <!-- [routerLink]="['/cour-session-profile/', item.Id]"  (click)="showSeance(item.Id)"-->
+
+                <div class="d-flex flex-wrap mb-3">
+                    <!--begin::Due-->
+                    <div class="border border-gray-300 border-dashed rounded w-92px py-2 px-2 me-3 mb-3">
+                        <div class="fs-6 text-gray-800 fw-bold">{{item.StartDate | date}} à {{item.StartDate |  date:'HH:mm'}} H</div>
+                        <div class="fw-semibold text-gray-400">
+                            Date</div>
+                    </div>
+                    <!--end::Due-->
+                    <!--begin::Budget-->
+                
+                    <!--end::Budget -->
+                </div>
+                <!--end::Info-->  
+                <div class="ms-5">
+                    <a class="btn btn-icon btn-light-youtube me-3 " (click)="deleteExamen(item.Id)" id="kt_docs_sweetalert_state_question"><i class="fas fa-trash fs-4"></i></a>
+                    <a class="btn btn-icon btn-light-linkedin me-5 " (click)="OpenDiag(item.Id)"  data-bs-toggle="modal" data-bs-target="#kt_modal_Examen"><i class="fas fa-pencil fs-4"></i></a>
+                </div>         
+          
+            </div>
+      
+
+            <!--end:: Card body -->
+        </a>
+        <!--end::Card-->
+    </div>    
+</div>                               
+</div>
+<div id="kt_Seance_table_pane" class="tab-pane fade" role="tabpanel">
+    <div class="card card-flush">
+        <div class="card-body pt-3">
+            <!--begin::Table-->
+            <div id="kt_profile_overview_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="table-wrapper"  style="height:567px;overflow:auto;">
+                    <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
+                <!--begin::Table head-->
+                <thead class="fs-7 text-gray-400 text-uppercase">
+                    <tr>
+                        <th class="min-w-110px sorting" >Name</th>
+                        <th class="min-w-110px sorting">Course</th>
+                        <th class="min-w-90px sorting" >Date</th>
+                        <th class="min-w-90px sorting" >Duration</th>
+
+                </thead>										
+                <tbody class="fs-6" *ngFor="let item of SeancesByCourse">
+                
+                <tr class="odd"  (click)="showSeance(item.Id)">
+                        <td class="fw-bold">
+                            <a  href="javascript:;" class="text-gray-900 text-hover-primary">{{item.Title}}</a>
+                        </td>
+                        <td >
+                            <a href="javascript:;" class="text-gray-900 text-hover-primary">{{Course?.Name}}</a>
+                        </td>                       
+                
+                        <td>
+                            <a href="javascript:;" class="text-gray-900 text-hover-primary">Le {{item.StartDate | date}} à {{item.StartDate |  date:'HH:mm'}} H </a>
+                        </td>
+                        
+                        <td>
+                            <a href="javascript:;" class="text-gray-900 text-hover-primary">{{item.Duration}} </a>
+                        </td>
+                        
+                    </tr></tbody>
+                <!--end::Table body-->
+            </table>
+            <!--end::Table-->
+        </div>
+    </div>
+ </div>
+</div>
+</div>
+</div>
+<!-- <p-paginator
+    [hidden]="hide"
+    [rows]="10"
+    [totalRecords]="120"
+    [rowsPerPageOptions]="[10, 20, 30]"
+    (onPageChange)="paginate($event)"
+></p-paginator> -->

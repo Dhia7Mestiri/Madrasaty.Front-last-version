@@ -1,0 +1,389 @@
+[
+  {
+    "label": "traits distinctifs des lettres",
+    "collapsedIcon": "pi pi-chevron-right",
+    "expandedIcon": "pi pi-chevron-down",
+    "children": [
+      {
+        "label": "perception légère du son",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "هـ"
+          }
+        ]
+      },
+      {
+        "label": "perception claire du son",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ج"
+          }
+        ]
+      },
+      {
+        "label": "Continuité compléte du son",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "خ"
+          }
+        ]
+      },
+      {
+        "label": "interruption du son",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ش"
+          }
+        ]
+      },
+      {
+        "label": "Continuité partielle du son",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ب",
+            "expanded": false
+          }
+        ]
+      },
+      {
+        "label": "le son de dirige vers le palais",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ع"
+          }
+        ]
+      },
+      {
+        "label": "le son ne se dirige pas vers le palais",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "س"
+          }
+        ]
+      },
+      {
+        "label": "compression du son entre la langue et le palais",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ط"
+          }
+        ]
+      },
+      {
+        "label": "Non compression du son entre la langue et le palais",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ف"
+          }
+        ]
+      },
+      {
+        "label": "Vibration de la lettre",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ق"
+          }
+        ]
+      },
+      {
+        "label": "Faible Vibration de la lettre",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ك"
+          }
+        ]
+      },
+      {
+        "label": "intensité du son",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ص"
+          }
+        ]
+      },
+      {
+        "label": "impulsion de la langue de l'arrière à l'avant",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ل"
+          }
+        ]
+      },
+      {
+        "label": "Nasillement",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "غ"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Règles de R",
+    "collapsedIcon": "pi pi-chevron-right",
+    "expandedIcon": "pi pi-chevron-down",
+    "children": [
+      {
+        "label": "pas emphatique",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "تف"
+          }
+        ]
+      },
+      {
+        "label": "pas amincie",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "تر"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Règles de mim statique",
+    "collapsedIcon": "pi pi-chevron-right",
+    "expandedIcon": "pi pi-chevron-down",
+    "children": [
+      {
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "label": "prononciation  distincte de la lettre 'mim'",
+        "children": [
+          {
+            "label": "ظش"
+          }
+        ]
+      },
+      {
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "label": "Assimilation de la lettre 'mim'",
+        "children": [
+          {
+            "label": "دش"
+          }
+        ]
+      },
+      {
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "label": "Dissimulation de la lettre 'mim'",
+        "children": [
+          {
+            "label": "خش"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Règles de noun statique et tanween",
+    "collapsedIcon": "pi pi-chevron-right",
+    "expandedIcon": "pi pi-chevron-down",
+    "children": [
+      {
+        "label": "prononciation  distincte de la lettre 'noun' / 'nounation'",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ظ"
+          }
+        ]
+      },
+      {
+        "label": "Substitution de...",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "ق"
+          }
+        ]
+      },
+      {
+        "label": "Dissimulation de la lettre...",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "خ"
+          }
+        ]
+      },
+      {
+        "label": "Assimilation avec nasillement",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "دغ"
+          }
+        ]
+      },
+      {
+        "label": "Assimilation sans nasillement",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "دلا"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Règles de Mad",
+    "collapsedIcon": "pi pi-chevron-right",
+    "expandedIcon": "pi pi-chevron-down",
+    "children": [
+      {
+        "label": "Allongement primaire faisant partie du lot",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "طع"
+          }
+        ]
+      },
+      {
+        "label": "Allongement autorisé",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "فص"
+          }
+        ]
+      },
+      {
+        "label": "Dissimulation de la lettre 'mim'",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "صل"
+          }
+        ]
+      },
+      {
+        "label": "Allongement nécessaire",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "لز"
+          }
+        ]
+      },
+      {
+        "label": "Allongement à l'arrêt",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "عا"
+          }
+        ]
+      },
+      {
+        "label": "Allongement de silah mineure",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "صغ"
+          }
+        ]
+      },
+      {
+        "label": "Allongement de silah majeure",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "صك"
+          }
+        ]
+      },
+      {
+        "label": "Allongement des diphtongues 'و' et 'ي' à l'arrêt",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+        "children": [
+          {
+            "label": "لن"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Règles d arrêt et de démarrage",
+    "collapsedIcon": "pi pi-chevron-right",
+    "expandedIcon": "pi pi-chevron-down",
+    "children": [
+      {
+        "label": "Arrête incorrect",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+      
+        "children": [
+          {
+         
+            "label": "وق"
+          }
+        ]
+      },
+      {
+        "label": "Début incorrect",
+        "collapsedIcon": "pi pi-chevron-right",
+        "expandedIcon": "pi pi-chevron-down",
+    
+        "children": [
+          {
+          
+            "label": "بق"
+          }
+        ]
+      }
+    ]
+  }
+]

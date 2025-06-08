@@ -1,0 +1,2 @@
+(()=>{"use strict";var t,e,n,i=(n=()=>{document.querySelector("#kt_inbox_listing_wrapper > .row").classList.add("px-9","pt-3","pb-5")},{init:function(){(t=document.querySelector("#kt_inbox_listing"))&&((e=$(t).DataTable({info:!1,order:[]})).on("draw",(function(){n()})),document.querySelector('[data-kt-inbox-listing-filter="search"]').addEventListener("keyup",(function(t){e.search(t.target.value).draw()})),n())}});KTUtil.onDOMContentLoaded((function(){i.init()}))})();
+//# sourceMappingURL=listing.js.map

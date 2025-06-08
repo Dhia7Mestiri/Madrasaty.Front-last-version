@@ -1,0 +1,90 @@
+<div class="row g-6 mb-15 g-xl-9 mb-xl-15">
+
+    <app-loading *ngIf="!data" [isloading]="!data">
+    </app-loading>
+
+    <div class="col-md-6 col-xl-4" *ngFor="let item of data?.Items" [ngClass]="item.Id % 2 == 0 ? 'hover-rotate-start' : 'hover-rotate-end'">
+
+        <!--begin::Card-->
+        <a class="card border-hover-primary" [routerLink]="['/', urlPath, item.Id]">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-9">
+                <!--begin::Card Title-->
+                <div class="card-title m-0">
+                    <!--begin::Avatar-->
+                    <div class="symbol symbol-50px w-50px bg-light">
+                        <img src="assets/media/svg/brand-logos/plurk.svg" alt="image" class="p-3" />
+                    </div>
+                    <!--end::Avatar-->
+                </div>
+                <!--end::Car Title-->
+
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                    <span class="badge badge-light-primary fw-bold me-auto px-4 py-3">
+                        Coefficient : {{item.Level}}
+                    </span>
+                </div>
+                <!--end::Card toolbar-->
+            </div>
+            <!--end:: Card header-->
+
+            <!--begin:: Card body-->
+            <div class="card-body p-9">
+                <!--begin::Name-->
+                <div class="fs-3 fw-bold text-dark">
+                    {{ item.Name }}
+                </div>
+                <!--end::Name-->
+
+                <!--begin::Description-->
+                <p class="text-gray-400 fw-semibold fs-5 mt-1 mb-7">{{item.SupervisorId}}</p>
+                <!--end::Description-->
+
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap mb-5">
+                    <!--begin::Due-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                        <div class="fs-6 text-gray-800 fw-bold">{{item.DisciplineId}}</div>
+                        <div class="fw-semibold text-gray-400">Discipline</div>
+                    </div>
+                    <!--end::Due-->
+                    <!--begin::Budget-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                        <div class="fs-6 text-gray-800 fw-bold">{{item.Level}}</div>
+                        <div class="fw-semibold text-gray-400">Level</div>
+                    </div>
+                    <!--end::Budget-->
+
+                </div>
+                <!--end::Info-->
+
+                <!--begin::Users-->
+                <div class="symbol-group symbol-hover">
+                    <!--begin::User-->
+                    <a href="" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Emma Smith"
+                        data-bs-original-title="Emma Smith" data-kt-initialized="1">
+                        <img alt="Pic" src="assets/media/avatars/300-6.jpg" />
+                    </a>
+                    <!--begin::User-->
+                    <!--begin::User-->
+                    <a href="" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Rudy Stone"
+                        data-bs-original-title="Rudy Stone" data-kt-initialized="1">
+                        <img alt="Pic" src="assets/media/avatars/300-1.jpg" />
+                    </a>
+                    <!--begin::User-->
+                    <!--begin::User-->
+                    <a href="" class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
+                        data-bs-original-title="Susan Redwood" data-kt-initialized="1">
+                        <span class="symbol-label bg-primary text-inverse-primary fw-bold">S</span>
+                    </a>
+                    <!--begin::User-->
+                </div>
+                <!--end::Users-->
+            </div>
+            <!--end:: Card body-->
+        </a>
+        <!--end::Card-->
+
+    </div>
+</div>

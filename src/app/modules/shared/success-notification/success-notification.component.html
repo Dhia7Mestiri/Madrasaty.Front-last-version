@@ -1,0 +1,58 @@
+<p-toast [autoZIndex]="true" *ngIf="showToastr">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="bi bi-check-circle-fill" style="font-size: 3rem"></i>
+                <h4>{{message?.summary}}</h4>
+                <p>{{message?.detail}}</p>
+            </div>
+
+            <!-- <div class="grid p-fluid">
+                <div class="col-6">
+                    <button type="button" pButton label="Yes" class="p-button-success"></button>
+                </div>
+                <div class="col-6">
+                    <button type="button" pButton label="No" class="p-button-secondary"></button>
+                </div>
+            </div> -->
+        </div>
+    </ng-template>
+</p-toast>
+
+<!-- ======================= Success Notification ======================= -->
+<div class="alert alert-dismissible bg-success d-flex flex-column flex-sm-row p-5 mb-10" *ngIf="!showToastr">
+    <!--begin::Icon-->
+    <span class="svg-icon svg-icon-2hx svg-icon-light me-4 mb-5 mb-sm-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill"
+            viewBox="0 0 24 24">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+    </span>
+    <!--end::Icon-->
+
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column text-light pe-0 pe-sm-10 fs-4">
+        <!--begin::Title-->
+        <h4 class="mb-2 light">{{title || ''}}</h4>
+        <!--end::Title-->
+
+        <!--begin::Content-->
+        <span>
+            <ng-content></ng-content>
+        </span>
+        <!--end::Content-->
+    </div>
+    <!--end::Wrapper-->
+
+    <!--begin::Close-->
+    <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+        <span class="svg-icon svg-icon-2x svg-icon-light">
+            <!-- <i class="bi bi-x fs-1 text-danger"></i> -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+                <path
+                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
+            </svg>
+        </span>
+    </button>
+    <!--end::Close-->
+</div>

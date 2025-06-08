@@ -1,0 +1,309 @@
+<!-- Dashboard -->
+<div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/dashboard" routerLinkActive="active"><span class="menu-icon">
+            <span [inlineSVG]="'./assets/media/icons/duotune/art/art002.svg'" class="svg-icon svg-icon-2"></span>
+        </span>
+        <span class="menu-title" translate="MENU.DASHBOARD"></span>
+    </a>
+</div>
+
+<!-- Separator -->
+<div class="menu-item">
+    <div class="menu-content pt-8 pb-2">
+        <span class="menu-section text-muted text-uppercase fs-8 ls-1"></span>
+    </div>
+</div>
+
+<!-- Pages -->
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link"><span class="menu-icon">
+            <span class="svg-icon svg-icon-2"
+                [inlineSVG]="'./assets/media/icons/duotune/general/gen022.svg'"></span></span><span
+            class="menu-title">Profile</span><span class="menu-arrow"></span>
+    </span>
+
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/pages/profile/projects"><span class="menu-bullet"><span
+                        class="bullet bullet-dot"></span></span><span class="menu-title">Projects</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/pages/profile/documents"><span class="menu-bullet"><span
+                        class="bullet bullet-dot"></span></span><span class="menu-title">Documents</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/pages/profile/connections"><span class="menu-bullet"><span
+                        class="bullet bullet-dot"></span></span><span class="menu-title">Connections</span></a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Accounts -->
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link"><span class="menu-icon"><span class="svg-icon svg-icon-2"
+                [inlineSVG]="'./assets/media/icons/duotune/communication/com006.svg'"></span></span><span
+            class="menu-title" data-link="/crafted/account">Accounts</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/account/overview"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Overview</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/account/settings"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Settings</span></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link"><span class="menu-icon"><span class="svg-icon svg-icon-2"
+                [inlineSVG]="'./assets/media/icons/duotune/general/gen025.svg'"></span></span><span class="menu-title"
+            data-link="/crafted/widgets">Widgets</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/widgets/lists"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Lists</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/widgets/statistics"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Statistics</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/widgets/charts"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Charts</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/widgets/mixed"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Mixed</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/widgets/tables"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Tables</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/widgets/feeds"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                    class="menu-title">Feeds</span></a>
+        </div>
+    </div>
+</div>
+
+<!-- *ngIf="!(currentMemberStatutId == 4 || currentMemberStatutId == 5|| currentMemberStatutId == 6)" -->
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link">
+        <span class="menu-icon"><span class="svg-icon svg-icon-2"><i class="fa fa-cog fa-spin fa-sm" style="font-size: 19px;"></i></span></span>
+        <span class="menu-title" data-link="/crafted/settings">Paramètres</span><span class="menu-arrow"></span>
+    </span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/school">
+                <span class="menu-bullet"><i class="fa fa-university fa-sm"></i></span>
+                <span class="menu-title">Ecoles</span>
+            </a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/schoolyear"><span
+                    class="menu-bullet"><i class="fa fa-calendar-alt fa-sm"></i></span><span class="menu-title">Année
+                    scolaire</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/holiday"><span
+                    class="menu-bullet"><i class="fa fa-tasks fa-sm"></i></span><span class="menu-title">Vacances
+                    scolaires</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/member"><span
+                    class="menu-bullet"><i class="fa fa-group fa-sm"></i></span><span
+                    class="menu-title">Membres</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/classroom"><span
+                    class="menu-bullet"><i class="fa fa-square fa-sm"></i></span><span class="menu-title">Sales de
+                    cours</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/settings/DisciplineLevel"><span class="menu-bullet"><i
+                        class="fa fa-signal fa-sm"></i></span><span class="menu-title">Niveaux de Disciplines
+                </span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/Discipline"><span
+                    class="menu-bullet"><i class="fa fa-bookmark fa-sm"></i></span><span
+                    class="menu-title">Disciplines</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/tajwid-error"><span
+                    class="menu-bullet"><i class="fa fa-window-close  fa-sm"></i></span><span class="menu-title">Fautes
+                    de Tajwid</span></a>
+        </div>
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/settings/Moutoun-List"><span
+                    class="menu-bullet"><i class="fa fa-window-close  fa-sm"></i></span><span
+                    class="menu-title">Moutoun</span></a>
+        </div>
+    </div>
+</div>
+
+<!-- *ngIf="!(currentMemberStatutId == 4 || currentMemberStatutId == 5|| currentMemberStatutId == 6)" -->
+
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link"><span class="menu-icon"><span class="svg-icon svg-icon-2"><i
+                    class="fa fa-graduation-cap fa-sm" style="font-size: 19px;"></i></span></span><span
+            class="menu-title" data-link="/crafted/evaluation">Tasmii</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/evaluation/TasmiiSession"><span class="menu-bullet"><i
+                        class="fa fa-balance-scale fa-sm"></i></span><span class="menu-title">Sessions de
+                    Tasmii</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/evaluation/TasmiiHistoriques"><span class="menu-bullet"><i
+                        class="fa fa-history fa-sm"></i></span><span class="menu-title">Historiques de Tasmii</span></a>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link"><span class="menu-icon"><span class="svg-icon svg-icon-2"><i
+                    class="fa fa-graduation-cap fa-sm" style="font-size: 19px;"></i></span></span><span
+            class="menu-title" data-link="/crafted/evaluation">Moutoun</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/evaluation/MoutounSession"><span class="menu-bullet"><i
+                        class="fa fa-balance-scale fa-sm"></i></span><span class="menu-title">Sessions de
+                    Moutoun</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/evaluation/MoutounHistoriques"><span class="menu-bullet"><i
+                        class="fa fa-history fa-sm"></i></span><span class="menu-title">Historiques de
+                    Moutoun</span></a>
+        </div>
+
+
+    </div>
+</div>
+<!-- *ngIf="!(currentMemberStatutId == 4 || currentMemberStatutId == 5|| currentMemberStatutId == 6)" -->
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link">
+        <span class="menu-icon"><span class="svg-icon svg-icon-2">
+                <i class="fa fa-book  fa-sm" style="font-size: 19px;"></i>
+            </span>
+        </span>
+        <span class="menu-title" data-link="/crafted/evaluation">Cours</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/evaluation/course"><span
+                    class="menu-bullet"><i class="fa fa-balance-scale fa-sm"></i></span><span
+                    class="menu-title">Sessions de Cours</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/evaluation/courseHistoriques"><span class="menu-bullet"><i
+                        class="fa fa-history fa-sm"></i></span><span class="menu-title">Historiques de Cours</span></a>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link">
+        <span class="menu-icon"><span class="svg-icon svg-icon-2">
+                <i class="fa fa-flask  fa-sm" style="font-size: 19px;"></i>
+            </span>
+        </span>
+        <span class="menu-title" data-link="/crafted/evaluation">Examens</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/crafted/evaluation/examen"><span
+                    class="menu-bullet"><i class="fa fa-flask  fa-sm"></i></span><span class="menu-title">Sessions de
+                    Examen</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active"
+                routerLink="/crafted/evaluation/examenHistoriques"><span class="menu-bullet"><i
+                        class="fa fa-history fa-sm"></i></span><span class="menu-title">Historiques des
+                    Examens</span></a>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+
+    <span class="menu-link">
+        <span class="menu-icon"><span class="svg-icon svg-icon-2">
+                <i class="fa fa-calendar fa-sm" style="font-size: 19px;"></i>
+            </span>
+        </span>
+        <span class="menu-title" routerLink="/crafted/evaluations/calendar">Calendrier</span></span>
+</div>
+
+
+<!-- Separator -->
+<div class="menu-item">
+    <div class="menu-content pt-8 pb-2">
+        <span class="menu-section text-muted text-uppercase fs-8 ls-1"></span>
+    </div>
+</div>
+
+<!-- Chat -->
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+    <span class="menu-link"><span class="menu-icon"><span class="svg-icon svg-icon-2"
+                [inlineSVG]="'./assets/media/icons/duotune/communication/com012.svg'"></span></span><span
+            class="menu-title" data-link="/apps/chat">Chat</span><span class="menu-arrow"></span></span>
+    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/apps/chat/private-chat"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Private
+                    Chat</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/apps/chat/group-chat"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Group
+                    Chart</span></a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link without-sub" routerLinkActive="active" routerLink="/apps/chat/drawer-chat"><span
+                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Drawer
+                    Chart</span></a>
+        </div>
+    </div>
+</div>

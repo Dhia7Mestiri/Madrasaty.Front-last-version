@@ -1,0 +1,638 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="card mb-5 mb-xl-10">
+    <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder fs-3 mb-1">Evaluation détaillée</span>
+        </h3>
+        <div class="my-0">
+            <button matTooltip="Generate Evaluation PDF to Download" type="button"
+                class="btn btn-sm btn-icon btn-color-danger btn-active-light-primary" data-kt-menu-trigger="click"
+                data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+                <span>
+                    <i style="font-size: 40px;" class="bi bi-file-pdf"></i>
+                </span>
+            </button>
+
+            <app-evaluation-drop-down [SurahList]="surahList"
+                (btnClick)="generatePDF($event)"></app-evaluation-drop-down>
+        </div>
+    </div>
+
+    <div class="card-body pt-9 pb-0">
+        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+            <div class="me-7 mb-4">
+                <div class="
+            symbol symbol-100px symbol-lg-160px symbol-fixed
+            position-relative
+          ">
+                    <img src="http://localhost:4200/assets/media/avatars/150-21.jpg" alt="Metronic" />
+
+                    <div class="
+              position-absolute
+              translate-middle
+              bottom-2
+              start-100
+              mb-4
+              bg-success
+              rounded-circle
+              border border-4 border-white
+              h-20px
+              w-20px
+            "></div>
+
+                </div>
+            </div>
+
+            <div class="flex-grow-1">
+                <div class=" d-flex justify-content-between  align-items-start flex-wrap ">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center">
+                            <a class="
+                  text-gray-800 text-hover-primary
+                  fs-2
+                  fw-bolder
+                  me-1
+                  cursor-pointer
+                ">
+                                {{FullName}}
+                            </a>
+                            <img [hidden]="hideCongras" class="winners" src="./assets/media/winners.gif" />
+                            <a class="cursor-pointer">
+                                <span [inlineSVG]="'./assets/media/icons/duotune/general/gen026.svg'"
+                                    class="svg-icon svg-icon-1 svg-icon-primary"></span>
+                            </a>
+                        </div>
+
+                        <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                            <a class="
+                  d-flex
+                  align-items-center
+                  text-gray-400 text-hover-primary
+                  me-3
+                  mb-2
+                  cursor-pointer
+                ">
+                                <span [inlineSVG]="
+                    './assets/media/icons/duotune/communication/com011.svg'
+                  " class="svg-icon svg-icon-4 me-1"></span>
+                                {{EvaluatedMemberEmail}}
+                            </a>
+
+                            <a class="
+                d-flex
+                align-items-center
+                text-gray-400 text-hover-primary
+                me-3
+                mb-2
+                cursor-pointer
+              ">
+                                <span [inlineSVG]="
+                  './assets/media/icons/duotune/general/gen005.svg'
+                " class="svg-icon svg-icon-4 me-1"></span>
+                                {{Discipline}}
+                            </a>
+                            <a class="
+              d-flex
+              align-items-center
+              text-gray-400 text-hover-primary           
+              mb-2
+              cursor-pointer
+            ">
+                                <span [inlineSVG]="
+                './assets/media/icons/duotune/graphs/gra004.svg'
+              " class="svg-icon svg-icon-4 me-1"></span>
+                                {{Level}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p-progressBar [ngClass]="{'progressBar-green': value > 50}" [value]="value"></p-progressBar>
+                </div>
+
+                <div class="d-flex flex-wrap flex-stack">
+                    <div class="d-flex flex-column flex-grow-1 pe-8">
+                        <div class="d-flex flex-wrap">
+
+                            <div class="
+                  border border-gray-300 border-dashed
+                  rounded
+                  min-w-125px
+                  py-3
+                  px-4
+                  me-6
+                  mb-3
+                ">
+                                <div class="d-flex align-items-center">
+                                    <span [inlineSVG]="
+                      './assets/media/icons/duotune/arrows/arr066.svg'
+                    " class="svg-icon svg-icon-3 svg-icon-success me-2"></span>
+                                    <div class="fs-2 fw-bolder">{{numberOfRecitatedsurah}}</div>
+                                </div>
+
+                                <div class="fw-bold fs-6 text-gray-400">Nombre de Surah</div>
+                            </div>
+                            <div class="
+                  border border-gray-300 border-dashed
+                  rounded
+                  min-w-125px
+                  py-3
+                  px-4
+                  me-6
+                  mb-3
+                ">
+                                <div class="d-flex align-items-center">
+                                    <span [inlineSVG]="
+                      './assets/media/icons/duotune/arrows/arr065.svg'
+                    " class="svg-icon svg-icon-3 svg-icon-danger me-2"></span>
+                                    <div class="fs-2 fw-bolder">{{ LearningErrorcount}}</div>
+                                </div>
+
+                                <div class="fw-bold fs-6 text-gray-400"> Total Fautes D'apprentisage</div>
+                            </div>
+
+                            <div class="
+                  border border-gray-300 border-dashed
+                  rounded
+                  min-w-125px
+                  py-3
+                  px-4
+                  me-6
+                  mb-3
+                ">
+                                <div class="d-flex align-items-center">
+                                    <span [inlineSVG]="
+                      './assets/media/icons/duotune/arrows/arr066.svg'
+                    " class="svg-icon svg-icon-3 svg-icon-success me-2"></span>
+                                    <div class="fs-2 fw-bolder">{{TajwidErrorcount}}</div>
+                                </div>
+
+                                <div class="fw-bold fs-6 text-gray-400">Total Fautes De Tajwid</div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex flex-wrap flex-stack">
+            <div class="d-flex flex-column flex-grow-1">
+
+
+                <form [formGroup]="surahForm">
+                    <div class="example-container">
+                        <div style="display: flex; justify-content: center;">
+
+                            <div class="me-3">
+                                <span class="p-float-label">
+                                    <p-dropdown inputId="dropdown" [options]="surahList" formControlName="Surah"
+                                        (onChange)="refreshAyahs()" optionLabel="name"
+                                        optionValue="number"></p-dropdown>
+                                    <label for="dropdown">Surah</label>
+                                </span>
+                            </div>
+                            <div class="me-3">
+                                <span class="p-float-label">
+                                    <p-inputNumber inputId="AyahDebut" formControlName="AyahDebut" [showButtons]="true"
+                                        inputId="minmax" mode="decimal" [min]="minAyah" [max]="minAyah">
+                                    </p-inputNumber>
+                                    <label for="AyahDebut">Ayah Début</label>
+                                </span>
+
+                            </div>
+                            <div>
+                                <span class="p-float-label">
+                                    <p-inputNumber inputId="AyahFin" formControlName="AyahFin" [showButtons]="true"
+                                        inputId="minmax" mode="decimal" [min]="minAyah" [max]="maxAyah">
+                                    </p-inputNumber>
+                                    <label for="AyahFin">Ayah Fin</label>
+                                </span>
+                            </div>
+                            <div class="ml-3">
+                                <button pButton pRipple type="button" pTooltip="next" (click)="Next()"
+                                    tooltipPosition="bottom" icon="pi pi-angle-double-right"
+                                    class="p-button-rounded p-button-outlined"></button>
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex flex-column flex-grow-1 mb-5 mt-2">
+                            <h3 style="float: left;" class="mb-3">Remarques</h3>
+                            <p-editor inputId="Remarques" formControlName="Remarques" [style]="{'height':'150px'}">
+                            </p-editor>
+
+
+                        </div>
+
+                        <div class="text-center" style="font-size: 60px;color:#1ab394;  margin: auto;">
+                            <div class="col-lg-12">
+                                <p-rating [maxlength]="max" tabindex="0" formControlName="Rating">
+                                    <!-- [titles]="['Innacceptable','Faible','Moyen', 'Bien', 'Très Bien']" -->
+                                </p-rating>
+
+                                <span class="label" tabindex="0"
+                                    [ngClass]="{'label-danger': percent<=20, 'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"></span>
+                            </div>
+                        </div>
+
+                        <a style="margin-left: 15px;padding: 10px;float: right;" class="btn btn-sm btn-primary mb-5 "
+                            (click)="confirmRecitationDetail()">
+                            Sauvegarder <i style="font-size: 20px;margin-left: 5px;" class="fa fa-save"></i>
+                        </a>
+                        <a style="margin-left: 15px;padding: 10px;float: right;" class="btn btn-sm btn-primary mb-5"
+                            (click)="initRecitation()"><i class="fa fa-refresh" style="font-size: 20px;"></i> Reset </a>
+
+                    </div>
+
+
+                </form>
+                <button matTooltip="Retour à la page des participants"
+                    class="btn btn-icon btn-bg btn-active-color-primary btn-sm mb-5"
+                    [routerLink]="['/crafted/evaluation/TasmiiSession/Tasmiiparticipants', currentSessionId]">
+                    <i class="fas fa-arrow-left" style="font-size: 30px"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-5 mb-xl-10">
+
+    <div class="card-body pt-9 pb-0">
+
+
+        <!--  <button class="btn  btn-primary " style="float: right;" type="button"  (click)="pushItem($event)"><i
+      class="fa fa-plus"></i></button>
+      <button class="btn  btn-primary me-2" style="float: right;" type="button"  (click)="removeItem($event)"><i
+        class="fa fa-minus"></i></button>
+        <br><br><br>
+        <button class="btn  btn-primary me-2" style="float: right;" type="button"  (click)="ConfirmItems($event)"><i
+         ></i> Confirme</button>
+
+    <div class="d-flex flex-wrap flex-stack">
+      
+      <div class="d-flex flex-column flex-grow-1 mb-5">      
+        <h3 style="float: left;">Fautes d'apprentisage </h3>
+        
+      <div style=" width: 600px;  top:0; left: 0; right: 0;  margin: auto;">             
+        <a *ngFor="let item of fautes " (click)="onButtonClick(item)" class="{{item.cssclass}}"
+        type="button"  style="margin: 3px;">{{item.id}}</a>  
+        
+    
+        </div>   
+
+   </div>
+  </div>
+ -->
+        <div class="row text-center mb-4">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <h3 style="float: left;">Fautes d'apprentisage</h3>
+                    <br>
+                    <button class="btn  btn-primary " style="float: right;" type="button" (click)="pushItem($event)"><i
+                            class="fa fa-plus"></i></button>
+                    <button class="btn  btn-primary me-2" style="float: right;" type="button"
+                        (click)="removeItem($event)"><i class="fa fa-minus"></i></button>
+                    <br><br><br>
+                    <button class="btn  btn-primary me-2" style="float: right;" type="button"
+                        (click)="ConfirmItems($event)"><i></i> Confirme</button>
+
+                    <div style=" width: 600px;  top:0; left: 0; right: 0;  margin: auto;">
+                        <a *ngFor="let item of fautes " (click)="onButtonClick(item)" class="{{item.cssclass}}"
+                            type="button" style="margin: 3px;">{{item.id}}</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row text-center mb-4">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <h3 style="float: left;">Fautes de Tajwid</h3>
+
+                    <br>
+                    <br>
+                    <button class="btn  btn-primary " style="float: right;" type="button"
+                        (click)="SaveTajwidErrors()">Confirme</button>
+                    <button class="btn btn-success" (click)="ClickButtonOfTajwidError(item)" type="button"
+                        *ngFor="let item of tajwidErrorData " style="margin:5px;">{{item.name}}</button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<ng-container>
+    <div class="d-flex flex-wrap align-items-center">
+        <div id="kt_signin_email_edit" class="flex-row-fluid false">
+            <form id="kt_signin_change_email" class="form" novalidate="">
+                <div class="row g-5 g-xl-8">
+                    <div class="col-xl-12">
+                        <div class="card card-xl-stretch mb-xl-8">
+
+                            <div class="card-header border-0 pt-5">
+                                <h3 class="card-title align-items-start flex-column">
+                                    <span class="card-label fw-bolder fs-3 mb-1">Historique De Tasmii</span>
+
+                                </h3>
+                                <div class="card-toolbar">
+                                    <ul class="nav">
+                                        <p-dropdown [options]="surahList" (onChange)="onSelectChange($event)"
+                                            optionLabel="name" optionValue="number"></p-dropdown>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card-body py-3">
+
+                                <div class="table-responsive">
+
+                                    <p-table #dt1 [value]="StudentHistory" dataKey="id"
+                                        styleClass="p-datatable-customers" responsiveLayout="scroll" [rows]="10"
+                                        [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th width="15%" pSortableColumn="Poeme">Surah <p-sortIcon
+                                                        field="poeme"></p-sortIcon></th>
+                                                <th width="10%" pSortableColumn="VerseDebut">Du vers <p-sortIcon
+                                                        field="VerseDebut"></p-sortIcon></th>
+                                                <th width="10%" pSortableColumn="VerseFin">Du vers <p-sortIcon
+                                                        field="VerseFin"></p-sortIcon></th>
+                                                <th width="10%" pSortableColumn="rating">Rating<p-sortIcon
+                                                        field="rating"></p-sortIcon></th>
+                                                <th width="10%" pSortableColumn="Remarques">Remarques<p-sortIcon
+                                                        field="Remarques"></p-sortIcon></th>
+                                                <th width="10%" pSortableColumn=""></th>
+                                            </tr>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-item>
+                                            <tr [pSelectableRow]="customer">
+                                                <td>
+                                                    {{getVal(item.Surah)}}
+                                                </td>
+                                                <td>
+
+                                                    <span class="image-text">{{item.VerseDebut }}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="image-text">{{item.VerseFin }}</span>
+                                                </td>
+                                                <td>
+                                                    <p-rating
+                                                [ngModel]="item.Rating"
+                                                [ngModelOptions]="{ standalone: true }"
+                                                [readonly]="true"
+                                                [cancel]="false"
+                                                [stars]="5">
+                                                      </p-rating>
+
+                                                </td>
+                                                <td> <textarea rows="2.5" readonly="true" cols="70"
+                                                        pInputTextarea>{{item.Remarques  | TruncateHtml }}</textarea>
+                                                </td>
+
+                                                <td>
+                                                    <div class="container">
+                                                        <app-shared-buttons class="button me-3" [evaluationMode]="true"
+                                                            [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                                                            (btnDeleteClick)="deleteItem(item.Id)">
+                                                        </app-shared-buttons>
+                                                        <button (click)="ShowFautesHistoryByRecitationId(item.Id)"
+                                                            matTooltip="afficher les détailles de fautes de tajwed"
+                                                            class="btn btn-icon btn-light-facebook btn-sm">
+                                                            <i class="bi bi-receipt-cutoff fs-4"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="4">No customers found.</td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</ng-container>
+
+
+
+
+<div class="row g-5 g-xl-8" *ngIf="showFautesTajwidHistory">
+    <div class="col-lg-12">
+        <div class="card card-xl-stretch mb-xl-8">
+
+            <!-- begin::Header -->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1">Historique De Fautes de Tajwid</span>
+                    <span class="text-muted mt-1 fw-bold fs-7"></span>
+                </h3>
+
+
+                <div class="card-toolbar">
+                    <a style="padding: 10px;float: right;" (click)="CloseFautesTajwidHistoryByRecitationId()"
+                        class="btn btn-sm btn-primary mb-5">
+                        Close <i style="font-size: 20px;margin-left: 5px;" class="fa fa-window-close"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- end::Header -->
+            <!-- begin::Body -->
+            <div class="card-body py-3">
+                <!-- begin::Table container -->
+                <div class="table-responsive">
+                    <!-- begin::Table -->
+                    <table class="table align-middle gs-0 gy-3">
+                        <!-- begin::Table head -->
+                        <thead>
+                            <tr>
+                                <th class="p-0 w-50px"></th>
+                                <th class="p-0 min-w-150px"></th>
+                                <th class="p-0 min-w-120px"></th>
+                                <th class="p-0 min-w-40px"></th>
+                            </tr>
+                        </thead>
+                        <!-- end::Table head -->
+                        <!-- begin::Table body -->
+                        <tbody *ngFor="let item of StudentsTajwidErrors">
+                            <tr>
+                                <td>
+                                    <div class="symbol symbol-50px me-2">
+                                        <span class="symbol-label bg-light-danger">
+                                            <span [inlineSVG]="
+                    './assets/media/icons/duotune/general/gen024.svg'
+                  " class="svg-icon svg-icon-2x svg-icon-danger"></span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">
+                                        {{item.Title}}
+                                    </a>
+                                    <div class="text-muted fs-7">Aya: {{ item.Aya }}</div>
+                                </td>
+                                <td class="text-end text-muted fw-bold">
+
+                                    <select class="form-select form-select-lg-2">
+                               <option *ngFor="let code of item.ErrorCodes.split(',')" [value]="code">
+                               {{ code }}
+                               </option>
+
+
+                                </select>
+                                </td>
+                                <td class="text-end text-muted fw-bold">
+                                    <app-shared-buttons [evaluationMode]="true" [ismodified]="true"
+                                        (btnEditClick)="OpenDiag(item.Id)"
+                                        (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--<h3 class="card-title align-items-start flex-column mt-4">
+                    <span class="card-label fw-bolder fs-3 mb-5">Historique De Fautes d'apprentisage</span>
+                    <span class="text-muted mt-1 fw-bold fs-7"></span>
+                </h3>
+
+                <div class="table-responsive">
+                    <table class="table align-middle gs-0 gy-3">
+                        <thead>
+                            <tr>
+                                <th class="p-0 min-w-120px"></th>
+                                <th class="p-0 min-w-40px"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of StudentsLearningErrors">
+                            <tr>
+                                <td class="text-end text-muted fw-bold">
+
+                                    <select class="form-select  form-select-lg-2">
+                                        <option *ngFor="let item of getErrorLearningList(item.Wording)"
+                                            [value]="item.value">
+                                            Ayah numéro : {{item}}
+                                        </option>
+                                    </select>
+
+                                </td>
+                                <td class="text-end text-muted fw-bold">
+                                    <app-shared-buttons [evaluationMode]="true" [ismodified]="true"
+                                        (btnEditClick)="OpenDiag(item.Id)"
+                                        (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>-->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+<ng-template #callAPIDialog>
+    <form [formGroup]="surahForm">
+
+        <div class="row mb-3">
+
+            <div class=" form-floating mb-2">
+                <select class="form-select" formControlName="Surah" id="Poeme" (onChange)="refreshAyahs()" required>
+                    <option *ngFor="let opt of surahList" [value]="opt.number">{{opt.name}}</option>
+                </select>
+                <label for="Poeme">Surah</label>
+            </div>
+
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="Debut" required="false" formControlName="AyahDebut">
+            <label for="Debut">Debut</label>
+        </div>
+
+
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="Fin" required="false" formControlName="AyahFin">
+            <label for="Fin">Fin</label>
+        </div>
+
+
+
+        <div class="row mb-3">
+
+            <h5>Remarques</h5>
+            <p-editor formControlName="Remarques" [style]="{'height':'120px'}">
+            </p-editor>
+        </div>
+        <div class="d-flex justify-content-center mb-2">
+            <div style="margin-top: -12px; font-size: 40px; color: #1ab394">
+                <p-rating [(ngModel)]="rate" [stars]="max" formControlName="Rating" tabindex="0"
+                    (onHover)="this.utilitiesService.hoveringOver($event)"
+                    [titles]="['Innacceptable', 'Faible', 'Moyen', 'Bien', 'Très Bien']">
+                </p-rating>
+
+                <span class="label" tabindex="0" [ngClass]="{
+          'label-danger': percent <= 20,
+          'label-warning': percent < 30,
+          'label-info': percent >= 30 && percent < 70,
+          'label-success': percent >= 70
+        }">
+                </span>
+            </div>
+        </div>
+        <div class="card-footer py-6">
+            <div class="col-lg-9">
+                <button type="button" (click)="this.surahForm.reset()" class="btn btn-primary me-2">
+                    <span class="indicator-label">Clear</span>
+                </button>
+                <button data-bs-dismiss="offcanvas" class="btn btn-active-light btn-color-muted"
+                    (click)="UpdateRecitationDetail()">
+                    <ng-container>
+                        <span class="indicator-label">Confirme</span>
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<app-tajwid-sub-errors [display]="display" [modalTitle]="modalTitle" (onDialogClose)="closeDialog()"
+    [subErrorsList]="subErrorsList" (SendfinalSubErrorsList)="GetFinalError($event)">
+</app-tajwid-sub-errors>

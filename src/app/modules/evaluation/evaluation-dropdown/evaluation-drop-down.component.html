@@ -1,0 +1,73 @@
+<div class="px-3 py-4">
+    <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+  </div>
+  
+  <div class="separator border-gray-100"></div>
+ 
+  <div class="px-3 py-4">
+    <form [formGroup]="FilterForm" >
+    <div class="mb-10">
+      <label class="form-label fw-bold">Poéme:</label>
+  
+      <div>
+        <select
+          class="form-select form-select-solid"
+          data-kt-select2="true"
+          data-placeholder="Select option"
+          data-allow-clear="true"
+          formControlName="Poeme"
+        >
+          <option value="0">All</option>
+          <option [value]="item.Id" *ngFor="let item of FilterList"  >{{item.Wording}}</option>
+          <option [value]="item.number" *ngFor="let item of SurahList"  >{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-10">
+        <label class="form-label fw-bold">Order By:</label>
+    
+        <div>
+          <select
+            class="form-select form-select-solid"
+            data-kt-select2="true"
+            data-placeholder="Select option"
+            data-allow-clear="true"
+            formControlName="OrderBy"
+          >
+            <option selected >Rating</option>
+            <option selected >Date d'Evaluation</option>
+           
+          </select>
+        </div>
+      </div>
+
+
+  
+    <div class="d-flex justify-content-end">
+      <button
+        type="reset"
+        class="btn btn-sm btn-white btn-active-light-primary me-2"
+        data-kt-menu-dismiss="true"
+      >
+      <i  style="font-size: 18px;" class="fa fa-refresh"></i>
+      </button>
+  
+      <button
+      (click)="Download()"
+      class="btn btn-sm btn-white btn-active-light-primary me-2"
+      data-kt-menu-dismiss="true"
+        
+      ><i style="font-size: 18px;" class="fa fa-download"></i>
+        
+      </button>
+      <button
+      (click)="open()"
+      class="btn btn-sm btn-white btn-active-light-primary me-2"    
+      data-kt-menu-dismiss="true"
+      >
+      <i  style="font-size: 18px;" class="fa fa-eye"></i>
+      </button>
+    </div>
+</form>
+  </div>

@@ -1,0 +1,365 @@
+<ng-container>
+    <app-tool-bar 
+    ToolBarName="Etudiants" 
+    TableHref="#kt_Etudiants_table_pane" 
+    CardHref="#kt_Etudiants_card_pane"
+    
+    (BtnOpenClick)="OpenDiag(-1)"    
+    ButtonName="Add étudiant"  
+    ModalTarget="#kt_modal_Add_Student"                             
+    IsButtonExist="true"   
+        
+    
+    >
+    </app-tool-bar>
+</ng-container>
+
+<div class="tab-content">
+    <div id="kt_Etudiants_card_pane" class="tab-pane fade show active" role="tabpanel">
+        <div class="row g-6 g-xl-9">
+            <div class="col-md-4" *ngFor="let item of StudentsByCourse">
+                <!--begin::Card-->
+                <div class="card">
+                  
+						<!--begin::Modal title-->
+                                             
+                                <div class="btn btn-sm btn-icon btn-active-color-primary xbtn"   >
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1" (click)="DeleteStudentFromCourse(item.Id)" pTooltip="Delete Student" tooltipPosition="bottom">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                      
+						<!--end::Modal title-->
+						<!--begin::Close-->
+				
+						<!--end::Close-->
+				
+                    <!--begin::Card body-->
+                    <div class="card-body d-flex flex-center flex-column pt-4 p-9">
+                        <!--begin::Avatar-->
+                        <div class="symbol symbol-65px symbol-circle mb-5">
+                            <img src="assets/media/default.png" alt="image">
+                            <div
+                                class="bg-success position-absolute border border-4 border-body h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3">
+                            </div>
+                        </div>
+                        <!--end::Avatar-->
+                        <!--begin::Name-->
+                        <a class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">{{item.FullName}}</a>
+                        <!--end::Name-->
+                        <!--begin::Position-->
+                        <div class="fw-semibold text-gray-400 mb-6">{{item.Email}}</div>
+                        <!--end::Position-->
+                        <!--begin::Info-->
+                        <div class="d-flex flex-center flex-wrap">
+                            <!--begin::Stats-->
+                            <div class="border border-gray-300 border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
+                                <div class="fs-6 fw-bold text-gray-700">{{item.SkypeId}}</div>
+                                <div class="fw-semibold text-gray-400">Skype</div>
+                            </div>
+                        </div>
+                        <!--end::Info-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Card-->
+        </div>
+    </div>
+
+    <div id="kt_Etudiants_table_pane" class="tab-pane fade" role="tabpanel">
+        <div class="card card-flush">
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                    transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                                <path
+                                    d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <input type="text" data-kt-user-table-filter="search"
+                            class="form-control form-control-solid w-250px ps-14" placeholder="Search user">
+                    </div>
+                    <!--end::Search-->
+                </div>
+                <!--begin::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                        <!--begin::Filter-->
+                        <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
+                            data-kt-menu-placement="bottom-end">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->Filter</button>
+                        <!--begin::Menu 1-->
+                        <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
+                            <!--begin::Header-->
+                            <div class="px-7 py-5">
+                                <div class="fs-5 text-dark fw-bold">Filter Options</div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Separator-->
+                            <div class="separator border-gray-200"></div>
+                            <!--end::Separator-->
+                            <!--begin::Content-->
+                            <div class="px-7 py-5" data-kt-user-table-filter="form">
+                                <!--begin::Actions-->
+                                <div class="d-flex justify-content-end">
+                                    <button type="reset"
+                                        class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6"
+                                        data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
+                                    <button type="submit" class="btn btn-primary fw-semibold px-6"
+                                        data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
+                                </div>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Menu 1-->
+                        <!--end::Filter-->
+                        <!--begin::Export-->
+                        <div class="">
+                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
+                                data-kt-menu-placement="bottom-end">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Export</button>
+                            <!--begin::Menu 1-->
+                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
+                                <!--begin::Header-->
+                                <div class="px-7 py-5">
+                                    <div class="fs-5 text-dark fw-bold">Export Options</div>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Separator-->
+                                <div class="separator border-gray-200"></div>
+                                <!--end::Separator-->
+                                <!--begin::Content-->
+                                <div class="px-7 py-5" data-kt-user-table-filter="form">
+                                    <!--begin::Actions-->
+                                    <div class="d-flex justify-content-end">
+                                        <button type="reset"
+                                            class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6"
+                                            data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
+                                        <button type="submit" class="btn btn-primary fw-semibold px-6"
+                                            data-kt-menu-dismiss="true"
+                                            data-kt-user-table-filter="filter">Apply</button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </div>
+                                <!--end::Content-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Toolbar-->
+
+                </div>
+                <!--end::Card toolbar-->
+            </div>
+            <div class="card-body pt-3">
+                <!--begin::Table-->
+                <div id="kt_profile_overview_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="table-wrapper "  style="height:567px;overflow:auto;">
+                        <table id="kt_profile_overview_table"
+                            class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
+                            <!--begin::Table head-->
+                            <thead class="fs-7 text-gray-400 text-uppercase">
+                                <tr>
+                                    <th class="w-25px">
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                data-kt-check="true" data-kt-check-target=".widget-9-check">
+                                        </div>
+                                    </th>
+                                    <th class="min-w-110px sorting"></th>
+                                    <th class="min-w-110px sorting">FullName</th>
+                                    <th class="min-w-110px sorting">Email</th>
+                                    <th class="min-w-40px sorting">Skype</th>
+                            </thead>
+
+                            <tbody class="fs-6" *ngFor="let item of StudentsByCourse">
+
+                                <tr class="odd">
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input widget-9-check" type="checkbox" value="1">
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold">
+
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-45px me-5">
+                                                <img src="assets/media/default.png" alt="">
+                                            </div>
+                                            <div class="d-flex justify-content-start flex-column">
+                                                <a
+                                                    class="text-dark fw-bold text-hover-primary fs-6">{{item.FullName}}</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><a class="text-gray-900 text-hover-primary">{{item.Email}}</a></td>
+
+                                    <td>
+                                        <a class="text-gray-900 text-hover-primary">{{item.SkypeId}}</a>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="kt_modal_Add_Student" tabindex="-1"  aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+<span class="svg-icon svg-icon-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+</svg>
+
+</span>
+<!--end::Svg Icon-->                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                <!--begin::Heading-->
+                <div class="text-center mb-13">
+                    <!--begin::Title-->
+                    <h1 class="mb-3">
+                        Parcourir les utilisateurs</h1>
+                    <!--end::Title-->
+                </div>
+                <!--end::Heading-->
+
+                <!--begin::Users-->
+                <div class="mb-15">
+                    <!--begin::List-->
+                    <div class="mh-375px scroll-y me-n7 pe-7">                                                                             <!--begin::User-->
+                             
+                            <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
+                                <!--begin::Details-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-35px symbol-circle">
+                                                                                    <span class="symbol-label bg-light-danger text-danger fw-semibold">
+                                                M                                            </span>
+                                                                            </div>
+                                    <!--end::Avatar-->
+
+                                    <!--begin::Details-->
+                                    <div class="ms-6">
+                                        <!--begin::Name-->
+                                        <a href="#" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">
+                                            Melody Macy   
+
+                                            <span class="badge badge-light fs-8 fw-semibold ms-2">
+                                                Marketing Analytic                                            </span>
+                                        </a>
+                                        <!--end::Name-->
+
+                                        <!--begin::Email-->
+                                        <div class="fw-semibold text-muted">melody@altbox.com</div>
+                                        <!--end::Email-->
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--end::Details-->
+
+                                <!--begin::Stats-->
+                                <div class="d-flex">
+                                    <!--begin::Sales-->
+                                    <div class="text-end">
+                                        <div class="fs-5 fw-bold text-dark">$50,500</div>
+
+                                        <div class="fs-7 text-muted">Sales</div>
+                                    </div>
+                                    <!--end::Sales-->
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+
+           
+                                            </div>
+                    <!--end::List-->
+                </div>
+                <!--end::Users-->
+
+                <!--begin::Notice-->
+                <div class="d-flex justify-content-between">
+                    <!--begin::Label-->                        
+                    <div class="fw-semibold">
+                        <label class="fs-6">Adding Users by Team Members</label>
+
+                        <div class="fs-7 text-muted">If you need more info, please check budget planning</div>
+                    </div>
+                    <!--end::Label-->   
+
+                    <!--begin::Switch-->
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" value="" checked="checked">
+
+                        <span class="form-check-label fw-semibold text-muted">
+                            Allowed
+                        </span>
+                    </label>
+                    <!--end::Switch-->
+                </div>
+                <!--end::Notice-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>

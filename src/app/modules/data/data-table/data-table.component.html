@@ -1,0 +1,297 @@
+<app-error-notification *ngIf="error" [message]="error">
+</app-error-notification>
+
+<p-contextMenu #menu [model]="contextMenu">
+</p-contextMenu>
+
+<p-table #table [value]="dataRows?.Items" [selectionMode]="selectionMode" [(selection)]="selectedRow"
+    [dataKey]="dataKey" responsiveLayout="scroll" styleClass="p-datatable"
+    [resizableColumns]="true" [reorderableColumns]="true" [autoLayout]="true"
+    [loading]="loading" [lazy]="true" (onLazyLoad)="getData($event)"
+    [rows]="itemsPerPage"
+    [totalRecords]="totalRecords"
+    [paginator]="true"
+    [showCurrentPageReport]="!simpleUI" [alwaysShowPaginator]="!simpleUI"
+    currentPageReportTemplate="Affichage des entrées {first} à {last}." [rowsPerPageOptions]="simpleUI ? [] : [10,25,50]"
+    [rowHover]="true"
+    [contextMenu]="contextMenu ? menu : undefined"
+
+    stateStorage="local" [stateKey]="'grid.' + colStorage"
+    (onRowSelect)="onRowSelect()"
+    (onRowUnselect)="onRowUnselect()">
+
+    <ng-template pTemplate="caption">
+
+        <div class="p-d-flex p-ai-center p-jc-between no-button">
+
+            <span class="p-input-icon-left p-ml-auto"
+                [ngClass]="showColumns ? 'filterAndColumn' : 'full-filter'">
+                    <i class="fas fa-search"></i>
+                    <input #search id="filter" pInputText type="text" class="p-inputtext p-component p-element fs-4" placeholder="Filtre..."
+                        (input)="filter($event)"
+                        [(ngModel)]="filterText" />
+            </span>
+
+            <p-multiSelect *ngIf="showColumns" [style]="{minWidth: '200px'}"
+                [options]="realColumns" [(ngModel)]="selectedCols" optionLabel="header"
+                selectedItemsLabel="{0} Colonnes" placeholder="Choisir les colonnes">
+            </p-multiSelect>
+
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="header" *ngIf="showColumns">
+        <tr #head>
+            <th *ngIf="collapsedColumns.length > 0" style="max-width: 50px!important" class="fixed">
+            </th>
+
+            <ng-container *ngFor="let col of selectedColumns">
+                <th [pSortableColumn]="col.field" [pSortableColumnDisabled]="!col.sortable"
+                    pResizableColumn [pResizableColumnDisabled]="col.width ? true : false"
+                    pReorderableColumn [pReorderableColumnDisabled]="col.width ? true : false"
+
+                    [ngClass]="col.onlyOnMobile ? 'd-none d-sm-block d-md-none' : ''"
+                    [style]="col.width ? 'width: ' + col.width + '!important' : ''">
+
+                        {{ col.header }} <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+
+                </th>
+            </ng-container>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row let-expanded="expanded">
+
+        <tr [pSelectableRow]="row" [pContextMenuRow]="row">
+
+            <td *ngIf="showColumns && collapsedColumns.length > 0" style="max-width: 50px!important" class="fixed">
+                <button *ngIf="row" type="button" pButton pRipple [pRowToggler]="row" class="p-button-text p-button-rounded p-button-plain"
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                </button>
+            </td>
+
+            <td *ngFor="let col of selectedColumns" [class]="col.css" [ngClass]="col.onlyOnMobile ? 'd-none d-sm-block d-md-none' : ''"
+                [style]="col.width ? 'width: ' + col.width + '!important' : ''">
+
+                <ng-container [ngSwitch]="col.type">
+
+                    <ng-container *ngSwitchCase="'check'">
+                        <!-- <p-tableCheckbox [value]="row[col.field]"></p-tableCheckbox> -->
+                        <p-tableCheckbox [pSelectableRow]="row" [value]="row"></p-tableCheckbox>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'button'">
+                        <a href="" (click)="onGridButtonClick(row, col.field)" [title]="col.title ?? 'Editer cette entrée'">
+                            <!-- <i [ngClass]="col.icon ?? 'bi bi-pencil-square'"></i> -->
+                            <i [ngClass]="col.icon ?? 'fa-solid fa-pen-to-square'"></i>
+                        </a>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'date'">
+                        {{ row[col.field] | date: 'longDate' }}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'time'">
+                        {{ row[col.field] | date:"HH:mm" }}
+                    </ng-container>
+
+
+                    <ng-container *ngSwitchCase="'boolean'">
+                        <i [ngClass]="row[col.field] ? 'true-icon far fa-check-circle' : 'false-icon fas fa-times'">
+                        </i>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'badge'">
+                        <span class="badge" [ngClass]="row[col.field] ? (row[col.field]?.includes('ACCEPT') ? 'badge-light-success' :
+                            (row[col.field]?.includes('REJECT') ? 'badge-light-danger' : 'badge-light-dark')) : 'd-none'">
+                                {{ row[col.field] }}
+                        </span>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'addr'">
+                        <a [href]="'https://maps.google.com/?q=' + row[col.field]" target="_blank">
+                            {{ row[col.field] }}
+                        </a>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'url'">
+                        <a [routerLink]="['/' + urlPath, row['Id']]">
+                            {{ row[col.field] }}
+                        </a>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'phone'" target="_blank">
+                        <a [href]="'tel:' + row[col.field]">
+                            {{ row[col.field] }}
+                        </a>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'email'" target="_blank">
+                        <a [href]="'mailto:' + row[col.field]">
+                            {{ row[col.field] }}
+                        </a>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'image'">
+                        <img *ngIf="row[col.field]" [src]="row[col.field]" [alt]="row[col.field]" />
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'tag'">
+                        <span class="badge badge-secondary me-2" *ngFor="let tag of row[col.field]?.split(',')">
+                            {{ tag }}
+                        </span>
+                    </ng-container>
+
+                    <ng-container *ngSwitchDefault>
+                        {{ row[col.field] }}
+                    </ng-container>
+
+                </ng-container>
+
+            </td>
+
+        </tr>
+
+    </ng-template>
+
+    <!--  -->
+    <ng-template pTemplate="rowexpansion" let-parentRow>
+
+        <tr *ngIf="adaptColumns && showColumns && collapsedColumns.length > 0">
+            <td [attr.colspan]="columns.length + 1">
+                <div class="p-3 pt-0">
+
+                    <p-table [value]="[parentRow]" responsiveLayout="stack" [autoLayout]="false"
+                        [breakpoint]="breakpoint + 'px'">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <ng-container *ngFor="let col of collapsedColumns">
+                                    <th [pSortableColumn]="col.field" [pSortableColumnDisabled]="!col.sortable"
+                                        pResizableColumn [pResizableColumnDisabled]="col.width ? true : false"
+                                        pReorderableColumn [pReorderableColumnDisabled]="col.width ? true : false"
+                    
+                                        [ngClass]="col.onlyOnMobile ? 'd-none d-sm-block d-md-none' : ''"
+                                        [style]="col.width ? 'width: ' + col.width : ''">
+                    
+                                            {{ col.header }} <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+                    
+                                    </th>
+                                </ng-container>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-row>
+
+                            <tr>
+                                <td *ngFor="let col of collapsedColumns" [class]="col.css" [ngClass]="col.onlyOnMobile ? 'd-none d-sm-block d-md-none' : ''">
+
+                                    <ng-container [ngSwitch]="col.type">
+
+                                        <ng-container *ngSwitchCase="'check'">
+                                            <p-tableCheckbox [pSelectableRow]="row" [value]="row"></p-tableCheckbox>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'button'">
+                                            <a href="" (click)="onGridButtonClick(row, col.field)" [title]="col.title ?? 'Editer cette entrée'">
+                                                <!-- <i [ngClass]="col.icon ?? 'bi bi-pencil-square'"></i> -->
+                                                <i [ngClass]="col.icon ?? 'fa-solid fa-pen-to-square'"></i>
+                                            </a>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'date'">
+                                            {{ row[col.field] | date: 'longDate' }}
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'boolean'">
+                                            <i [ngClass]="row[col.field] ? 'true-icon far fa-check-circle' : 'false-icon fas fa-times'">
+                                            </i>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'badge'">
+                                            <span class="badge" [ngClass]="row[col.field] ? (row[col.field]?.includes('ACCEPT') ? 'badge-light-success' :
+                                                (row[col.field]?.includes('REJECT') ? 'badge-light-danger' : 'badge-light-dark')) : 'd-none'">
+                                                    {{ row[col.field] }}
+                                            </span>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'addr'">
+                                            <a [href]="'https://maps.google.com/?q=' + row[col.field]" target="_blank">
+                                                {{ row[col.field] }}
+                                            </a>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'phone'" target="_blank">
+                                            <a [href]="'tel:' + row[col.field]">
+                                                {{ row[col.field] }}
+                                            </a>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'email'" target="_blank">
+                                            <a [href]="'mailto:' + row[col.field]">
+                                                {{ row[col.field] }}
+                                            </a>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchCase="'tag'">
+                                            <span class="badge badge-secondary me-2" *ngFor="let tag of row[col.field]?.split(',')">
+                                                {{ tag }}
+                                            </span>
+                                        </ng-container>
+
+                                        <ng-container *ngSwitchDefault>
+                                            {{ row[col.field] }}
+                                        </ng-container>
+
+                                    </ng-container>
+
+                                </td>
+                            </tr>
+
+                        </ng-template>
+
+                    </p-table>
+
+                    <!-- <p-listbox [options]="parentRow"
+                        [optionLabel]="dataKey"
+                        [optionValue]="dataKey"
+                        [metaKeySelection]="false"
+                        [checkbox]="false" [filter]="false" [multiple]="false" [showToggleAll]="false"
+                        [style]="{ 'height': '100%' }"
+                        emptyMessage="Aucune entrée trouvée">
+                    
+                            <ng-template let-item pTemplate="item">
+                                {{ item[dataKey] }}
+                            </ng-template>
+                    
+                    </p-listbox> -->
+
+                </div>
+            </td>
+        </tr>
+
+    </ng-template>
+
+    <ng-template pTemplate="loadingbody">
+        <tr style="height:34px">
+            <td *ngFor="let col of selectedColumns">
+                <p-skeleton [ngStyle]="{ width: '100%' }"></p-skeleton>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td [attr.colspan]="columns.length + 1" class="empty-list">Aucune entrée trouvée.</td>
+        </tr>
+    </ng-template>
+
+
+    <ng-template pTemplate="summary" *ngIf="showFooter">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            <h3 class="fw-bolder m-0 text-gray-800">
+                {{ dataRows ? dataRows?.totalCount : 0 }} entrée{{ dataRows?.totalCount > 1 ? 's' : '' }}.
+            </h3>
+        </div>
+    </ng-template>
+</p-table>

@@ -1,0 +1,58 @@
+<div class="row g-6 mb-6 g-xl-9 mb-xl-9">
+    <!--begin::Followers-->
+    <!--begin::Col-->
+    <div class="col-md-6 col-xxl-4" *ngFor="let item of data?.Items" [ngClass]="item.id % 2 == 0 ? 'hover-rotate-start' : 'hover-rotate-end'">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card body-->     
+            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                <!--begin::Avatar-->
+                <div class="symbol symbol-65px symbol-circle mb-5">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADx0lEQVR4nO2XW2gTWQCGR42iiBVFd9VKFTWhgVVZEW9tLWjSWKmruF3SJFMn7WQylGCRkm0zOjHWkjamLmy9VJc8FLSkKMLuYq14eREfXETFN/WhghV8815U1PLLGZ0uSZpL42QcIT/8D0n+OfN/Z845Qygqr7zyykuTGhRnQ0umsgF41DYfw6c3YKR/q+Th3hIMBQu/D4BHbfMxcr4SuLgtxk/P78DCAzwowaOKB7MFIDMfX1722VNW7QOM9G9NCvDywg5Q3aHcW8gRwIvvAWC4tyQpwLlzTu0DDAULx97EF3ZCHwloH2CQHKMH50kblqx5YjLzqpXvVgBAupCcBmoV7lYQ4JavEH96SrG6zo1yhsdmmpNcWteAFY178GOrCOp4hzYBzDaupspRB7PdldKrPI2Y0hXMqMzUE+3oOsNjxolgbgE21bArzDb2fbrysjc6eczu2J+0xITjIRgiAdz9t0Y6BAr/OphbAJON7cm0vGyTg8MSXzMmxBUo6GyFhXPjv57fRk8xY2R/zgEejhdA9s+eRkz+sqQW+gVY6M/f27l6vPznF7wZ2I5lkQO5BTDbXG+zBSCWN3n8901eBisj/txvYvNXlE/l9bwHuqPt2gIo9nphbGqC2cGlzC1v3IOJx7I4coUcAyz1NUs3mtURQAnbkJhxcJ8z2b4vBJUAiCcda4fB65VOJPLbJtqNH9rEhFKpFLpzQ12AxXt9CQULwq0oEn2Y9kfbmLOaSoGb19UFqK/8CS1lOnVcqnvcXDKpUlEA15Zi9QDKdGgu1Q0pCsBXLFUVoKVMl34p3YhUw8rWZwTQYC7SHgDIf96/t2Pf77VpASqs3AZKa8JA1TYMVD25drJaKkmztbhzdA3e9hbj9pG1cLD0KIDJ7l4uXdNrXISo/ir69MOIGq7g7JKihHEVymQkDGyZe6W7+hopScqjzzBqAiEDWKz8Yikv3fT/DPoMlxPGVCiTsUwO1zpS8s1pYwwA+SwDlNvcc0gWUf3rmBtH9a/ix1Mqk7FMVtZISpIZT/YEyhlmKslKjzvt7CqTyVimmvoF8h4gpcnM34rZA+yHmLXbZ7gszWDUcCnp+lYgk7HMND091QlksrPPKK3LQnMfqncLqBXawYhh0L4gft0toILmYbK7pLeiuyU00yl2HnL6ww8Zf/gdI4YHGX845Ah0FcjjKJUZl+qE4FzaF/zo9Hci3nRLEJZd/AOSYfyd98fKOMXwPXfg8BylMtR45RTD/WMO+MU2b+vzdBnpd4Uy1LgBUg34DUzllVdeeVFa1Ce2X2Tan4h/1QAAAABJRU5ErkJggg==">
+                
+                </div>
+                <!--end::Avatar-->
+
+                <!--begin::Name-->
+                <a  class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">{{item.Name}}</a>
+                <!--end::Name-->
+
+                <!--begin::Position-->
+                <!-- <div class="fw-semibold text-gray-400 mb-6">Recurrence :{{item.Recurrence}}</div>                end::Position -->
+            
+                <!--begin::Info-->
+                <div class="d-flex flex-center flex-wrap mb-5">
+                    <!--begin::Stats-->
+                    <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
+                        <div class="fs-6 fw-bold text-gray-700">{{ item.NumberDesk}}</div>
+                        <div class="fw-semibold text-gray-400">
+                            bureaux</div>
+                    </div>
+                    <!--end::Stats-->
+                    <!--begin::Stats-->
+                    <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
+                        <div class="fs-6 fw-bold text-gray-700">{{ item.NumberProjector}}</div>
+                        <div class="fw-semibold text-gray-400">
+                           projecteurs </div>
+                    </div>
+
+                    <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
+                        <div class="fs-6 fw-bold text-gray-700">{{ item.NumberChair}}</div>
+                        <div class="fw-semibold text-gray-400">
+                            chaises</div>
+                    </div>
+                    <!--end::Stats-->
+                </div>
+                <!--end::Info-->
+
+                <div class="ms-5">
+                    <a class="btn btn-icon btn-light-youtube me-3 "  id="kt_docs_sweetalert_state_question"><i class="fas fa-trash fs-4"></i></a>
+                    <a class="btn btn-icon btn-light-linkedin me-5 "  data-bs-toggle="modal" data-bs-target="#kt_modal_Examen"><i class="fas fa-pencil fs-4"></i></a>
+                </div>  
+            </div>
+            <!--begin::Card body-->
+        </div>
+        <!--begin::Card-->
+    </div>
+    <!--end::Col-->
+</div>

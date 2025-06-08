@@ -1,0 +1,27 @@
+.parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+ 
+
+
+  :host ::ng-deep  .p-rating .p-rating-icon {
+
+    font-size: 2.143rem !important;
+}
+
+
+:host ::ng-deep .p-rating .p-rating-icon.pi-star-fill {
+  color: #37bc74;
+}
+
+.rating-list {
+  display: inline-block;
+  list-style: none;
+}
+
+.rating-list li.selected {
+  color: #ffd700;
+}

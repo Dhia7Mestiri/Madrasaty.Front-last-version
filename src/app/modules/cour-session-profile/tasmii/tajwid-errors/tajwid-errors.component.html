@@ -1,0 +1,59 @@
+<p-dialog  header={{modalTitle}} [(visible)]="display"  [style]="{width: '35vw'}"
+[draggable]="false" [resizable]="false" (onHide)="closeDialog()">   
+
+      <div class="col-xs-12">
+        <div class="form-group">  
+          <button *ngFor="let item of subErrorsList; let index=index;" class="btn btn-secondary" (click)="onButtonClick(item)" class="{{item.cssclass}}"
+                 style="margin: 3px;" >{{item.name}} <p style="color: rgb(46, 0, 252);">{{item.code }}</p></button>  
+        </div>  
+      </div>       
+    <ng-template pTemplate="footer">   
+    <div  class="d-flex justify-content-end mt-5">        
+            <a  class="btn btn-primary me-2" (click)="closeDialog()"><i class="fa fa-times" style="font-size: 20px;"></i> Annuler </a>
+            <button  class="btn btn-primary " (click)="saveSubErrors()" ><i class="fa-solid fa-check" style="font-size: 20px;"></i>
+                Confirmer</button>
+            </div>
+    </ng-template>
+</p-dialog>
+
+<div class="row gy-5 gx-xl-5">
+    <div class="card card-xxl-stretch mb-5 mb-xl-8">
+      <div class="card-header border-0 pt-5">
+<div class="d-flex align-items-center collapsible rotate collapsed" data-bs-toggle="collapse" href="#kt_TajweedError" role="button" aria-expanded="false" aria-controls="kt_TajweedError">
+
+    <div class="me-3 rotate-90">
+        <span class="svg-icon svg-icon-3">
+            <img style="margin-top: -12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxElEQVR4nO3TP2oCURCA8R9EkHQRS08Qi7QB8QrbeQA7D5AiV/AEdklv5xWSxgN4ghSpRDtBUNywMMWupNF9Wu0HA4+Z4ePN+0NDw73pRNyEHlYRxTopz/hBHvGLl1TyATYh/o7II1fUapFhF8IFHtHGPHJ7jK6Vj3EI0SdapdoDZlE7YnKp/B2nEEwT9NXa2bg06cfZpBXqnG32z11VeMJXNGwxdDmvWIdjie75mHm89b7r6Zf+S+Gs8Jboh/bC1dAgDX/XyTWeB2zrBwAAAABJRU5ErkJggg==">               </span>
+ 
+    </div>
+    <h4>Fautes de Tajwid</h4> 
+</div>
+      </div>
+
+      <div id="kt_TajweedError" class="fs-6 ps-10 collapse" data-bs-parent="#kt_TajweedError">
+      <div class="card-body pb-2">
+
+                    <!--begin::Details-->
+                    <div class="d-flex flex-wrap py-6">                          
+                      
+                        <button class="btn btn-success position-relative me-5 mb-4 hover-elevate-up"  (click)="ClickButtonOfTajwidError(item)" type="button"
+                        *ngFor="let item of tajwidErrorData ">                            
+                        <span class="position-absolute top-0 start-0 translate-middle  badge badge-circle badge-warning">{{item.length ?? 0}}</span>{{item.name}}</button>
+                    </div>
+                    <!--end::Details-->
+                    <div class="d-flex justify-content-end mt-5">
+                        <button (click)="SaveTajwidErrors()" class="btn btn-primary me-2">
+                            <i class="fas fa-save" style="font-size: 20px"></i>
+                            Confirmer
+                          </button>                        
+                    </div>
+              
+             
+              </div>       
+     
+            </div>
+   
+      </div>
+  
+    </div>
+

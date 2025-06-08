@@ -1,0 +1,26 @@
+<a href="javascript:;" class="menu-link px-5">
+    <span class="menu-title position-relative">
+        {{'navbar-language-dropdown.language' | translate}}
+        <span
+            class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+            {{activeLanguage.name}}
+            <img class="w-15px h-15px rounded-1 ms-2" [src]="activeLanguage.src" [alt]="activeLanguage.name" />
+        </span>
+    </span>
+</a>
+
+<!--begin::Languages-->
+<div class="menu-sub menu-sub-dropdown w-175px py-4">
+    <!--begin::Menu item-->
+    <div class="menu-item px-3" *ngFor="let language of languages">
+        <a href="javascript:;" class="menu-link d-flex px-5" [ngClass]="language.name == activeLanguage?.name ? 'active' : ''"
+            (click)="changeLanguage(language.name)">
+            <span class="symbol symbol-20px me-4">
+                <img class="rounded-1" [src]="language.src" [alt]="language.name" />
+            </span>
+            {{language.name}}
+        </a>
+    </div>
+    <!--end::Menu item-->
+</div>
+<!--end::Languages-->

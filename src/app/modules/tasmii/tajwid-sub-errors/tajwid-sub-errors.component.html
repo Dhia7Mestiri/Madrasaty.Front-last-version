@@ -1,0 +1,13 @@
+    <p-dialog  closable="true" header={{modalTitle}} [(visible)]="display" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">   
+          <div class="col-xs-12">
+            <div class="form-group">  
+              <button *ngFor="let item of subErrorsList; let index=index;" class="btn btn-secondary" (click)="onButtonClick(item)" class="{{item.cssclass}}"
+                     style="margin: 3px;" >{{item.name}} <p style="color: rgb(46, 0, 252);">{{item.code }}</p></button>  
+            </div>  
+          </div>       
+        <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="closeDialog()" label="Annuler" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="saveSubErrors()" label="Confirmer" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>

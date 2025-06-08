@@ -1,0 +1,58 @@
+<div class="row gy-5 gx-xl-5">
+    <div class="card card-xxl-stretch mb-5 mb-xl-8">
+      <div class="card-header border-0 pt-5">
+<div class="d-flex align-items-center collapsible rotate collapsed" data-bs-toggle="collapse" href="#kt_LearningError" role="button" aria-expanded="false" aria-controls="kt_LearningError">
+
+    <div class="me-3 rotate-90">
+        <span class="svg-icon svg-icon-3">
+            <img style="margin-top: -12px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxElEQVR4nO3TP2oCURCA8R9EkHQRS08Qi7QB8QrbeQA7D5AiV/AEdklv5xWSxgN4ghSpRDtBUNywMMWupNF9Wu0HA4+Z4ePN+0NDw73pRNyEHlYRxTopz/hBHvGLl1TyATYh/o7II1fUapFhF8IFHtHGPHJ7jK6Vj3EI0SdapdoDZlE7YnKp/B2nEEwT9NXa2bg06cfZpBXqnG32z11VeMJXNGwxdDmvWIdjie75mHm89b7r6Zf+S+Gs8Jboh/bC1dAgDX/XyTWeB2zrBwAAAABJRU5ErkJggg==">               </span>
+ 
+    </div>
+    <h4>Fautes d'apprentisage</h4> 
+</div>
+      </div>
+
+      <div id="kt_LearningError" class="fs-6 ps-10 collapse" data-bs-parent="#kt_LearningError" style="">
+      <div class="card-body pb-2">
+        
+                    
+              
+                    <!--begin::Details-->
+                      
+                      <div class="parent2">
+                   
+                     
+                          <div class="child">
+                            <button class="btn  btn-primary me-7" (click)="RemoveItem()" type="button"  ><i
+                              class="fa fa-minus"></i></button>
+                            </div> 
+                          <div >
+                            <div style=" width: 574px;;  margin: auto;">    
+                            <a *ngFor="let item of fautes " (click)="onButtonClick(item)" class="{{item.cssclass}}"
+                            type="button"  style="margin: 3px;">{{item.id}}</a> 
+                        
+                            </div>
+                          </div>
+                          <div class="child">
+                            <button class="btn  btn-primary " (click)="PushItem()" type="button"  ><i
+                              class="fa fa-plus"></i></button>
+                            </div>                     
+                            
+                      
+                      </div>
+                    <!--end::Details-->
+                    <div class="d-flex justify-content-end mt-5">
+                        <button  class="btn btn-primary me-2">
+                            <i class="fas fa-save" style="font-size: 20px"></i>
+                            Confirmer
+                          </button>                        
+                    </div>
+              
+             
+              </div>       
+     
+         
+   
+      </div>
+    </div>
+    </div>

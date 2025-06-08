@@ -1,0 +1,103 @@
+.false-icon {
+    color: #c63737;
+}
+.true-icon {
+    color: #28b331;
+}
+
+:host-context(.dark-skin)
+{
+    .true-icon {
+        color: #256029;
+    }
+}
+th {
+    min-height: 48px;
+}
+
+p-multiselect
+{
+    margin-left: 5px;
+    float: right;
+    margin-right: 40px;
+    max-width: 200px;
+}
+.no-button p-multiselect
+{
+    margin-right: 0;
+}
+.p-input-icon-left
+{
+    width: calc(100% - 245px);
+    position: relative;
+    display: inline-flex;
+
+    input { width: 100%; }
+
+    &.minimized-grid
+    {
+        width: calc(100% - 40px);
+    }
+
+    &.full-filter {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px)
+{
+    .p-input-icon-left
+    {
+        width: 100%;
+    }
+    p-multiselect
+    {
+        display: none!important;
+    }
+}
+
+
+@media (min-width: 992px)
+{
+    .no-button .filterAndColumn
+    {
+        width: calc(100% - 210px);
+    }
+}
+
+@media (max-width: 992px)
+{
+    .filterAndColumn
+    {
+        width: calc(100% - 245px);
+    }
+    .no-button .filterAndColumn
+    {
+        width: 100%;
+    }
+    .p-input-icon-left.minimized-grid
+    {
+        width: 100%;
+    }
+}
+
+.fixed
+{
+    width: 50px!important;
+    max-width: 50px!important;
+}
+
+.p-button.p-button-icon-only
+{
+    width: 1.5rem;
+}
+.p-button.p-button-icon-only.p-button-rounded
+{
+    height: 1rem;
+}
+
+#filter
+{
+    padding-left: 30px;
+    border: none;
+}

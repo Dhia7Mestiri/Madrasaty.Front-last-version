@@ -1,0 +1,52 @@
+<div class="row g-6 mb-6 g-xl-9 mb-xl-9">
+
+    <div class="col-md-6 col-xxl-4" *ngFor="let item of data?.Items"
+        [ngClass]="item.Id % 2 == 0 ? 'hover-rotate-start' : 'hover-rotate-end'">
+        <!--begin::Card-->
+        <a class="card border-hover-primary" [routerLink]="['/' + urlPath, item.Id]">
+            <!--begin::Card body-->
+            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                <!--begin::Avatar-->
+                <div class="symbol symbol-65px symbol-circle mb-5">
+                    <img src="/assets/media/default.png " />
+                </div>
+                <!--end::Avatar /assets/media/default.png -->
+
+                <!--begin::Name-->
+                <a [routerLink]="['/', urlPath, item.Id]" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">
+                    {{item.FullName}}
+                </a>
+                <!--end::Name-->
+
+                <!--begin::Position-->
+                <div class="fw-semibold text-gray-400 mb-6">{{item.Email}}</div>        
+
+                <!--begin::Info-->
+                <div class="d-flex flex-center flex-wrap mb-5 mt-2">                   
+                 
+                    <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
+                        <div class="fs-6 fw-bold text-gray-700">{{ item.PhoneNumber }}</div>
+                        <div class="fw-semibold text-gray-400">Email</div>
+                    </div>
+                  
+                    <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
+                        <div class="fs-6 fw-bold text-gray-700">{{item.City}},{{item.Country }}</div>
+                        <div class="fw-semibold text-gray-400">Adress </div>
+                    </div>
+                    <!--end::Stats-->
+                </div>
+                <!--end::Info-->
+
+                <!--begin::Follow-->
+                <div class="ms-5">
+                    <a class="btn btn-icon btn-light-youtube me-3 "  id="kt_docs_sweetalert_state_question"><i class="fas fa-trash fs-4"></i></a>
+                    <a class="btn btn-icon btn-light-linkedin me-5 "  data-bs-toggle="modal" data-bs-target="#kt_modal_Examen"><i class="fas fa-pencil fs-4"></i></a>
+                </div>   
+                <!--end::Follow-->
+            </div>
+            <!--begin::Card body-->
+        </a>
+        <!--begin::Card-->
+    </div>
+
+</div>

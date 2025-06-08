@@ -1,0 +1,160 @@
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="top-center"></p-toast>
+<app-settings-header-shared (SearchEvent)="searchResult($event)"
+    (btnClickSwitchToCard)=" this.switchbtn = !this.switchbtn;" (btnClick)="OpenDiag(-1)"></app-settings-header-shared>
+
+<app-shared-file-uploder (btnUploadClick)="uploadFile($event)"></app-shared-file-uploder>
+
+<div class="row" *ngIf="switchbtn == false">
+    <div class="col-lg-3" *ngFor="let item of rowData">
+        <div class="card cardAnimation card-xl-stretch mb-5 mb-xl-6">
+            <div class="card-body d-flex align-items-center pt-3 pb-0">
+                <div class="d-flex flex-column flex-grow-1 py-2 py-lg-13 me-2 parent">
+                    <a class="fw-bolder fs-4 mb-2 ">
+                        <h4>
+                            <strong>{{ item.Name }}</strong>
+                        </h4>
+
+                        <h5>
+                            Date de Début :
+                            <i><strong class="text-primary">{{ item.StartDate | date }}</strong></i>
+                        </h5>
+                        <h5>
+                            Date de Fin :
+                            <i>
+                                <strong class="text-primary"> {{ item.EndDate | date }}</strong></i>
+                        </h5>
+                    </a>
+
+                    <div style="
+              display: flex;
+              justify-content: space-between;
+              margin-top: 10px;
+            ">
+                        <div class="switchbtn">
+                            <p-inputSwitch [(ngModel)]="item.Actif"
+                                (onChange)="setActifSchoolYear(item.Id)"></p-inputSwitch>
+                        </div>
+
+                        <app-shared-buttons (btnEditClick)="OpenDiag(item.Id)"
+                            (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #callAPIDialog>
+    <form [formGroup]="schoolYearForm" (submit)="saveSchoolYear()">
+
+        <div class="form-floating mb-4">
+            <input style=" width: 20rem;" type="text" class="form-control" id="Nom" required="false" type="text"
+                formControlName="Name">
+            <label for="Nom">Nom</label>
+        </div>
+        <br>
+        <div class="form-floating mb-5">
+            <span class="p-float-label ">
+                <p-calendar dataType="string" formControlName="StartDate" [showIcon]="true"
+                    inputId="StartDate"></p-calendar>
+                <label for="StartDate">Date de début</label>
+            </span>
+        </div>
+        <div class="form-floating mb-5">
+            <span class="p-float-label">
+                <p-calendar dataType="string" formControlName="EndDate" [showIcon]="true"
+                    inputId="EndDate"></p-calendar>
+                <label for="EndDate">Date de Fin</label>
+            </span>
+        </div>
+        <div class="form-floating mb-4">
+            <input style=" width: 20rem;" type="text" class="form-control" id="Recurrence" required="false" type="text"
+                formControlName="Recurrence">
+            <label for="Recurrence">Recurrence</label>
+        </div>
+
+        <br />
+        <div class="card-footer py-6">
+            <div class="col-lg-9">
+                <button type="button" (click)="schoolYearForm.reset()" class="btn btn-active-light btn-color-muted">
+                    <span class="indicator-label">Dégager</span>
+                </button>
+
+                <button type="submit" data-bs-dismiss="offcanvas"
+                    [disabled]="schoolYearForm.invalid || !schoolYearForm.dirty" class="btn btn-primary me-2">
+                    <ng-container>
+                        <span class="indicator-label">Confirmer</span>
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+<app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+
+<div class="card" *ngIf="switchbtn == true">
+
+    <p-toolbar styleClass="mb-3">
+        <ng-template pTemplate="left">
+            <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                (click)="OpenDiag(-1)" pButton pRipple type="button" icon="pi pi-plus"
+                class="p-button-rounded p-button-outlined" pTooltip="Nouvelle année scolaire"></button>
+        </ng-template>
+    </p-toolbar>
+
+
+
+    <p-table [value]="rowData  " class="me-5 ms-5" [resizableColumns]="true" responsiveLayout="scroll"
+        [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 15%;" pSortableColumn="Name">Années scolaire<p-sortIcon field="Name"></p-sortIcon>
+                </th>
+                <th style="width: 15%;" pSortableColumn="StartDate">Date debut <p-sortIcon
+                        field="StartDate"></p-sortIcon> </th>
+                <th style="width: 15%;" pSortableColumn="EndDate">Date fin<p-sortIcon field="EndDate"></p-sortIcon></th>
+                <th style="width: 15%;" pSortableColumn="Recurrence">Recurrence <p-sortIcon
+                        field="Recurrence"></p-sortIcon></th>
+                <th style="width: 15%;" pSortableColumn="État">État <p-sortIcon field="État"></p-sortIcon></th>
+                <th style="width: 15%;"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>{{item.Name}}</td>
+                <td>{{item.StartDate | date}}</td>
+                <td>{{item.EndDate | date }}</td>
+                <td>{{item.Recurrence}}</td>
+                <td>
+                    <span
+                        [ngClass]="item.Actif==true ? 'badge fw-bolder me-auto px-2 py-1  badge-light-success' : 'badge fw-bolder me-auto px-2 py-1  badge-light-danger' ">
+                        <h6 [ngStyle]="{ 'color': (item.Actif==true  ? '#18b618' : '#F1416C') }"> {{
+                            getActive(item.Actif) }}</h6>
+                    </span>
+                </td>
+                <td>
+                    <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                        (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                </td>
+            </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+
+                Au total il y a {{SchoolYearsCount }}
+                années scolaire.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<div class="mt-5" style="       position:static;       bottom: 116px;right:25%;
+    left:50%;
+    margin-left:-150px;">
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="paginate($event)"></p-paginator>
+</div>

@@ -1,0 +1,44 @@
+<div class="flex-column flex-lg-row-auto w-100 w-xl-300px mb-10">  
+    <!--begin::Card-->
+    <div class="card mb-5 mb-xl-8">
+        <!--begin::Card body-->
+        <div class="card-body pt-15">
+            <!--begin::Summary-->
+            <div class="d-flex flex-center flex-column mb-5">
+                <!--begin::Avatar-->
+                <div class="symbol symbol-150px symbol-circle mb-7">
+                    <img [src]="ImageSrc"/>
+                </div>
+                <!--end::Avatar-->
+                <!--begin::Name-->
+                <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">{{Title}}</a>      
+                <!--end::Name-->
+                <!--begin::Email-->
+                <!--end::Email-->
+            </div>
+            <!--end::Summary-->
+            <!--begin::Details toggle-->
+            <div class="d-flex flex-stack fs-4 py-3">
+                <div class="fw-bold">Details</div>                          
+            </div>
+            <!--end::Details toggle-->
+            <div class="separator separator-dashed my-3"></div>
+            <!--begin::Details content-->
+            <div class="pb-5 fs-6" >
+                <div class="symbol symbol-circle symbol-70px overflow-hidden me-3">                
+                        <div class="symbol-label">
+                            <img src="assets/media/default.png" alt="Emma Smith" class="w-100">
+                        </div>                 
+                </div>
+                <!--begin::Details item -->
+                <div *ngFor="let item of Data" >
+                <div class="fw-bold mt-5">{{item?.key}}</div>
+                <div class="text-gray-600">{{item?.value}}</div>
+            </div>
+            </div>
+            <!--end::Details content-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+</div>

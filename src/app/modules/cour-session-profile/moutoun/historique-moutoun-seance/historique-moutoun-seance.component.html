@@ -1,0 +1,124 @@
+<div class="row gy-5 gx-xl-5">
+    <div class="card card-xxl-stretch mb-5 mb-xl-8">
+      <div class="card-header border-0 pt-5">
+        <div class="card-toolbar">
+          <h4>Historique De séance Moutoun</h4>
+        </div>
+        <div class="my-0">
+          <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">        
+            <!--begin::Input-->
+            <select class="form-select form-select-solid" (change)="onSelectChange($event.target.value)" > 
+              <option  value="-1">Tous</option>                            
+                <option *ngFor="let opt of StudentsBySeance" [value]="opt.Id">{{opt.FullName}}</option>  
+            </select>  
+            <!--end::Input -->
+        <div class="fv-plugins-message-container invalid-feedback"></div>
+    </div>
+  
+      
+        </div>
+  
+      </div>
+      <div class="card-body pb-5">   
+        <div id="kt_widget_table_3_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+          <div class="table-wrapper "  style="height:350px;overflow:auto;">
+          <table id="kt_widget_table_3" class="table table-row-dashed align-middle fs-6 gy-4 my-0 pb-3 dataTable no-footer" data-kt-table-widget-3="all">
+          <thead class="d-none">
+            <tr>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Campaign: activate to sort column ascending" style="width: 0px;">Campaign</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Platforms: activate to sort column ascending" style="width: 0px;">Platforms</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 0px;">Status</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 0px;">Status</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Team: activate to sort column ascending" style="width: 0px;">Team</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 0px;">Date</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Progress: activate to sort column ascending" style="width: 0px;">Progress</th>
+              <th class="sorting" tabindex="0" aria-controls="kt_widget_table_3" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 0px;">Action</th></tr>
+          </thead>
+          <tbody>              
+          <tr class="odd" *ngFor="let item of filteredData; let index = index">
+              <td class="min-w-175px">
+                <div class="position-relative ps-6 pe-3 py-2">
+                  <div class="position-absolute start-0 top-0 w-4px h-100 rounded-2 " [ngClass]="index % 2==0 ? 'bg-info' : 'bg-success'"></div>
+                  <a href="#" class="mb-1 text-dark text-hover-primary fw-bold">{{item.PoemeTitle}}</a>
+                  <div class="fs-7 text-muted fw-bold">{{item.SeanceTitle}}</div>
+                </div>
+              </td>
+              <td>
+                <div class="position-relative ps-6 pe-3 py-2">
+                 
+                  <a href="#" class="mb-1 text-dark text-hover-primary fw-bold">{{item.StudentFirstName}}</a>
+                  <div class="fs-7 text-muted fw-bold">{{item.StudentLastName}}</div>
+                </div>
+                <!--end::Icons-->
+              </td>
+              <td>                
+                <div class="mb-2 fw-bold">{{item.VerseStart}}</div>
+                <div class="fs-7 fw-bold text-muted">Début</div>
+             
+              </td>
+              <td>
+                <div class="mb-2 fw-bold">{{item.VerseEnd}}</div>
+                <div class="fs-7 fw-bold text-muted">Fin</div>
+
+            
+                
+              </td>
+              <td class="min-w-125px">
+                <!--begin::Team members-->
+               
+                  <div class="fw-bold">
+                    <ul class="list-inline rating-list" *ngFor="let star of stars">               
+                      <div  [ngClass]="{'rating-label  checked': (star <= item.Rating)}" >
+                        <i class="fa fa-star fs-5"></i>
+                    </div>
+                  </ul>
+                  </div>
+           
+              
+
+        
+           
+
+          
+              </td>
+              <td class="min-w-150px">
+                <div class="mb-2 fw-bold">{{item.Date | date}}</div>
+                <div class="fs-7 fw-bold text-muted">Date D'évaluation</div>
+              </td>
+              <td class="d-none">Pending</td>
+              <td class="text-end">
+                <div class="d-flex justify-content-end flex-shrink-0">                                                                                
+                  <!--end::Print-->
+                  <!--begin::Chat-->
+                  <a (click)="editMoutoun(item)" class="btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm me-3">
+                      <i class="fa fa-edit fs-5"></i>
+                  </a>
+                  <!--end::Chat-->
+                  <!--begin::Attach-->
+                  <a (click)="DeleteMoutoun(item.Id)" class="btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm">
+                      <i class="fa fa-trash fs-5"></i>
+                  </a>
+                  <!--end::Attach-->
+              </div>
+              </td>
+            </tr>
+        
+          </tbody>
+          <!--end::Table-->
+        </table>
+    </div>   
+</div>
+      </div>
+    </div>
+
+  </div>
+
+  <app-edit-moutoun #edit ></app-edit-moutoun>
+
+  <app-generic-modal-dialog [modalTitle]="modalTitle"   [(showModal)]="modalIsVisible" [stepsCount]="1"  
+  backButtonCaption="Annuler"
+ >
+
+
+
+</app-generic-modal-dialog>

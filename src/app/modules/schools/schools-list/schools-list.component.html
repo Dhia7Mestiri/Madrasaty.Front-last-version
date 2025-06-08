@@ -1,0 +1,97 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table #dataTable [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="schools" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            (GridButtonClick)="buttonClicked($event)"   [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+
+    <app-card-view
+        apiUrlPath="schools" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions" [config]="config" [css]="css"
+        (btnClicked)="buttonClicked($event)">
+    </app-card-view>
+
+</ng-container>
+
+
+<app-generic-modal-dialog [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="'general.ok' | translate" [backButtonCaption]="'general.cancel' | translate"
+    [page]="page" [saveAction]="saveAction">
+
+        <app-edit-school #edit></app-edit-school>
+
+</app-generic-modal-dialog>
+
+
+<!-- 
+<div class="row">
+    <div class="col-lg-4 mb-4" *ngFor="let item of rowData">
+        <div class="card cardAnimation card-xl-stretch  mb-5 mb-xl-8">
+            <div class="card-body">
+
+                <div class="d-flex flex-stack">
+                    <div class="d-flex align-items-center">
+                        <div class="symbol symbol-60px me-5">
+                            <img [src]="this.schoolService.GetSchoolPhotoPath(item.PhotoPath)"
+                                class="h-40 align-self-center" alt="" />
+                        </div>
+
+                        <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                            <a class="text-dark fw-bolder text-hover-primary fs-5">
+                                {{item .Name}}
+                            </a>
+                            <span class="text-muted fw-bold">{{ item.Street }},{{ item.City }}</span>
+                        </div>
+
+                    </div>
+
+                    <div class="ms-1">
+                        <a class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                            style="width: 60px;">
+                            <span class="svg-icon svg-icon-1"> <i class="fas fa-map"></i> {{item.ZipCode}}</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex  mt-3">
+                    <h6 class="fs-5">Paye: </h6>
+                    <h5 style=" margin-left: 3px;" class="text-muted fw-bold fs-6 mt-1">
+                        {{ item.Country }}
+                    </h5>
+                </div>
+                <div class="d-flex flex-column mt-2">
+                    <div class="text-dark me-2 fw-bolder  pb-4">Membres:</div>
+
+                    <div class="d-flex">
+                        <p-avatarGroup *ngIf="item?.memberslist.length!=0" styleClass="mb-2">
+                            <ng-container *ngFor="let i of item?.memberslist;let ind = index;">
+                                <p-avatar *ngIf="ind <= maxMemberList" [image]="getmemberPhotos(i.PhotoPath)"
+                                    size="large" shape="circle"></p-avatar>
+                            </ng-container>
+
+                            <p-avatar *ngIf="item?.memberslist?.length-maxMemberList-1>0"
+                                matTooltip="afficher tous les members" (click)="showBasicDialog(item.Id)"
+                                [label]="item?.memberslist?.length-maxMemberList-1" shape="circle" size="large"
+                                [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"></p-avatar>
+                        </p-avatarGroup>
+
+                        <p-avatarGroup *ngIf="item?.memberslist.length==0" styleClass="mb-2">
+                            <p-skeleton *ngFor="let i of[1,2,3,4,5]" shape="circle" size="3rem"></p-skeleton>
+                        </p-avatarGroup>
+                    </div>
+                </div>
+            </div>
+
+            <div align="end" style=" margin-top: -25px;">
+                <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                    (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+            </div>
+        </div>
+    </div>
+</div> -->

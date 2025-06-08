@@ -1,0 +1,372 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="members" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+
+    <app-card-view
+        apiUrlPath="members" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions" [config]="config" [css]="css" 
+        (btnClicked)="buttonClicked($event)">
+    </app-card-view>
+
+</ng-container>
+<app-generic-modal-dialog  [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="'general.ok' | translate" [backButtonCaption]="'general.cancel' | translate"
+    [page]="page" [saveAction]="saveAction">
+
+        <app-edit-member #EditMember></app-edit-member>
+
+</app-generic-modal-dialog>
+
+
+
+
+
+
+<ng-container *ngIf="false">
+
+    <app-settings-header-shared (SearchEvent)="searchResult($event)"
+        (btnClickSwitchToCard)="this.switchbtn = !this.switchbtn" (btnClick)="OpenDiag(-1)"></app-settings-header-shared>
+    <p-toast position="top-center"></p-toast>
+
+    <p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+    <div class="d-flex justify-content-between">
+        <div>
+            <p-dropdown [options]="MemberStatusId" (onChange)="onSelectChange($event)" placeholder="Select a Role"
+                optionLabel="Wording" optionValue="Id" [showClear]="true"></p-dropdown>
+        </div>
+
+        <div>
+            <app-shared-file-uploder (btnUploadClick)="uploadFile($event)"></app-shared-file-uploder>
+        </div>
+    </div>
+
+    <div class="container-fluid" *ngIf="switchbtn == false">
+        <div class="row">
+            <div class="col-lg-4 mb-4" *ngFor="let item of rowData">
+                <div class="card cardAnimation card-xl-stretch ">
+                    <div class="card-body d-flex flex-center flex-column p-9">
+                        <div class="mb-5">
+                            <div class="symbol symbol-75px symbol-circle">
+                                <!-- [matTooltip]= "findRole(item.MemberStatusId)"  -->
+                                <ng-container>
+                                    <img alt="Pic" [src]="members.GetMemberPhotoPath(item.PhotoPath)"
+                                        class="h-90px w-90px" />
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <a *ngIf="item.FullName" [routerLink]="['/member/', item.Id]"
+                            class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0 cursor-pointer"
+                            pTooltip="voir les details de {{ item.FullName }}">
+                            {{ item.FullName }}
+                        </a>
+                        <h5 *ngIf="item.BirthDate">{{ item.BirthDate | date }}
+                            <strong><br></strong>
+                        </h5>
+
+                        <div class="fw-bold text-gray-400 mb-6">{{ item.Email }}</div>
+
+                        <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                            (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <ng-template #callAPIDialog>
+        <form [formGroup]="memberForm" (submit)="BeforeSave()">
+            <div class="row " style=" display: flex; justify-content: center;    margin-top: -39px;">
+                <div class="col-lg-5">
+                    <style>
+                        i.fa-paperclip {
+                            margin: 10px;
+                            cursor: pointer;
+                            font-size: 20px;
+                        }
+
+                        i:hover {
+                            opacity: 0.6;
+                        }
+                    </style>
+                    <input class="fileupload" type="file" name="fileupload" value="fileupload" id="fileupload" #fileInput
+                        (change)="onChange(fileInput.files[0])" style="visibility:hidden;" />
+
+                    <img [src]="PhotoPath" id="profile_picture" onerror="this.src='/assets/media/default.png'"
+                        alt="profile_picture" style="    width: 120px;
+            height: 115px;border-radius: 50%;">
+                    <div class="caption"><label class="label" for="fileupload"> <i class="fa fa-paperclip"></i>Choisir une
+                            image...</label></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+
+                        <select class="form-select" id="MemberStatusId" name="MemberStatusId"
+                            formControlName="MemberStatusId" required="false">
+
+                            <option *ngFor="let status of MemberStatusId" [value]="status.Id">{{status.Wording}}</option>
+                        </select>
+                        <label for="MemberStatusId">Statut</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Nom" required="false" type="text"
+                            formControlName="LastName">
+                        <label for="Nom">Nom</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="FirstName" required="false" type="text"
+                            formControlName="FirstName">
+                        <label for="FirstName">Pr&eacute;nom</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" id="Gender" formControlName="Female" required="false">
+                            <option value="1">Masculin</option>
+                            <option value="0">Femenin</option>
+                        </select>
+                        <label for="Gender">Gender</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Skype" required="false" type="text"
+                            formControlName="SkypeId">
+                        <label for="Skype">Skype</label>
+                    </div>
+                    <br />
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="PhoneNumber" required="false" type="text"
+                            formControlName="PhoneNumber">
+                        <label for="PhoneNumber">T&eacute;l&eacute;phone</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 form-floating mb-3">
+                    <span class="p-float-label">
+                        <p-calendar dataType="string" formControlName="BeginningDate" [showIcon]="true"
+                            inputId="BeginningDate"></p-calendar>
+                        <label for="BeginningDate">Date d'entr&eacute;e</label>
+                    </span>
+                </div>
+
+                <div class=" col-6 form-floating mb-3">
+                    <span class="p-float-label">
+                        <p-calendar dataType="string" formControlName="BirthDate" [showIcon]="true"
+                            inputId="BirthDate"></p-calendar>
+                        <label for="BirthDate">Date de naissance</label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Profession" required="false" type="text"
+                            formControlName="Profession">
+                        <label for="Profession">Profession</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Street" required="false" type="text"
+                            formControlName="Street">
+                        <label for="Street">Adresse</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="ZipCode" required="false" type="text"
+                            formControlName="ZipCode">
+                        <label for="ZipCode">Code postale</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+
+                        <select class="form-select" id="Country" formControlName="Country" required="false">
+                            <option *ngFor="let opt of countries" [value]="opt.code">{{ opt.name}}
+                            </option>
+                        </select>
+                        <label for="Country">Pays</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="City" required="false" type="text"
+                            formControlName="City">
+                        <label for="City">Ville</label>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="Email" required="false" formControlName="Email">
+                        <label for="Email">Email</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="Login" required="false" formControlName="Login">
+                        <label for="Login">Nom d'utilisateur</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" id="MemberStateId" formControlName="MemberStateId" required="false">
+                            <option *ngFor="let status of MemberStatesId" [value]="status.Id">
+                                {{ status.Wording }}
+                            </option>
+                        </select>
+                        <label for="MemberStateId">Etat</label>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="card-footer py-6">
+                    <div class="col-lg-9">
+                        <button type="button" (click)="this.memberForm.reset()"
+                            class="btn btn-active-light btn-color-muted me-2">
+                            <span class="indicator-label">Dégager</span>
+                        </button>
+
+                        <button data-bs-dismiss="offcanvas" type="submit" class="btn btn-primary ">
+                            <ng-container>
+                                <span class="indicator-label">
+                                    Confirmer</span>
+                            </ng-container>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </ng-template>
+    <app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+
+    <div class="card" *ngIf="switchbtn == true">
+
+        <p-toolbar styleClass="mb-3">
+            <ng-template pTemplate="left">
+                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                    (click)="OpenDiag(-1)" pButton pRipple type="button" icon="pi pi-plus"
+                    class="p-button-rounded p-button-outlined" pTooltip="Nouvelle membre"></button>
+            </ng-template>
+        </p-toolbar>
+
+        <p-table [value]="rowData  " [resizableColumns]="true" responsiveLayout="scroll" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[5,10,20]" class="me-5 ms-5">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 15%;" pSortableColumn="Email">Email<p-sortIcon field="Email"></p-sortIcon></th>
+                    <th style="width: 15%;" pSortableColumn="BirthDate">Date de naissance <p-sortIcon
+                            field="BirthDate"></p-sortIcon> </th>
+                    <th style="width: 15%;" pSortableColumn="PhoneNumber">Téléphone<p-sortIcon
+                            field="PhoneNumber"></p-sortIcon></th>
+                    <th style="width: 15%;" pSortableColumn="MemberStateId">Etat<p-sortIcon
+                            field="MemberStateId"></p-sortIcon></th>
+
+                    <th style="width: 15%;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="symbol symbol-50px me-5">
+                                <span class="symbol-label bg-light">
+                                    <img [matTooltip]="findRole(item.MemberStatusId)"
+                                        [src]="members.GetMemberPhotoPath(item.PhotoPath)" class="h-75 align-self-end"
+                                        alt="" />
+                                </span>
+                            </div>
+
+                        </div>
+                    </td>
+                    <td>{{item.Email}}</td>
+                    <td>{{item.BirthDate |date }}</td>
+                    <td>{{item.PhoneNumber }}</td>
+                    <td>
+                        <div *ngIf="item.MemberStateId==3">
+                            <span class="badge badge-danger fs-7 fw-bold">
+                                {{getvalue(item.MemberStateId)}}
+                            </span>
+                        </div>
+
+                        <div *ngIf="item.MemberStateId==2">
+                            <span class="badge badge-success fs-7 fw-bold">
+                                {{getvalue(item.MemberStateId)}}
+                            </span>
+                        </div>
+                        <div *ngIf="item.MemberStateId==1">
+                            <span class="badge badge-info fs-7 fw-bold">
+                                {{getvalue(item.MemberStateId)}}
+                            </span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                            (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+
+                    Au total il y a {{MembersCoun }}
+                    membres.
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="mt-5">
+        <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+            (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+
+</ng-container>

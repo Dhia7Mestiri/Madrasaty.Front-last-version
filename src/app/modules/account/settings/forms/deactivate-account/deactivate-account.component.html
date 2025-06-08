@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+        data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">
+                Désactiver le compte</h3>
+        </div>
+    </div>
+    <div id="kt_account_deactivate" class="collapse show">
+        <form id="kt_account_deactivate_form" class="form">
+            <div class="card-body border-top p-9">
+                <div class="
+            notice
+            d-flex
+            bg-light-warning
+            rounded
+            border-warning border border-dashed
+            mb-9
+            p-6
+          ">
+                    <div class="d-flex flex-stack flex-grow-1">
+                        <div class="fw-bold">
+                            <h4 class="text-gray-800 fw-bolder">
+                                Vous désactivez votre compte
+                            </h4>
+                            <div class="fs-6 text-gray-600">
+                                Pour plus de sécurité, cela vous oblige à confirmer votre adresse e-mail ou
+                                numéro de téléphone lorsque vous réinitialisez votre mot de passe.<br /><a
+                                    class="fw-bolder" href="#">En savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-check form-check-solid fv-row">
+                    <input class="form-check-input" type="checkbox" name="confirm" value="false" /><label
+                        class="form-check-label fw-bold ps-2 fs-6" for="deactivate">
+                        Je confirme la désactivation de mon compte</label>
+                </div>
+                <div class="fv-plugins-message-container">
+                    <div class="fv-help-block">
+
+                        Veuillez cocher la case pour désactiver votre compte
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                <button id="kt_account_deactivate_account_submit" type="button" class="btn btn-danger fw-bold"
+                    (click)="saveSettings()">
+                    Désactiver le compte
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

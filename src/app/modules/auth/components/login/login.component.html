@@ -1,0 +1,124 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+
+    <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="./assets/media/illustrations/sketchy-1/13.png" class="img-fluid" alt="Sample image">
+    </div>
+
+    <!--begin::Content body-->
+    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <!--begin::Form-->
+        <form class="form w-100" [formGroup]="loginForm" id="kt_login_signin_form"
+            (ngSubmit)="loginUser()">
+            <!--begin::Heading-->
+            <div class="text-center mb-5">
+                <h1 class="text-dark mb-3"> {{"auth.welcome" | translate}}Madrasaty</h1>
+                <h3>مرحباً بكم</h3>
+                <div class="text-gray-400 fw-bold fs-4">
+                    {{"auth.new" | translate}}
+                    <a routerLink="/auth/registration" id="kt_login_signup" class="link-primary fw-bolder">{{
+                        "general.SIGNUP_BUTTON" | translate }}</a>
+                </div>
+            </div>
+            <!--end::Heading-->
+
+            <!-- begin::Alert info-->
+
+            <!-- end::Alert info-->
+
+            <!-- begin::Alert error-->
+            <ng-container *ngIf="hasError">
+                <div class="mb-lg-15 alert alert-danger">
+                    <div class="alert-text font-weight-bold">
+                        Les informations de connexion sont incorrectes
+                    </div>
+                </div>
+            </ng-container>
+            <!-- end::Alert error-->
+
+            <!--begin::Form group-->
+            <div class="fv-row mb-10">
+                <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+                <input class="form-control form-control-lg form-control-solid" type="email" name="email"
+                    formControlName="email" autocomplete="off" [ngClass]="{
+            'is-invalid': loginForm.controls['email'].invalid,
+            'is-valid': loginForm.controls['email'].valid
+          }" />
+                <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Email is required',
+            control: loginForm.controls['email']
+          }"></ng-container>
+                <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'email',
+            message: 'Email is invalid',
+            control: loginForm.controls['email']
+          }"></ng-container>
+            </div>
+            <!--end::Form group-->
+
+            <!--begin::Form group-->
+          
+            <!--end::Form group-->
+            <div class="col-6">
+                <div class="fv-row mb-3">
+                  <label class="form-label fw-bolder text-dark fs-6">Mot de passe </label>
+            <input (paste)="(false)" class="passwordalign form-control form-control-lg form-control-solid" type="password"
+              placeholder="Mot de passe" name="password" formControlName="password"  autocomplete="off" />
+              <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Password is required',
+                control: loginForm.controls['password']
+              }"></ng-container>
+        </div>
+    </div>
+            <!--begin::Action-->
+            <div class="text-center">
+                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-4"
+                    [disabled]="loginForm.invalid">
+                        <span class="indicator-label">
+                            Continuer
+                        </span>
+                </button>
+
+                <div class="d-flex align-items-center mb-3">
+                    <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+                    <span class="fw-bold text-gray-400 fs-7 mx-2">OR</span>
+                    <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+                </div>
+
+                <div class="text-center">
+                    <button type="button" matTooltip="S'inscrire avec facebook"
+                        class="btn btn-link btn-floating mx-1 me-5">
+                        <i class="fab fa-facebook-f" style="font-size: 20px;"></i>
+                    </button>
+
+                    <button type="button" matTooltip="S'inscrire avec google"
+                        class="btn btn-link btn-floating mx-1 me-5">
+                        <i class="fab fa-google" style="font-size: 20px;"></i>
+                    </button>
+
+                    <button type="button" matTooltip="S'inscrire avec twitter" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-twitter" style="font-size: 20px;"></i>
+                    </button> 
+                </div>
+
+             </div>
+            <!--end::Action-->
+        </form>
+        <!--end::Form-->
+
+        <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+            <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+                <div class="fv-plugins-message-container">
+                    <span role="alert" id="validationcolor">
+                        {{ message }}
+                    </span>
+                </div>
+            </ng-container>
+        </ng-template>
+    </div>
+
+
+
+    <!--end::Content body-->
+</div>

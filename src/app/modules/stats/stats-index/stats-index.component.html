@@ -1,0 +1,29 @@
+<div class="card p-10">
+
+    <form [formGroup]="form" class="form-horizontal">
+
+        <app-dynamic-form [form]="form" [questions]="questions">
+        </app-dynamic-form>
+
+
+        <!--Save/Reset Buttons-->
+        <div class="text-center buttons" *ngIf="canEditClassroom">
+            <img *ngIf="loading" src="assets/media/loading.gif" />
+
+            <div class="separator separator-dashed my-10"></div>
+
+            <button class="btn btn-danger mr-2" id="cancel" (click)="closePanel()" [disabled]="loading">
+                <i class="fa fa-check"></i> Annuler
+            </button> &nbsp;&nbsp;
+
+            <!-- [disabled]="loading || !form.valid || form.controls['password'].value !== form.controls['confirmPassword'].value" -->
+            <button type="submit"
+                [disabled]="loading || !form.valid || !form.dirty"
+                class="btn btn-primary mr-2" id="modify" (click)="saveClientAccountModif()">
+                    <i class="fa fa-check"></i> Enregistrer
+            </button> &nbsp;&nbsp;
+        </div>
+
+    </form>
+
+</div>

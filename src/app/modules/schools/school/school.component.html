@@ -1,0 +1,270 @@
+<!--<app-settings-header-shared (SearchEvent)="searchResult($event)"
+    (btnClickSwitchToCard)="this.switchbtn = !this.switchbtn" (btnClick)="OpenDiag(-1)"></app-settings-header-shared>
+
+<app-shared-file-uploder (btnUploadClick)="uploadFile($event)"></app-shared-file-uploder>
+
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-dialog header="Tous les members" [(visible)]="displayBasic" [style]="{width: '36vw'}">
+    <p-table [value]="memberslist" selectionMode="single" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th width="30%" pSortableColumn="Email">Email<p-sortIcon field="Email"></p-sortIcon></th>
+                <th width="15%" pSortableColumn="image">Image</th>
+                <th width="35%" pSortableColumn="FullName">Full Name <p-sortIcon field="FullName"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-member>
+            <tr [pSelectableRow]="rowData">
+                <td>{{member.Email}}</td>
+                <td><p-avatar [image]="getmemberPhotos(member.PhotoPath)" styleClass="mr-2" size="xlarge"
+                        shape="circle"></p-avatar></td>
+                <td>{{member.FullName}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<div class="container-fluid" *ngIf="switchbtn == false">
+    <div class="row">
+        <div class="col-lg-4 mb-4" *ngFor="let item of rowData">
+            <div class="card cardAnimation card-xl-stretch  mb-5 mb-xl-8">
+                <div class="card-body">
+
+                    <div class="d-flex flex-stack">
+                        <div class="d-flex align-items-center">
+                            <div class="symbol symbol-60px me-5">
+                                <img [src]="this.schoolService.GetSchoolPhotoPath(item.PhotoPath)"
+                                    class="h-40 align-self-center" alt="" />
+                            </div>
+
+                            <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                                <a class="text-dark fw-bolder text-hover-primary fs-5">
+                                    {{item .Name}}
+                                </a>
+                                <span class="text-muted fw-bold">{{ item.Street }},{{ item.City }}</span>
+                            </div>
+
+                        </div>
+
+                        <div class="ms-1">
+                            <a class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                                style="width: 60px;">
+                                <span class="svg-icon svg-icon-1"> <i class="fas fa-map"></i> {{item.ZipCode}}</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex  mt-3">
+                        <h6 class="fs-5">Paye: </h6>
+                        <h5 style=" margin-left: 3px;" class="text-muted fw-bold fs-6 mt-1">
+                            {{ item.Country }}
+                        </h5>
+                    </div>
+                    <div class="d-flex flex-column mt-2">
+                        <div class="text-dark me-2 fw-bolder  pb-4">Membres:</div>
+
+                        <div class="d-flex">
+                            <p-avatarGroup *ngIf="item?.memberslist.length!=0" styleClass="mb-2">
+                                <ng-container *ngFor="let i of item?.memberslist;let ind = index;">
+                                    <p-avatar *ngIf="ind <= maxMemberList" [image]="getmemberPhotos(i.PhotoPath)"
+                                        size="large" shape="circle"></p-avatar>
+                                </ng-container>
+
+                                <p-avatar *ngIf="item?.memberslist?.length-maxMemberList-1>0"
+                                    matTooltip="afficher tous les members" (click)="showBasicDialog(item.Id)"
+                                    [label]="item?.memberslist?.length-maxMemberList-1" shape="circle" size="large"
+                                    [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"></p-avatar>
+                            </p-avatarGroup>
+
+                            <p-avatarGroup *ngIf="item?.memberslist.length==0" styleClass="mb-2">
+                                <p-skeleton *ngFor="let i of[1,2,3,4,5]" shape="circle" size="3rem"></p-skeleton>
+                            </p-avatarGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <div align="end" style=" margin-top: -25px;">
+                    <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                        (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #callAPIDialog>
+    <form [formGroup]="schoolForm">
+        <p>{{fuctionality}}</p>
+        <div class="row mb-6" style="display: flex; justify-content: center;">
+            <div class="col-lg-5">
+                <input class="fileupload" type="file" name="fileupload" value="fileupload" id="fileupload" #fileInput
+                    (change)="onChange(fileInput.files[0])" style="visibility:hidden;" />
+                <a>
+                    <img [src]="PhotoPath" id="profile_picture" onerror="this.src='/assets/media/default.png'"
+                        style="border-radius: 50%;" alt="profile_picture"
+                        style="width:150px; height:150px;border-radius: 50%;">
+                    <div class="caption"><label class="label" for="fileupload">
+                        <i class="fa fa-paperclip"></i>Choisir une image...</label>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputemail" required="false" type="text"
+                        formControlName="Name">
+                    <label for="floatingInputemail">Email address</label>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputAdresse" required="false" type="text"
+                        formControlName="Street">
+                    <label for="floatingInputAdresse">Adresse</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputCode" required="false" type="text"
+                        formControlName="ZipCode">
+                    <label for="floatingInputCode">Code postale</label>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputCity" required="false" type="text"
+                        formControlName="City">
+                    <label for="floatingInputCity">Ville</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <p-dropdown [options]="countries" formControlName="Country" optionValue="name" optionLabel="name"
+                        placeholder="Select a City" [showClear]="true"></p-dropdown>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputSocietyName" required="false" type="text"
+                        formControlName="SocietyName">
+                    <label for="floatingInputSocietyName">Nom Société</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputSiretCode" required="false" type="text"
+                        formControlName="SiretCode">
+                    <label for="floatingInputSiretCode">Code Siret</label>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputNumTVA" required="false" type="text"
+                        formControlName="NumTVA">
+                    <label for="floatingInputNumTVA">Num TVA</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card-footer py-6">
+            <div class="col-lg-9">
+                <button type="button" (click)="this.schoolForm.reset();this.LogoPath=''"
+                    class=" btn btn-active-light btn-color-muted  me-2">
+                    <span class="indicator-label">Dégager</span>
+                </button>
+                <button data-bs-dismiss="offcanvas" (click)="saveSchool()" class=" btn btn-primary">
+                    <ng-container>
+                        <span class="indicator-label">Confirmer</span>
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+
+
+    </form>
+
+</ng-template>
+
+
+
+<app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+
+<div class="card" *ngIf="switchbtn == true">
+    <p-toolbar styleClass="mb-3">
+        <ng-template pTemplate="left">
+            <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                (click)="OpenDiag(-1)" pButton pRipple type="button" icon="pi pi-plus"
+                class="p-button-rounded p-button-outlined" pTooltip="Nouvelle ecole"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table [value]="rowData" [resizableColumns]="true" responsiveLayout="scroll" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[5,10,20]" class="me-5 ms-5">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 15%;" pSortableColumn="Description">Logo de l'école</th>
+                <th style="width: 15%;" pSortableColumn="Name">École <p-sortIcon field="Name"></p-sortIcon> </th>
+                <th style="width: 15%;" pSortableColumn="Street">Adresse<p-sortIcon field="Street"></p-sortIcon></th>
+                <th style="width: 15%;" pSortableColumn="NumTVA">Num TVA<p-sortIcon field="NumTVA"></p-sortIcon></th>
+                <th style="width: 15%;" pSortableColumn="SiretCode">Code Siret<p-sortIcon
+                        field="SiretCode"></p-sortIcon></th>
+                <th style="width: 15%;" pSortableColumn="SocietyName">Nom de société<p-sortIcon
+                        field="SocietyName"></p-sortIcon></th>
+                <th style="width: 15%;"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="symbol symbol-50px me-5">
+                            <img class="img" src={{this.schoolService.GetSchoolPhotoPath(item.PhotoPath)}} />
+                        </div>
+                    </div>
+                </td>
+                <td>{{item.Name}}</td>
+                <td>{{item.Street}}</td>
+                <td>{{item.NumTVA }}</td>
+                <td>{{item.SiretCode}}</td>
+                <td>{{item.SocietyName }}</td>
+                <td>
+                    <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                        (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Au total il y a {{rowData ? rowData?.length : 0 }}
+                écoles.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<div class="mt-5 mb-9">
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="paginate($event)"></p-paginator>
+</div>-->

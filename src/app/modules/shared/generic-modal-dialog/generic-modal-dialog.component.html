@@ -1,0 +1,48 @@
+<p-dialog [style]="{width: '35vw'}" #dlg [(visible)]="showModal" [maximizable]="true" [modal]="true"  [dismissableMask]="true"
+    (onHide)="onHide()">
+
+    <ng-template pTemplate="header">
+        <h3>{{modalTitle}}</h3>
+    </ng-template>
+
+    <ng-content></ng-content>
+
+    <ng-template pTemplate="footer">
+
+        <div class="separator separator-dashed my-5"></div>
+
+        <!--begin::Buttons-->
+        <div class="d-flex flex-stack modal-footer-sticky mt-5">
+            <!--begin::Previous-->
+            <div class="me-2">
+                <button type="button" class="btn btn-light btn-active-light-primary"
+                    data-kt-stepper-action="previous" (click)="gotoPreviousStep($event)"
+                        *ngIf="backButtonCaption && (currentStep > 1 || stepsCount == 1)">
+                            {{backButtonCaption}}
+                </button>
+            </div>
+            <!--end::Previous-->
+
+            <!--begin::Next-->
+            <div>
+                <button type="button" class="btn btn-primary" *ngIf="currentStep == stepsCount" (click)="submit($event)">
+                    <span class="indicator-label">
+                        {{saveButtonCaption}}
+                    </span>
+                    <span class="indicator-progress">
+                        Opération en cours...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                </button>
+
+                <button type="button" class="btn btn-primary" data-kt-stepper-action="next"
+                    (click)="gotoNextStep()" *ngIf="currentStep < stepsCount">
+                        {{nextButtonCaption}}
+                </button>
+            </div>
+            <!--end::Next-->
+        </div>
+        <!--end::Buttons-->
+
+    </ng-template>
+</p-dialog>

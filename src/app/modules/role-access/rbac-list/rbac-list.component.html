@@ -1,0 +1,79 @@
+<div class="d-flex flex-column flex-lg-row">
+
+    <div class="flex-lg-row-fluid w-100" [ngClass]="{ 'me-lg-10' : selectedRole }">
+
+        <div class="card">
+            <div class="card-body">
+
+                <!-- <app-error-notification *ngIf="error" [message]="error">
+                </app-error-notification> -->
+
+                <!-- <div class="border-0 pt-5 pb-3 px-0">
+                    <h2 class="border-bottom-dashed border-1 border-gray-500 fw-bolder text-gray-800 pb-3">
+                        Rôles
+                    </h2>
+                </div> -->
+
+                <span class="d-inline-block position-relative mb-2">
+                    <!--begin::Label-->
+                    <span class="d-inline-block mb-2 fs-2tx fw-bold text-dark">Rôles</span>
+                    <!--end::Label-->
+                    <!--begin::Line-->
+                    <span class="d-inline-block position-absolute h-3px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                    <!--end::Line-->
+                </span>
+
+                <span class="float-end" *ngIf="canManageRoles">
+                    <a href="" class="btn btn-icon btn-primary" (click)="showNewRoleModal()"
+                        title="Ajouter un ou des utilisateur à ce rôle">
+                            <i class="fas fa-plus"></i>
+                    </a>
+                    <!-- <span class="ms-3"></span> -->
+                </span>
+
+                <app-data-table [pageTitle]="pageTitle" sideBar="roles"
+                    [columns]="columns" [adaptColumns]="false"
+                    urlPath="roles" [page]="page" [permissions]="permissions" dataKey="Id"
+                    colStorage="rbac" [tackSelectionChange]="true"
+                    (GridButtonClick)="onGridButtonClick($event)">
+                </app-data-table>
+    
+            </div>
+        </div>
+
+    </div>
+
+    <app-users-list class="flex-lg-row-fluid w-100 ms-lg-10">
+    </app-users-list>
+
+</div>
+
+<app-generic-modal-dialog [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="saveBtnCaption" backButtonCaption="Annuler" [page]="page"
+    [saveAction]="saveAction">
+
+        <div class="separator separator-dashed mb-10"></div>
+
+        <ng-container *ngIf="action == gridRowButton.Rename">
+            Veuillez entrer le nom du rôle:
+
+            <input #rename class="mt-5 form-control form-control-lg form-control-solid"
+                type="text"
+                placeholder="Nom du rôle"
+                [ngModel]="selectedRole?.Name"
+                minlength="1"
+                [attr.autofocus]="true" />
+        </ng-container>
+
+        <ng-container *ngIf="action == gridRowButton.Delete">
+            Êtes-vous sûr de vouloir supprimer ce rôle?
+
+            <div class="del mt-7 fw-bold text-break">
+                {{selectedRole?.Name}}
+            </div>
+        </ng-container>
+
+        <app-new-role *ngIf="action == gridRowButton.New">
+        </app-new-role>
+
+</app-generic-modal-dialog>

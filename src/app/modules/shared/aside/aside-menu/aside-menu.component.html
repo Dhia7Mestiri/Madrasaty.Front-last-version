@@ -1,0 +1,360 @@
+<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+    <!--begin::Menu wrapper-->
+    <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
+        <!--begin::Menu-->
+        <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
+
+            <!-- Dashboard -->
+            <div class="menu-item mt-20">
+                <a class="menu-link without-sub" routerLink="/dashboard" routerLinkActive="active"><span class="menu-icon">
+                        <span [inlineSVG]="'./assets/media/icons/duotune/art/art002.svg'" class="svg-icon svg-icon-2"></span>
+                    </span>
+                    <span class="menu-title" translate="aside-menu.home">
+                    </span>
+                </a>
+            </div>
+
+            <!-- Separator -->
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1"></span>
+                </div>
+            </div>
+
+            <!-- Pages -->
+            <!--<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <span class="svg-icon svg-icon-2" [inlineSVG]="'./assets/media/icons/duotune/general/gen022.svg'"></span>
+                    </span>
+                    <span class="menu-title" translate="aside-menu.profile"></span>
+                    <span class="menu-arrow"></span>
+                </span>
+
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" [routerLink]="['/profile/projects']">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title" translate="aside-menu.projects"></span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active"
+                            [routerLink]="['/profile/documents']"><span class="menu-bullet"><span
+                                    class="bullet bullet-dot"></span></span><span class="menu-title">
+                                        {{'aside-menu.documents' | translate}}
+                                    </span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active"
+                            [routerLink]="['/profile/connections']"><span class="menu-bullet"><span
+                                    class="bullet bullet-dot"></span></span><span class="menu-title">
+                                        {{'aside-menu.friends' | translate}}
+                                    </span>
+                        </a>
+                    </div>
+                </div>
+            </div>-->
+
+            <!-- Accounts
+          <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <span class="svg-icon svg-icon-2" [inlineSVG]="'./assets/media/icons/duotune/communication/com006.svg'">
+                        </span>
+                    </span>
+                    <span class="menu-title" data-link="/account">
+                        {{ 'aside-menu.accounts' | translate }}
+                    </span>
+                    <span class="menu-arrow"></span>
+                </span>
+
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/account/overview">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Overview</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/account/settings">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- *ngIf="!(currentMemberStatutId == 4 || currentMemberStatutId == 5|| currentMemberStatutId == 6)" -->
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon"><span class="svg-icon svg-icon-2"><i class="fa fa-cog fa-spin fa-sm" style="font-size: 19px;"></i></span></span>
+                    <span class="menu-title" data-link="/crafted/settings">
+                        {{ 'aside-menu.parameters' | translate }}
+                    </span><span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" [routerLink]="['/schools']">
+                            <span class="menu-bullet"><i class="fa fa-university fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.schools' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/terms">
+                            <span class="menu-bullet"><i class="fa fa-calendar-alt fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.terms' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/holidays">
+                            <span class="menu-bullet"><i class="fa fa-tasks fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.holidays' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/members">
+                            <span class="menu-bullet"><i class="fa-solid fa-user-group fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.members' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/classrooms">
+                            <span class="menu-bullet"><i class="fa fa-square fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.classrooms' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/disciplines">
+                            <span class="menu-bullet"><i class="fa fa-bookmark fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.disciplines' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+            <!-- *ngIf="!(currentMemberStatutId == 4 || currentMemberStatutId == 5|| currentMemberStatutId == 6)" -->
+
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <span class="svg-icon svg-icon-2"><i class="fa fa-graduation-cap fa-sm" style="font-size: 19px;"></i></span>
+                    </span>
+                    <span class="menu-title" data-link="/crafted/evaluation">
+                        {{'aside-menu.tasmii' | translate}}
+                    </span>
+                    <span class="menu-arrow"></span>
+                </span>
+
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                     <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/tasmii">
+                            <span class="menu-bullet"><i class="fa fa-balance-scale fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.sessions-tasmii' | translate}}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/tasmii/historique">
+                            <span class="menu-bullet"><i class="fa fa-history fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.tasmii-history' | translate}}
+                            </span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <span class="svg-icon svg-icon-2">
+                            <i class="fa fa-graduation-cap fa-sm" style="font-size: 19px;"></i>
+                        </span>
+                    </span>
+                    <span class="menu-title" data-link="/crafted/evaluation">
+                        {{'aside-menu.moutouns' | translate}}
+                    </span><span class="menu-arrow"></span></span>
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+
+                <!--     <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/moutouns">
+                            <span class="menu-bullet"><i class="fa fa-balance-scale fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.sessions-moutouns' | translate}}
+                            </span>
+                        </a>
+                    </div> -->
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/moutouns/historique">
+                            <span class="menu-bullet"><i class="fa fa-history fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.moutouns-history' | translate}}
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- *ngIf="!(currentMemberStatutId == 4 || currentMemberStatutId == 5|| currentMemberStatutId == 6)" -->
+
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon"><span class="svg-icon svg-icon-2">
+                            <i class="fa fa-book  fa-sm" style="font-size: 19px;"></i>
+                        </span>
+                    </span>
+                    <span class="menu-title" data-link="/crafted/evaluation">
+                        {{'aside-menu.courses' | translate}}
+                    </span>
+                    <span class="menu-arrow"></span>
+                </span>
+
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/courses">
+                            <span class="menu-bullet"><i class="fa fa-balance-scale fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.sessions-courses' | translate}}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link without-sub"  routerLinkActive="active" routerLink="/courses/historique" >
+                            <span class="menu-bullet">
+                                <i class="fa fa-history fa-sm"></i>
+                            </span>
+                            <span class="menu-title">
+                                {{'aside-menu.courses-history' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon"><span class="svg-icon svg-icon-2">
+                            <i class="fa fa-flask fa-sm" style="font-size: 19px;"></i>
+                        </span>
+                    </span>
+                    <span class="menu-title" data-link="/crafted/evaluation">
+                        {{'aside-menu.exams' | translate}}
+                    </span><span class="menu-arrow"></span>
+                </span>
+
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" [routerLink]="['/examens']">
+                            <span class="menu-bullet"><i class="fa fa-flask  fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.sessions-exams' | translate}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" [routerLink]="['/examens/historique']">
+                            <span class="menu-bullet"><i class="fa fa-history fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.exams-history' | translate}}
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon"><span class="svg-icon svg-icon-2">
+                            <i class="fa fa-calendar fa-sm" style="font-size: 19px;"></i>
+                        </span>
+                    </span>
+                    <span class="menu-title" routerLink="/crafted/evaluations/calendar">
+                        {{'aside-menu.calendar' | translate}}
+                    </span>
+                </span>
+            
+            <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" [routerLink]="['/evaluations/calendar']">
+                            <span class="menu-bullet"><i class="fa fa-calendar fa-sm"></i></span>
+                            <span class="menu-title">
+                                {{'aside-menu.calendar' | translate}}
+                            </span>
+                        </a>
+                    </div>
+                    </div>
+                    </div>
+
+
+            <!-- Separator -->
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1"></span>
+                </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <span class="svg-icon svg-icon-2" [inlineSVG]="'./assets/media/icons/duotune/communication/com012.svg'"></span>
+                    </span>
+                    <span class="menu-title" data-link="/apps/chat">
+                        {{'aside-menu.chat' | translate}}
+                    </span>
+                    <span class="menu-arrow"></span>
+                </span>
+
+                <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/apps/chat/private-chat">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Private Chat</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/apps/chat/group-chat"><span
+                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Group
+                                Chart</span></a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link without-sub" routerLinkActive="active" routerLink="/apps/chat/drawer-chat"><span
+                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Drawer
+                                Chart</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--end::Menu-->
+    </div>
+    <!--end::Menu wrapper-->
+</div>

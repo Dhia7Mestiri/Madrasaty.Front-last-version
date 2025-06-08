@@ -1,0 +1,128 @@
+<!-- <div  *ngIf="show">
+<p-toast></p-toast>
+
+<p-confirmDialog position="top"  icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">       
+        <form [formGroup]="SearchForm">
+            <p-dropdown class="me-2" [options]="CoursesTitle" optionValue="Id" formControlName="CourseId" placeholder="Sélectionnez le nom de cour..." optionLabel="Name"></p-dropdown>
+            <p-dropdown class="me-2" [options]="teachers" optionValue="Id" formControlName="TeacherId" placeholder="Sélectionnez le nom d'enseignant..." optionLabel="FullName"></p-dropdown>
+     
+        </form>     
+        </ng-template>
+        <ng-template pTemplate="right">     
+            <p-button  pRipple label="Clear" icon="pi pi-refresh" styleClass="p-button-outlined"  (click)="ResetForm()" class="me-2"></p-button>      
+            <p-button  pRipple label="filtre" icon="pi pi-filter" styleClass="p-button-outlined" (click)="submitFilter()"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Cours" [rows]="7" responsiveLayout="scroll" [rowHover]="true" dataKey="Id"> 
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Gérer Cour Historique</h5>             
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="Course">Titre de Cour<p-sortIcon field="Course"></p-sortIcon></th>  
+                <th pSortableColumn="Wording">Titre de session<p-sortIcon field="Wording"></p-sortIcon></th>         
+                <th pSortableColumn="Begin">Date<p-sortIcon field="Begin"></p-sortIcon></th>           
+                <th pSortableColumn="Remarque">Remarques <p-sortIcon field="Remarque"></p-sortIcon></th>                 
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                </td>
+                <td>{{item.Course}}</td>
+                <td>{{item.Wording}}</td>            
+                <td> Le {{item.StartDate | date }} de {{item.Begin  | date:'HH:mm'  }}  vers  {{item.End  | date:'HH:mm'}}</td>
+              
+                <td> <textarea rows="2.5" readonly="true" cols="70" pInputTextarea>{{item.Remarque  | TruncateHtml }}</textarea> </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-outlined mr-2"  (click)="editItem(item)"></button>
+                    <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteItem(item)"></button>               
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Au total il y a {{Cours ? Cours.length : 0 }} Cours.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<p-dialog [(visible)]="moutounDialog" [style]="{width: '550px',height:'600px'}" header="Modifier les Detailes de cour pour" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="CourseSessionHistoriqueForm" (ngSubmit)="saveExamen()">
+      
+            <div class="row">   
+              <div class="col-6">
+                <div class="form-floating">
+                 <input type="text" class="form-control" id="Nom" required="false"  type="text" formControlName="Wording">
+                 <label for="Nom">Nom</label>
+               </div> 
+               </div>  
+               <div class="col-6">
+                <div class="form-floating">
+                 <input type="text" class="form-control" id="Nom" required="false"  type="text" formControlName="Course">
+                 <label for="Nom">Course Name</label>
+               </div> 
+               </div>  
+          
+            </div>
+            <div class="row"> 
+                <div class="col-6 mb-3 ">  
+                    <label for="StartDate">StartDate</label>  
+                    <p-calendar [style]="{ 'height': '3.5rem','width':'18rem'}" dataType="string"   formControlName="StartDate" [showIcon]="true" inputId="StartDate"></p-calendar>
+                  
+                  </div>
+            </div>  
+
+            <p-editor formControlName="Remarque"   [style]="{'height':'90px'}">          
+            </p-editor>   
+                <div class="row">
+                  <div class="col-6">
+                    <label>Heure de début</label>
+                    <ngb-timepicker formControlName="Begin" ></ngb-timepicker>
+          
+                   </div>
+              <div class="col-6">
+                <label>heure de fin</label>
+                <ngb-timepicker formControlName="End" ></ngb-timepicker>
+              </div>
+            </div>         
+              </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCoure()"></button>
+    </ng-template>
+</p-dialog> 
+
+
+<div class="mt-5">    
+    <p-paginator  [rows]="10" [totalRecords]="1000" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+
+</div> -->
+
+
+<div class="card card-page">
+    <div class="card-body">
+        <app-data-table [pageTitle]="pageTitle | translate" [columns]="columns"
+        urlPath="courses" [urlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions"
+      >
+    </app-data-table>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<p-toast></p-toast>
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <form [formGroup]="SearchForm">
+                <p-dropdown class="me-2" [options]="MoutounRecitaionsSessions" optionValue="Id"
+                    formControlName="RecitationId" placeholder="Sélectionnez le nom de récitation..."
+                    optionLabel="Title"></p-dropdown>
+                <p-dropdown class="me-2" [options]="teachers" optionValue="Id" formControlName="TeacherId"
+                    placeholder="Sélectionnez le nom d'enseignant..." optionLabel="FullName"></p-dropdown>
+                <p-dropdown class="me-2" [options]="students" optionValue="Id" formControlName="StudentId"
+                    placeholder="Sélectionnez le nom d'élève..." optionLabel="FullName"></p-dropdown>
+                <p-dropdown class="me-2" [options]="EvaluationDates" optionValue="DateEvaluation"
+                    formControlName="evaluationDate" placeholder="Sélectionnez la date d'évaluation..."
+                    optionLabel="DateEvaluation"></p-dropdown>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <p-button pRipple label="Clear" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="ResetForm()"
+                class="me-2"></p-button>
+            <p-button pRipple label="filtre" icon="pi pi-filter" styleClass="p-button-outlined"
+                (click)="submitFilter()"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Moutouns" [rows]="7" responsiveLayout="scroll" [rowHover]="true" dataKey="Id">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Gérer Moutoun Historique</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="RecitationTitle">Titre de récitation<p-sortIcon
+                        field="RecitationTitle"></p-sortIcon></th>
+                <th pSortableColumn="Poeme">Nom de poéme<p-sortIcon field="Poeme"></p-sortIcon></th>
+                <th pSortableColumn="VerseDebut">Verse Debut <p-sortIcon field="VerseDebut"></p-sortIcon></th>
+                <th pSortableColumn="VerseFin">Verse Fin <p-sortIcon field="VerseFin"></p-sortIcon></th>
+                <th pSortableColumn="Rating">Commentaires <p-sortIcon field="Rating"></p-sortIcon></th>
+                <th pSortableColumn="Remarques">Remarques <p-sortIcon field="Remarques"></p-sortIcon></th>
+                <th pSortableColumn="DateEvaluation">Date d'évaluation <p-sortIcon field="DateEvaluation"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                </td>
+                <td>{{item.RecitationTitle}}</td>
+                <td>{{getVal(item.Poeme)}}</td>
+                <td>{{item.VerseDebut }}</td>
+                <td>{{item.VerseFin}}</td>
+                <td><p-rating [ngModel]="item.Rating" [readonly]="true" [cancel]="false" stars="5"></p-rating></td>
+                <td> <textarea rows="2.5" readonly="true" cols="30"
+                        pInputTextarea>{{item.Remarques  | TruncateHtml }}</textarea> </td>
+                <td>Le {{item.DateEvaluation | date}} à {{item.DateEvaluation | date:'HH:mm' }} </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success p-button-outlined mr-2"
+                        (click)="editItem(item)"></button>
+                    <button pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger p-button-outlined"
+                        (click)="deleteItem(item?.Id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Au total il y a {{Moutouns ? Moutouns.length : 0 }} Récitations de Moutouns.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="moutounDialog" [style]="{width: '480px'}"
+    header="Modifier les Detailes de Moutoun pour {{getstudentName(studentId)}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="moutounForm">
+            <div class="field">
+                <label for="PoemeId" class="block">Poeme</label>
+                <p-dropdown [style]="{width: '34rem'}" [options]="poemeList" formControlName="Poeme" id="PoemeId"
+                    optionLabel="Wording" optionValue="Id"></p-dropdown>
+            </div>
+            <div class="field">
+                <label for="Debut" class="block">Début</label>
+                <p-inputNumber mode="decimal" [showButtons]="true" formControlName="VerseDebut" inputId="Debut"
+                    [min]="0" [max]="100">
+                </p-inputNumber>
+            </div>
+            <div class="field">
+                <label for="Fin" class="block">Fin</label>
+                <p-inputNumber mode="decimal" [showButtons]="true" formControlName="VerseFin" inputId="Fin" [min]="0"
+                    [max]="100">
+                </p-inputNumber>
+            </div>
+            <div class="field">
+                <label for="Remarques" class="block">Remarques</label>
+                <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="Remarques"
+                    id="Remarques"></textarea>
+            </div>
+            <div class="field" style="font-size: 40px; text-align: center ; color: #1ab394">
+                <p-rating [max]="max" formControlName="Rating" tabindex="0"></p-rating>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveMoutoun()"></button>
+    </ng-template>
+</p-dialog>
+
+
+<div class="mt-5">
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="paginate($event)"></p-paginator>
+</div>
+
+<div class="card card-page">
+    <div class="card-body">
+
+        <app-data-table [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="Moutoun" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>

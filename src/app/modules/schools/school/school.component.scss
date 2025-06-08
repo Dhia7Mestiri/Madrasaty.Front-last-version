@@ -1,0 +1,86 @@
+i.fa-paperclip {
+    margin: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+i:hover {
+    opacity: 0.6;
+}
+
+.img {
+  border-radius: 36px;
+
+  width: 120px;
+  border: 1px solid #ddd;
+  height: 130px
+}
+
+.row {
+  display: flex;
+
+}
+.column {
+  flex: 1;
+}
+.mat-form-field{
+  width: 100%;
+}
+
+ table {
+  width: 90%;
+}
+
+.table.gs-0 th:first-child, .table.gs-0 td:first-child {
+  padding-left: 1rem;
+}
+ .table.gs-0 th:last-child, .table.gs-0 td:last-child {
+  padding-right: 3rem;
+} 
+.cardAnimation {
+  transition: transform 400ms;
+  will-change: transform;
+
+}
+.cardAnimation:hover,
+.cardAnimation:focus {
+  transform: translateY(10px);
+}
+
+
+.table-responsive {
+  max-height:600px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 6px;
+  line-height: 1.42857;
+}
+
+.member-image {
+  width: 60px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+a:hover {
+  text-decoration:underline!important;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 14.3rem;
+  height: 3.7rem;
+}
+
+:host ::ng-deep .p-avatar-circle {
+  transition: transform 400ms;
+  will-change: transform;
+}
+:host ::ng-deep .p-avatar-circle:hover,
+.p-avatar-circle:focus {
+  transform: translateY(5px);
+}

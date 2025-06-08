@@ -1,0 +1,210 @@
+
+<p-toast></p-toast>
+<div class="card mb-5 mb-xl-10">
+  <div
+    class="card-header border-0 cursor-pointer"
+    role="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#kt_account_profile_details"
+    aria-expanded="true"
+    aria-controls="kt_account_profile_details"
+  >
+    <div class="card-title m-0">
+      <h3 class="fw-bolder m-0">
+        Détails du profil</h3>
+    </div>
+  </div>
+  <div id="kt_account_profile_details" class="collapse show">
+    
+    <form novalidate=""  [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="form">
+      <div class="card-body border-top p-9">
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
+          <div class="col-lg-8">
+            <style>
+              i.fa-paperclip {
+               margin: 10px;
+               cursor: pointer;
+               font-size: 20px;
+              }
+              i:hover {
+               opacity: 0.6;
+              }
+            
+           :host ::ng-deep .p-calendar {
+                      height: 3.7rem;
+                      width: 60rem;
+                      max-width: 34rem;
+                    
+               } 
+         
+            </style>            
+            <input class="fileupload" type="file" name="fileupload" value="fileupload" id="fileupload"
+            #fileInput (change)="onChange(fileInput.files[0])"  style="visibility:hidden;" />
+        <a>
+            <img src={{PhotoPath}} id="profile_picture" style="border-radius: 50%;" alt="profile_picture" style="width:150px; height:150px;border-radius: 50%;">
+            <div class="caption"><label class="label" for="fileupload"> <i class="fa fa-paperclip"></i>Choisir une image ...</label></div>
+        </a>
+          </div>
+        </div>
+
+
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            >
+            Nom et prénom</label >
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-6 fv-row">
+                <input type="text"
+                  class="form-control form-control-lg   mb-3 mb-lg-0" placeholder="First name" formControlName="FirstName" />
+              </div>
+              <div class="col-lg-6 fv-row">
+                <input type="text"
+                  class="form-control form-control-lg  " placeholder="Last name" formControlName="LastName" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label  fw-bold fs-6" >Sexe</label>
+          <div class="col-lg-8 fv-row">
+            <select  class="form-select  form-select-lg " name="Female"  formControlName="Female" >
+            <option value=""> Sélectionnez un genre...</option>    
+            <option *ngFor="let gender of genderOptions" [value]="gender.id">{{gender.name}}
+            </option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-6" *ngIf="currentMemberStatutId==4||currentMemberStatutId==5||currentMemberStatutId==6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="required">Parent Email</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="email"
+              class="form-control form-control-lg  " formControlName="ParentEmail" 
+              placeholder="Parent Email"
+              name="Parent Email"            
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="">Skype</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-lg  " formControlName="SkypeId" 
+              placeholder="Skype"
+              name="contactPhone"            
+            />
+          </div>
+        </div>
+
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="">Téléphone</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="tel"
+              class="form-control form-control-lg "
+              placeholder="Phone number"
+              name="contactPhone"
+              formControlName="PhoneNumber"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+          ><span class="">Date de naissance </span></label >
+      
+          <div class="col-lg-8 fv-row" style="display: flex;">   
+                <p-calendar  formControlName="BirthDate" [showIcon]="true" inputId="BirthDate"></p-calendar>     
+          </div>   
+        </div>
+
+
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="">Adresse</span></label >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-lg  "
+              placeholder="Street"
+              name="Street"
+              formControlName="Street"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="">Code postale</span></label >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-lg  "
+              placeholder="ZipCode"
+              name="ZipCode"
+              formControlName="ZipCode"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="">Ville</span></label >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-lg  "
+              placeholder="City"
+              name="City"
+              formControlName="City" 
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="">Pays</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <select
+              class="form-select    form-select-lg "
+              name="country" formControlName="Country"
+            >
+              <option value="">Choisissez un pays...</option>
+              <option *ngFor="let country of countries" [value]="country.code">{{country.name}}
+              </option>
+           
+            </select>
+          
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isLoading"
+         
+        ><i class="fa fa-save" style="font-size: 20px;"></i>
+          <ng-container *ngIf="!isLoading">
+            Sauvegarder</ng-container>
+          <ng-container *ngIf="isLoading">
+            <span clas="indicator-progress" [style.display]="'block'">
+              S'il vous plaît, attendez...{{ " " }}
+              <span
+                class="spinner-border spinner-border-sm align-middle ms-2"
+              ></span>
+            </span>
+          </ng-container>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

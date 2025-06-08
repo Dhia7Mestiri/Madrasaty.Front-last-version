@@ -1,0 +1,50 @@
+
+
+            <!--begin::Layout-->
+            <div class="d-flex flex-column flex-xl-row">
+                <!--begin::prof details-->
+                <app-profile [Data]="ProfileDataTosend"  [Title]="SeanceData?.Title" [ImageSrc]="src"></app-profile>
+                <!--end::-->
+
+          
+    <!--begin::Content-->
+    <div class="flex-lg-row-fluid ms-lg-7">
+        <!--begin::tabs-->
+        <app-tabslist [TabsList]="TabsList" (BtnNavigateClick)="onClick($event)"></app-tabslist>
+        <!--end::-->
+
+        <div class="tab-content" id="myTabContent">
+            <!--begin::overview-->
+            <div class="tab-pane fade show active" id="kt_overview" role="tabpanel">
+            <app-overview-profile [Data]="SeanceDataTosend"></app-overview-profile> 
+            </div>
+            <!--end::-->
+            <!--begin::settings-->
+            <div class="tab-pane fade" id="kt_settings" role="tabpanel">
+                <app-settings 
+                 [SeanceData]="SeanceData" *ngIf="selectedTab == 2" > 
+                 </app-settings>
+             
+            </div>
+            <!--end::-->
+            <!--begin::Etudiants -->
+            <div class="tab-pane fade"  id="kt_Documents_Exercices" role="tabpanel">
+        <app-documents-exercices [SeanceData]="SeanceData" *ngIf="selectedTab == 3" ></app-documents-exercices>
+            </div>
+            <!--end::-->
+            <!--begin::Examens -->
+            <div class="tab-pane fade" id="kt_Tasmii"   role="tabpanel">
+            <app-tasmii [SeanceData]="SeanceData" [StudentsBySeance]="StudentsBySeance" *ngIf="selectedTab == 4" ></app-tasmii>
+            </div>
+            <!--end::-->
+            <!--begin::Séances  -->
+            <div class="tab-pane fade" id="kt_Moutoun"  role="tabpanel">
+              <app-moutoun   [SeanceData]="SeanceData" [StudentsBySeance]="StudentsBySeance" *ngIf="selectedTab == 5"></app-moutoun>
+            </div>
+            <!--end::-->
+        </div>
+
+        <div class="clearfix">&nbsp;</div>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+:host ::ng-deep .p-tree.p-tree-horizontal .p-treenode .p-treenode-content{
+    height: 47px;
+    padding: 5px;
+}
+
+:host ::ng-deep .p-tree-container > p-treenode:first-of-type .pi.pi-circle-on:before {
+    color: red;
+  }
+  

@@ -1,0 +1,47 @@
+// To learn more about this file see: https://angular.io/config/tsconfig.
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks":false,
+    "sourceMap": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "emitDecoratorMetadata": false,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+        "@modules/*"   : ["src/app/modules/*"],
+        "@shared/*"    : ["src/app/modules/shared/*"],
+        "@services/*"  : ["src/app/services/*"],
+        "@consts/*"    : ["src/app/consts/*"],
+        "@functions/*" : ["src/app/includes/functions/*"],
+        "@interfaces/*": ["src/app/includes/interfaces/*"],
+        "@models/*"    : ["src/app/models/*"],
+        "@pipes/*"     : ["src/app/includes/pipes/*"],
+        "@enums/*"     : ["src/app/includes/enums/*"],
+        // "@mocks/*"     : ["src/app/includes/mocks/*"],
+        "@common/*"    : ["src/app/common/*"],
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false, 
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": false
+  }
+}

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <div class="d-flex">
+            <div class="form-floating mb-7" *ngIf="showSearch">
+                <input class="form-control" id="floatingInput" type="search" (keyup)="onChangeEvent($event)"
+                    placeholder="Search" />
+                <label for="floatingInput">Chercher...</label>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center py-1">
+            <div class="me-3">
+                <button pTooltip="Ajouter" tooltipPosition="bottom" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                    class="btn btn-icon btn-light-twitter  btn-lg me-2" (click)="onClick()">
+                    <i class="bi bi-plus fs-1"></i>
+                </button>
+            </div>
+
+            <button class="btn btn-icon btn-light-facebook btn-lg" pTooltip="Changer le mode d'affichage"
+                tooltipPosition="bottom" (click)="onClickSwitchToCard()">
+                <i class="bi bi-eye fs-2"></i>
+            </button>
+        </div>
+    </div>
+</nav>

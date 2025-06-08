@@ -1,0 +1,175 @@
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <div class="card-header cursor-pointer">
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">
+          Détails du profil</h3>
+      </div>
+      
+  
+      <div class="card-footer d-flex justify-content-end py-6 px-9">
+  
+    <p-inputSwitch  class="me-3 mt-2"  [(ngModel)]="ischecked"   
+    pTooltip="Autoriser les modifications" tooltipPosition="bottom"
+   ></p-inputSwitch>
+  
+    <button
+    routerLink="/account/settings"
+    class="btn btn-primary align-self-center"
+    [disabled]="!ischecked"
+  >
+  Editer le profil
+  </button>
+      </div>
+  
+    </div>
+  
+    <div class="card-body p-9">
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">
+          Nom et prénom</label>
+  
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-dark">{{memberData.FullName}}  </span>
+        </div>
+      </div>
+  
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">Sexe</label>
+  
+        <div class="col-lg-8 fv-row">
+          <span class="fw-bold fs-6">{{getGendervalue(memberData.Female)}} </span>
+        </div>
+      </div>
+      
+      <div class="row mb-7"  *ngIf="currentMemberStatutId==4||currentMemberStatutId==5||currentMemberStatutId==6">
+        <label class="col-lg-4 fw-bold text-muted">Email de parent</label>
+  
+        <div class="col-lg-8 fv-row">
+          <span class="fw-bold fs-6">{{memberData.ParentEmail}} </span>
+        </div>
+      </div>
+  
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">Skype</label>
+  
+        <div class="col-lg-8 fv-row">
+          <span class="fw-bold fs-6">{{memberData.SkypeId}} </span>
+        </div>
+      </div>
+  
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">
+          Téléphone
+          <i      
+            data-bs-toggle="tooltip"
+            title="Phone number must be active"
+          ></i>
+        </label>
+  
+        <div class="col-lg-8 d-flex align-items-center">
+          <span class="fw-bolder fs-6 me-2">{{memberData.PhoneNumber}} </span>   
+        </div>
+      </div>
+  
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">
+          Date de naissance
+          <i
+       
+            data-bs-toggle="tooltip"
+            title="Country of origination"
+          ></i>
+        </label>
+  
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-dark"> {{memberData.BirthDate | date:'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+  
+  
+  
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">
+          Adresse
+          <i
+          
+            data-bs-toggle="tooltip"
+            title="Country of origination"
+          ></i>
+        </label>
+  
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-dark">{{memberData.Street}}</span>
+        </div>
+      </div>
+  
+     
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">Code postale</label>
+  
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-dark">{{memberData.ZipCode}}</span>
+        </div>
+      </div>
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">Ville</label>
+  
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-dark">{{memberData.City}}</span>
+        </div>
+      </div>
+      <div class="row mb-7">
+        <label class="col-lg-4 fw-bold text-muted">Pays</label>
+  
+        <div class="col-lg-8">
+          <span class="fw-bolder fs-6 text-dark">{{getCountryVal(memberData.Country)}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-5 mb-xl-10">
+    <div
+      class="card-header border-0 cursor-pointer"
+      role="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#kt_account_signin_method"
+    >
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">
+          Section de paiement</h3>
+      </div>
+    </div>
+    <div id="kt_account_signin_method" class="collapse show">
+      <div class="card-body border-top p-9">
+    
+        <div
+        class="
+          notice
+          d-flex
+          bg-light-warning
+          rounded
+          border-warning border border-dashed
+          p-6
+        "
+      >
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/general/gen044.svg'"
+          class="svg-icon svg-icon-2tx svg-icon-warning me-4"
+        ></span>
+        <div class="d-flex flex-stack flex-grow-1">
+          <div class="fw-bold">
+            <h4 class="text-gray-800 fw-bolder">
+              Nous avons besoin de votre attention !</h4>
+            <div class="fs-6 text-gray-600">       
+           
+             Pour commencer à utiliser les outils, veuillez
+            <a routerLink="/web/pricing" class="fw-bold  hover-scale" >Paiement</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  

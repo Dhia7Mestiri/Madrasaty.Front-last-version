@@ -1,0 +1,60 @@
+
+.mat-primary {
+  margin-left: 17px;
+}
+.mat-form-field{
+  width: 98%;
+}
+
+
+
+
+table {
+  width: 80%;
+}
+
+
+
+
+.table.gs-0 th:first-child, .table.gs-0 td:first-child {
+  padding-left: 1rem;
+}
+.table.gs-0 th:last-child, .table.gs-0 td:last-child {
+  padding-right: 6rem;
+}
+
+.cardAnimation {
+  transition: transform 400ms;
+  will-change: transform;
+
+}
+
+
+.cardAnimation:hover,
+.cardAnimation:focus {
+  transform: translateY(10px);
+}
+
+.table-responsive {
+  max-height:600px;
+}
+
+a:hover {
+  text-decoration:underline!important;
+}
+
+.f-l {
+  float: left;
+}
+  
+.f-r {
+  float: right;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 20rem;
+}
+
+:host ::ng-deep .p-calendar {
+  height: 3.7rem;
+}

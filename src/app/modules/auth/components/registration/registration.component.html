@@ -1,0 +1,200 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+
+  <div class="col-md-9 col-lg-6 col-xl-5">
+    <img src="./assets/media/illustrations/sketchy-1/10.png" class="img-fluid" alt="Sample image">
+  </div>
+
+  <!--begin::Content body-->
+  <div class="col-md-8 col-lg-6 col-xl-4 ">
+    <form class="form w-100 fv-plugins-bootstrap5" [formGroup]="registerform" 
+      id="kt_login_signup_form" (ngSubmit)="GetAdmins(registerform)">
+
+      <div class="mb-10 text-center">
+        <h1 class="text-dark mb-3">{{ "auth.new-account" | translate}}</h1>
+        <div class="text-gray-400 fw-bold fs-4">
+          {{"auth.auth-question" | translate}}
+          <a routerLink="/auth/login" class="link-primary fw-bolder" [style.margin-left]="'5px'"> {{"auth.login"| translate}}</a>
+        </div>
+      </div>
+
+
+      <div class="d-flex align-items-center mb-5">
+        <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+        <span class="fw-bold text-gray-400 fs-7 mx-2">OR</span>
+        <div class="border-bottom border-gray-300 mw-50 w-100"></div>
+      </div>
+
+
+      <ng-container *ngIf="hasError">
+        <div class="mb-lg-15 alert alert-danger">
+          <div class="alert-text font-weight-bold" class="animation-alert">
+            Les détails d'enregistrement sont incorrects
+          </div>
+        </div>
+      </ng-container>
+      <div class="row">
+        <div class="col-6">
+          <div class="fv-row mb-6">
+
+
+            <label class="form-label fw-bolder text-dark fs-6">Email *</label>
+            <input class="form-control form-control-lg" type="email" placeholder="email" name="Email"
+              formControlName="Email" autocomplete="off" [ngClass]="{ 'has-error': displayMessage.Email }" required>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Adresse email est obligatoire',
+              control: registerform.controls['Email']
+            }"></ng-container>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+              validation: 'pattern',
+              message: 'Entrez une adresse email valide.',
+              control: registerform.controls['Email']
+            }"></ng-container>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-6 fv-row">
+
+
+            <div class="form-label fw-bolder text-dark fs-6">
+              <label class="form-label fw-bolder text-dark fs-6">Ecole *</label>
+              <select class="form-control form-control-lg form-control-solid" name="SchoolId" formControlName="SchoolId"
+                [ngClass]="{ 'has-error': displayMessage.SchoolId }" required="">
+                <option value="" disabled style="background: #eeeeee">
+                  Sélectionner votre école
+                </option>
+                <option *ngFor="let opt of schools" [value]="opt.Id">
+                  {{ opt.Name }}
+                </option>
+              </select>
+              <span class="fv-help-block" id="validationcolor">
+                {{ displayMessage.schoolId }}
+              </span>
+            </div>
+
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-6">
+          <div class="fv-row mb-3">
+            <label class="form-label fw-bolder text-dark fs-6">Mot de passe *</label>
+            <input (keyup)="checkPassSame()" class="form-control form-control-lg form-control-solid" type="password"
+              placeholder="Mot de passe" name="password" formControlName="Password" autocomplete="off" />
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Le mot de passe est obligatoire',
+            control: registerform.controls['Password']
+          }"></ng-container>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'minlength',
+            message: 'Les mots de passe doivent contenir au moins 6 caractères.',
+            control: registerform.controls['Password']
+          }"></ng-container>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="fv-row mb-3">
+            <label class="form-label fw-bolder text-dark fs-6"> Confirmez le mot de passe *</label>
+            <input (keyup)="checkPassSame()" class="form-control form-control-lg form-control-solid" type="password"
+              placeholder="Confirmer mot de passe" name="ConfirmPassword" autocomplete="off"
+              formControlName="ConfirmPassword" required />
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'La confirmation doit correspondre au mot de passe.',
+              control: registerform.controls['cPassword']
+            }"></ng-container>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+              validation: 'minlength',
+              message: 'La confirmation doit contenir au moins 6 caractères.',
+              control: registerform.controls['cPassword']
+            }"></ng-container>
+            <div *ngIf="passmsg != '' ">
+              <div class="fv-help-block" id="validationcolor">
+                {{passmsg}}
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-6">
+          <div class="fv-row mb-4">
+            <label for="Name" class="form-label fw-bolder text-dark fs-6">Date de naissance * </label>
+            <div class="input-group">
+              <p-calendar [maxDate]="maxDate" [styleClass]="'test-klass'"formControlName="BirthDate" [showIcon]="true"></p-calendar>
+              <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'La Date de naissance est obligatoire.',
+                control: registerform.controls['BirthDate']
+              }"></ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="fv-row mb-4">
+            <label class="form-label fw-bolder text-dark fs-6">Role *</label>
+            <select class="form-control form-control-lg form-control-solid" name="MembreStatusId"
+              formControlName="MembreStatusId">
+              <option value="" disabled style="background: #eeeeee">
+                Sélectionner votre Role
+              </option>
+              <option *ngFor="let opt of MemberStatusId" [value]="opt.Id">
+                {{ opt.Wording }}
+              </option>
+            </select>
+            <span class="fv-help-block" id="validationcolor">
+              {{ displayMessage.MemberStatusId }}
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="text-center">
+        <button type="submit" id="kt_login_signup_form_cancel_button" class="afterclick btn btn-lg btn-light-primary w-100 mb-3">
+          {{ "auth.new-account" | translate}}
+        </button>
+        <p class="text-muted text-center">
+          <small>{{ "auth.check-message" | translate}}</small>
+        </p>
+        <a routerLink="/auth/login" type="button" id="kt_login_signup_form_cancel_button"
+          class="btn btn-lg btn-light-primary w-100 mb-5">
+          {{ "auth.login" | translate}}
+
+        </a>
+      </div>
+
+    </form>
+
+    <!-- <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+  </ng-template> -->
+    <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+      <ng-container *ngIf="control?.hasError(validation) && (control.dirty || control.touched)">
+        <div class="fv-plugins-message-container">
+          <span role="alert"id="validationcolor">
+            {{ message }}
+          </span>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+
+</div>

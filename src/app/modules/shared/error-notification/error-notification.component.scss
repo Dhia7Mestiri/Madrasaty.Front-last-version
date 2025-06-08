@@ -1,0 +1,23 @@
+button
+{
+    background: #af1f42;
+    z-index: 2;
+    top: 13px;
+    right: 8px;
+}
+:host-context(.dark-skin)
+{
+    button
+    {
+        background: #6c101a;
+    }
+}
+.title
+{
+    color: white;
+}
+.message
+{
+    word-break: break-word;
+    color: #ffabb5;
+}

@@ -1,0 +1,42 @@
+<div class="card-body d-flex flex-center flex-column p-9">
+  <div class="mb-5">
+    <div class="symbol symbol-75px symbol-circle">
+      <ng-container *ngIf="color">
+        <span
+          class="symbol-label fs-5 fw-bolder"
+          [ngClass]="'bg-light-' + color"
+          [ngClass]="'text-' + color"
+        >
+          {{ name.charAt(0) }}
+        </span>
+      </ng-container>
+      <ng-container>
+        <img alt="Pic" [src]="avatar" />
+      </ng-container>
+      <ng-container *ngIf="online">
+        <div
+          class="
+            symbol-badge
+            bg-success
+            start-100
+            top-100
+            border-4
+            h-15px
+            w-15px
+            ms-n3
+            mt-n3
+          "
+        ></div>
+      </ng-container>
+    </div>
+  </div>
+
+  <a
+    class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0 cursor-pointer"
+  >
+    {{ name }}
+  </a>
+
+  <div class="fw-bold text-gray-400 mb-6">{{ job }}</div>
+  <a  class="btn btn-light-primary" id="kt_drawer_chat_toggle"><i class="bi bi-plus fs-4 me-2"></i>Connect</a>
+</div>

@@ -1,0 +1,14 @@
+<p-listbox [options]="(data$ | async)!"
+    [optionLabel]="optionLabel"
+    [optionValue]="optionValue"
+    [metaKeySelection]="false"
+    [checkbox]="false" [filter]="true" [multiple]="true" [showToggleAll]="true"
+    [style]="{ 'height': '100%' }"
+    emptyMessage="Cet utilisateur n'a aucun rôle/permission définit"
+    emptyFilterMessage="Aucun rôle/permission trouvé">
+
+        <ng-template let-item pTemplate="item">
+            {{ item[optionLabel] }}
+        </ng-template>
+
+</p-listbox>

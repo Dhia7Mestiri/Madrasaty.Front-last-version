@@ -1,0 +1,2 @@
+(()=>{"use strict";var e={9816:e=>{var t,r={init:function(){KTModalOfferADeal.getForm(),t=KTModalOfferADeal.getStepperObj(),KTModalOfferADeal.getStepper().querySelector('[data-kt-element="complete-start"]').addEventListener("click",(function(){t.goTo(1)}))}};void 0!==e.exports&&(window.KTModalOfferADealComplete=e.exports=r)}},t={};(function r(o){var a=t[o];if(void 0!==a)return a.exports;var l=t[o]={exports:{}};return e[o](l,l.exports,r),l.exports})(9816)})();
+//# sourceMappingURL=complete.js.map

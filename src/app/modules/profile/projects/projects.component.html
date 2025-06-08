@@ -1,0 +1,106 @@
+<div class="d-flex flex-wrap flex-stack mb-6">
+  <h3 class="fw-bolder my-2">
+    Mes projets
+    <span class="fs-6 text-gray-400 fw-bold ms-1">Active</span>
+  </h3>
+
+  <div class="d-flex flex-wrap my-2">
+    <div class="me-4">
+      <select
+        name="status"
+        data-control="select2"
+        data-hide-search="true"
+        class="form-select  w-125px"
+        defaultValue="Active"
+      >
+        <option value="Active">Active</option>
+        <option value="Approved">En cours</option>
+        <option value="Declined">à Faire</option>
+        <option value="In Progress">Complété
+        </option>
+      </select>
+    </div>
+    <a
+      class="btn btn-primary btn-sm cursor-pointer"
+      data-bs-toggle="modal"
+      data-bs-target="#kt_modal_create_project"
+    >
+     Nouveau projet
+    </a>
+  </div>
+</div>
+
+<!-- <div class="row g-6 g-xl-9">
+  <div class="col-md-6 col-xl-4">
+    <app-card2
+      icon="./assets/media/svg/brand-logos/plurk.svg"
+      badgeColor="primary"
+      status="In Progress"
+      statusColor="primary"
+      title="Projet 2"
+      description="Projet 2 Test"
+      date="May 10, 2021"
+      budget="$284,900.00"
+      [progress]="90"
+      [users]="users1"
+    ></app-card2>
+  </div>
+
+  <div class="col-md-6 col-xl-4">
+    <app-card2
+      icon="./assets/media/svg/brand-logos/disqus.svg"
+      badgeColor="info"
+      status="Pending"
+      statusColor="info"
+      title="Projet 1"
+      description="Projet 1 Test"
+      date="May 10, 2021"
+      budget="$36,400.00"
+      [progress]="66"
+      [users]="users2"
+    ></app-card2>
+  </div>
+
+</div>
+ -->
+<div class="d-flex flex-stack flex-wrap pt-10">
+  <div class="fs-6 fw-bold text-gray-700"></div>
+
+  <ul class="pagination">
+    <li class="page-item previous">
+      <a class="page-link cursor-pointer">
+        <i class="previous"></i>
+      </a>
+    </li>
+
+    <li class="page-item active">
+      <a class="page-link cursor-pointer"> 1 </a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link cursor-pointer"> 2 </a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link cursor-pointer"> 3 </a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link cursor-pointer"> 4 </a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link cursor-pointer"> 5 </a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link cursor-pointer"> 6 </a>
+    </li>
+
+    <li class="page-item next">
+      <a class="page-link cursor-pointer">
+        <i class="next"></i>
+      </a>
+    </li>
+  </ul>
+</div>

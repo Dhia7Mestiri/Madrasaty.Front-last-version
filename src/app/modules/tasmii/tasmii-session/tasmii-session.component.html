@@ -1,0 +1,307 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="tasmiis" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+
+    <app-card-view
+        apiUrlPath="tasmiis" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions"
+        (btnClicked)="buttonClicked($event)">
+    </app-card-view>
+
+ <app-card-view-project
+        urlPath="tasmiis" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions">
+    </app-card-view-project> 
+
+</ng-container>
+
+
+
+<ng-container *ngIf="true">
+     <app-settings-header-shared (SearchEvent)="searchResult($event)" (btnClick)="OpenDiag(-1)"
+        (btnClickSwitchToCard)="this.switchbtn =!this.switchbtn"></app-settings-header-shared>
+
+     <p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-toast></p-toast> 
+
+     <div class="container-fluid" *ngIf="switchbtn == false">
+        <div class="row">
+            <div class="col-lg-4" *ngFor="let sessionItem of rowData">
+                <div class="card cardAnimation card-xl-stretch  mb-5 mb-xl-8" (click)="navigateToParticipants(sessionItem.Id)">
+
+                    <div class="card-body">
+
+                        <div class="d-flex flex-stack">
+
+                            <div class="d-flex align-items-center">
+                                <div class="symbol symbol-70px me-5">
+                                    <img src="http://localhost:4200/assets/media/avatars/150-21.jpg" class="h-50 align-self-center"
+                                        alt="" />
+                                </div>
+                                <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                                    <a class="text-dark fw-bolder text-hover-primary fs-5">
+                                        {{sessionItem.Title}}
+                                    </a>
+                                    <span class="text-muted fw-bold">{{sessionItem.TeacherName}}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="ms-1">
+                                <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                                    data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                                    data-kt-menu-flip="top-end" style="width: 60px;">
+                                    <span class="svg-icon svg-icon-1"> <i class="fa fa-clock-o"></i>
+                                        {{sessionItem.DivisionParam}} min</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="d-flex">
+                            <h6 class="fs-5">Discipline :</h6>
+                            <h5 style=" margin-left: 3px;" class="text-muted fw-bold fs-6 mt-1">
+                                {{sessionItem.DisciplineName}}
+                            </h5>
+                        </div>
+                        <div class="d-flex">
+                            <h6 class="fs-5">Niveaux :</h6>
+                            <h5 *ngFor="let level of sessionItem.RecitationDisciplineLevels" style=" margin-left: 3px;"
+                                class="text-muted fw-bold fs-6 mt-1">
+                                {{level}}
+                            </h5>
+                        </div>
+
+                        <div class="col-sm-12 mt-3" style="display:inline-block;">
+                            <h5> Le {{sessionItem.StartDate +'Z' | date}} de {{sessionItem.Begin| date:'HH:mm' }} vers
+                                {{sessionItem.End| date:'HH:mm' }} </h5>
+                        </div>
+
+                        <div class="d-flex flex-column mt-10">
+                            <div class="text-dark me-2 fw-bolder pb-4">Members</div>
+                            <div class="d-flex">
+
+                                <p-avatarGroup styleClass="mb-3">
+                                    <ng-container *ngFor="let i of sessionItem.Students;let ind = index;">
+                                        <p-avatar *ngIf="ind <= maxMemberList-1" [image]="getmemberPhotos(i.PhotoPath)"
+                                            size="large" shape="circle"></p-avatar>
+                                    </ng-container>
+                                    <p-avatar
+                                        [routerLink]="['/tasmii/participants/', sessionItem.Id]"
+                                        styleClass="ml-1" *ngIf="sessionItem?.Students?.length-maxMemberList>0"
+                                        matTooltip="afficher tous les members"
+                                        [label]=' "+" + sessionItem?.Students?.length-maxMemberList' shape="circle"
+                                        size="large"
+                                        [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"></p-avatar>
+                                </p-avatarGroup>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <mat-card-actions align="end" style="margin-top: -25px;">
+                        <button [routerLink]="['/crafted/evaluation/TasmiiSession/Tasmiiparticipants', sessionItem.Id]"
+                            class="btn btn-icon">
+                            <span class="svg-icon svg-icon-2x svg-icon-warning"
+                                ng-reflect-inline-s-v-g="./assets/media/icons/duotune/a">
+                                <i class="fas fa-group" style="font-size: 25px; color: rgb(40, 47, 143);"></i></span>
+                        </button>
+
+                        <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(sessionItem.Id)"
+                            (btnDeleteClick)="deleteItem(sessionItem.Id)">
+                        </app-shared-buttons>
+                    </mat-card-actions>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+     <app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+    <ng-template #callAPIDialog>
+        <form [formGroup]="TasmiiessionForm" (ngSubmit)="saveSession()">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Title" required="false" type="text"
+                            formControlName="Title">
+                        <label for="Title">Titre</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Description" required="false" type="text"
+                            formControlName="Description">
+                        <label for="Description">Description</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" id="ClassroomId" name="ClassroomId" formControlName="ClassroomId"
+                            required="false">
+                            <option *ngFor="let opt of classrooms; index as i" [selected]="i == 2" [value]="opt.Id">{{
+                                opt.Wording }}</option>
+                        </select>
+                        <label for="ClassroomId">Salle</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" id="TeacherId" name="TeacherId" formControlName="TeacherId"
+                            required="false">
+
+                            <option *ngFor="let opt of teachers; index as i" [selected]="i == 2" [value]="opt.Id">
+                                {{opt.FullName}}</option>
+                        </select>
+                        <label for="TeacherId">Enseignant</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select (ngModelChange)="refreshLevels($event)" class="form-select" id="DisciplineId"
+                            name="DisciplineId" formControlName="DisciplineId" required="false">
+                            <option *ngFor="let opt of DisciplineList; index as i" [selected]="i == 2" [value]="opt.Id">
+                                {{opt.Wording }}</option>
+                        </select>
+                        <label for="DisciplineId">Discipline</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" style="height: 90px;" id="LevelIds" name="LevelIds"
+                            formControlName="LevelIds" multiple="multiple" required="false">
+
+                            <option *ngFor="let opt of LevelList" [value]="opt.Id">{{ opt.Wording }}</option>
+                        </select>
+                        <label for="DisciplineId">Niveaux</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" id="DivisionParam" name="DivisionParam" formControlName="DivisionParam"
+                            required="false">
+                            <option *ngFor="let opt of slotList; index as i" [selected]="i == 2" [value]="opt">{{opt}}
+                            </option>
+                        </select>
+                        <label for="DivisionParam">Créneau :</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating  mb-3">
+                        <select (change)="refreshReccurenceValue()" class="form-select" id="RecurrenceId"
+                            name="RecurrenceId" formControlName="RecurrenceId" required="false">
+                            <option *ngFor="let opt of reccurenceList" [value]="opt.Id">{{opt.Wording}}</option>
+                        </select>
+                        <label for="DivisionParam">Recurrence :</label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6" *ngIf="(ReccurenceValue == 3)">
+
+                    <div class="form-floating  mb-3">
+                        <select class="form-select" id="Jour" name="Jour" formControlName="Jour" required="false">
+
+                            <option *ngFor="let opt of DaysList" [value]="opt">{{opt}}</option>
+                        </select>
+                        <label for="Jour"> Jour :</label>
+                    </div>
+
+                </div>
+
+                <div class="col-6" *ngIf="(ReccurenceValue == 1||ReccurenceValue == 2|| ReccurenceValue ==4 )">
+                    <div class=" col-9  mb-3 mt-3">
+                        <span class="p-float-label">
+                            <p-calendar [style]="{ 'height': '3.5rem','width':'18rem'}" dataType="string"
+                                formControlName="StartDate" [showIcon]="true" inputId="StartDate"></p-calendar>
+                            <label for="StartDate">Date</label>
+                        </span>
+                    </div>
+                </div>
+
+                <div *ngIf="(ReccurenceValue == 5)">
+                    <div class="form-floating mb-3 mt-3">
+                        <span class="p-float-label">
+                            <p-calendar [style]="{ 'height': '3.5rem','width':'18rem'}" formControlName="T1"
+                                [showIcon]="true" inputId="T1"></p-calendar>
+                            <label for="T1">Trimestre 1:</label>
+                        </span>
+                    </div>
+                    <div class="flex gap-4 justify-start items-center">
+
+                        <div class="form-floating mb-3  mt-3">
+                            <span class="p-float-label">
+                                <p-calendar formControlName="T2" [showIcon]="true" inputId="T2"></p-calendar>
+                                <label for="T2">Trimestre 2:</label>
+                            </span>
+                        </div>
+                        <div class="form-floating mb-3  mt-3">
+                            <span class="p-float-label">
+                                <p-calendar formControlName="T3" [showIcon]="true" inputId="T3"></p-calendar>
+                                <label for="T3">Trimestre 3:</label>
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+
+                    <label for="Begin">D&eacute;but :</label>
+                    <ngb-timepicker id="Begin" formControlName="Begin" required=""></ngb-timepicker>
+                </div>
+                <div class="col-6">
+                    <label for="End">Fin :</label>
+                    <ngb-timepicker id="Fin" formControlName="End" required=""></ngb-timepicker>
+                </div>
+            </div>
+
+            <div class="card-footer py-6">
+                <div class="col-lg-9">
+                    <button type="button" (click)="this.sessionForm.reset()" class="btn btn-primary me-2">
+                        <span class="indicator-label">Clear</span>
+                    </button>
+                    <button type="submit" data-bs-dismiss="offcanvas" class="btn btn-active-light btn-color-muted">
+                        <ng-container>
+                            <span class="indicator-label">Confirme</span>
+                        </ng-container>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <div class="mt-5">
+        <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+            (onPageChange)="paginate($event)">
+        </p-paginator>
+    </div> 
+</ng-container>

@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+
+// https://stackoverflow.com/a/52292365
+:host { display: contents; }
+
+
+// $grid-bg-color: var(--kt-light);
+
+// :root
+// {
+//     --column-right: 5px;
+// }
+
+html[data-theme="light"]
+{
+    & body
+    {
+        background-color: rgb(238, 240, 248);
+    }
+
+    .card, .p-datatable
+    {
+        box-shadow: 2px 2px 7px 3px #e3e7f5;
+    }
+}
+
+html[data-theme="dark"]
+{
+    .card, .p-datatable
+    {
+        box-shadow: 2px 2px 7px 3px #14141e;
+    }
+
+//     .p-datatable
+//     {
+//         .p-datatable-header, .p-datatable .p-datatable-footer, tr, th
+//         {
+//             background: $grid-bg-color!important;
+//             border-color: $grid-bg-color!important;
+//         }
+//     }
+
+//     .p-paginator-bottom
+//     {
+//         background: $grid-bg-color!important;
+//         border-color: $grid-bg-color!important;
+//     }
+
+    .p-paginator
+    {
+        background: transparent!important;
+        border: none!important;
+
+        .p-dropdown {
+            line-height: 2.3rem;
+        }
+
+        .p-dropdown {
+            background: transparent!important;
+            border: none!important;
+        }
+    }
+}
+
+app-data-table
+{
+    // a.toggle-fluid
+    // {
+    //     right: calc(var(--column-right) - 21px);
+    //     top: 40px;
+    //     position: absolute;
+    //     margin: 3px;
+    //     z-index: 1;
+
+    //     i { padding-top: 12px!important; }
+    // }
+
+    p-contextmenu .p-contextmenu
+    {
+        margin-top: -140px;
+    }
+}
+
+.swal2-popup
+{
+  border-radius: 0.475rem;
+}
+
+[data-kt-app-sidebar-minimize="on"] .logoMD
+{
+    width: 160%!important;
+    margin: 0 0 0 -20px!important;
+}
+
+// Grid CSS
+p-dropdown .p-dropdown-label {
+    padding-top: 3px;
+}
+td.empty-list
+{
+    text-align: center!important;
+    vertical-align: middle!important;
+}
+.p-multiselect
+{
+    height: 37px;
+    border: none;
+}
+.p-multiselect-label
+{
+    padding-top: 9px!important;
+}
+
+.mt--25
+{
+    margin-top: -25px!important;
+}
+
+html[lang="ar"], html[lang="pk"]
+{
+    & app-aside-menu .menu-title, .page-title, .card, app-aside-footer
+    {
+        font: 15px "Amiri Quran Colored";
+    }
+}

@@ -1,0 +1,40 @@
+
+<div class="d-flex flex-column flex-xl-row">
+                <!--begin::prof details-->                        
+                 <app-profile [Data]="ProfileDataTosend"  [Title]="examenData?.Name" [ImageSrc]="src"></app-profile>    
+                <!--end::-->
+                
+                <!--begin::Content-->
+                <div class="flex-lg-row-fluid ms-lg-7">
+               <!--begin::tabs-->
+                <app-tabslist [TabsList]="TabsList" (BtnNavigateClick)="onClick($event)" ></app-tabslist>
+
+                    <div class="tab-content" id="myTabContent">                 
+                          <!--begin::overview-->
+                        <div class="tab-pane fade show active" id="kt_overview" role="tabpanel">
+                            <app-overview-profile  [Data]="examenDataTosend"></app-overview-profile>
+                        </div>
+                         <!--end::-->
+                      <!--begin::settings-->
+                        <div class="tab-pane fade" id="kt_settings" role="tabpanel">
+                            <!--begin::Card-->
+
+                            <app-settings  *ngIf="selectedTab == 0"
+                            (BtnUpdateClick)="UpdateExamen()"
+                            [terms]="terms"
+                            [examenData]="examenData"
+                            [ExamenForm]="ExamenForm"
+                        >
+                        </app-settings>
+
+                        </div>
+                       <!--end::-->
+                        <!--begin::Etudiants-->                
+                        <div class="tab-pane fade" id="kt_Examen_Note" role="tabpanel">  
+                        <app-examens-notes  *ngIf="selectedTab == 1" [ExamenData]="examenData" ></app-examens-notes>
+                    </div> 
+                        </div>    
+                 </div>
+     
+        </div>
+

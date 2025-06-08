@@ -1,0 +1,209 @@
+<div [formGroup]="form" class="col mb-5">
+
+    <ng-container *ngIf="!multiCols && question.separator">
+        <div class="separator separator-dashed mt-5 mb-10"></div>
+    </ng-container>
+
+    <ng-container *ngIf="question.type == 'header'">
+        <div class="border-0 pt-5 pb-3 px-0">
+            <h1 class="border-bottom-dashed border-1 fw-bolder text-gray-800 pb-3" *ngIf="question.value == 1">{{question.label}}</h1>
+            <h2 class="border-bottom-dashed border-1 fw-bolder text-gray-800 pb-3" *ngIf="question.value == 2">{{question.label}}</h2>
+            <h3 class="border-bottom-dashed border-1 fw-bolder text-gray-800 pb-3" *ngIf="question.value == 3">{{question.label}}</h3>
+            <h4 class="border-bottom-dashed border-1 fw-bolder text-gray-800 pb-3" *ngIf="question.value == 4">{{question.label}}</h4>
+        </div>
+    </ng-container>
+
+    <label class="d-flex align-items-center fs-5 fw-bold mb-2"
+         [attr.for]="question.key"
+         *ngIf="question.label && question.showLabel && question.type != 'checkbox' && question.type != 'tag' && question.type != 'header'">
+
+        <span [ngClass]="question.required ? 'required' : ''">{{question.label}}</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" [title]="question.label" *ngIf="question.type != 'label'"
+            [attr.data-bs-original-title]="question.label" [attr.aria-label]="question.label"></i>
+
+    </label>
+
+    <ng-container *ngIf="question.type == 'list'">
+
+        <p-listbox [options]="question.options"
+            optionLabel="value"
+            optionValue="key"
+            [ngModel]="question.value"
+            [metaKeySelection]="false"
+            [checkbox]="true" [filter]="true" [multiple]="true"
+            [listStyle]="{ 'max-height': '40vh' }"
+            [attr.data-placeholder]="question.placeholder ? question.placeholder : question.label"
+            [formControlName]="question.key ? question.key : null"
+            [id]="question.key"
+            [minlength]="question.minLength ? question.minLength : null"
+            [maxlength]="question.maxLength ? question.maxLength : null"
+            [attr.autofocus]="question.order == 1 ? '' : null"
+            [attr.readonly]="question.readOnly    ? '' : null"
+            emptyMessage="Liste vide"
+            emptyFilterMessage="Aucun résult trouvé"
+            [showToggleAll]="true"
+            (focus)="hasFocus = true" (blur)="hasFocus = false">
+        
+            <ng-template let-entry pTemplate="item">
+                <!-- The following "value" property must match the "p-listbox.optionLabel" attribute above -->
+                {{entry.value}}
+            </ng-template>
+
+        </p-listbox>
+
+    </ng-container>
+
+    <!-- Select2 dropdown menus, some day... -->
+    <!--
+    <div class="form-horizontal" *ngIf="question.type != 'tag'">
+        <label [for]="question.key" [ngClass]="question.required ? 'bold' : ''">
+            {{question.label + question.required ? " (*)" : ''}}
+        </label>
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <select class="form-control form-control-lg form-control-solid select2"
+                [id]="question.key"
+                [formControlName]="question.key"
+                [multiple]="true"
+                [attr.autofocus]="question.order == 1 ? '' : null"
+                [attr.readonly]="question.readOnly    ? '' : null"
+                (focus)="hasFocus = true" (blur)="hasFocus = false">
+ 
+                <optgroup [label]="question.label">
+
+                    < !-- <option *ngFor="let data of requiredDataList" [value]="data.value">
+                        {{data.label}}
+                    </option> -- >
+
+                    <option *ngFor="let opt of question.options" [value]="opt.key" [attr.selected]="opt.key == question.value ? 'selected' : null">
+                        {{opt.label}}
+                    </option>
+        
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    <br />
+    -->
+
+    
+    <select appSelect2 class="form-select form-select-lg form-select-solid form-check-input me-2" *ngIf="question.type == 'tag'"
+        data-control="select2" data-allow-clear="true" multiple="multiple"
+        data-dropdown-parent="#modal_stepper"
+        [attr.data-placeholder]="question.placeholder ? question.placeholder : question.label"
+        [formControlName]="question.key ? question.key : null"
+        [id]="question.key"
+        [minlength]="question.minLength ? question.minLength : null"
+        [maxlength]="question.maxLength ? question.maxLength : null"
+        [attr.autofocus]="question.order == 1 ? '' : null"
+        [attr.readonly]="question.readOnly    ? '' : null"
+        (focus)="hasFocus = true" (blur)="hasFocus = false">
+
+        <option *ngFor="let opt of question.options" [value]="opt.value" [attr.selected]="question.value.indexOf(opt.value) >= 0 ? 'selected' : null">
+            {{opt.value}}
+        </option>
+    </select>
+
+
+    <div class="form-check form-check-custom form-check-solid" *ngIf="question.type == 'checkbox'">
+        <input type="checkbox" class="form-check-input me-2"
+               [attr.id]="question.key"
+               [formControlName]="question.key ? question.key : null"
+               [checked]="question.checked ? 'checked' : null"         
+               [attr.autofocus]="question.order == 1 ? '' : null"
+               [attr.readonly]="question.readOnly    ? '' : null"
+               (focus)="hasFocus = true" (blur)="hasFocus = false" />
+               <!-- (ngModelChange)="onChange($event, question)" -->
+
+        <label [attr.for]="question.key" *ngIf="question.label && question.showLabel">
+            {{question.label}}
+        </label>
+    </div>
+
+
+    <div [ngSwitch]="question.type" *ngIf="question.type != 'checkbox' && question.type != 'header' && question.type != 'list'
+        && question.type != 'tag' && question.type != 'label'">
+
+        <textarea *ngSwitchCase="'textarea'" [formControlName]="question.key ? question.key : null"
+                class="form-control form-control-lg form-control-solid"
+                [id]="question.key"
+                [placeholder]="question.placeholder ? question.placeholder : question.label"
+                [minlength]="question.minLength ? question.minLength : null"
+                [maxlength]="question.maxLength ? question.maxLength : null"
+                [rows]="question.rows"
+                [attr.readonly]="question.readOnly ? '' : null"
+                (focus)="hasFocus = true" (blur)="hasFocus = false">
+        </textarea>
+
+        <p-password *ngSwitchCase="'password'" inputStyleClass="form-control form-control-lg form-control-solid"
+            [id]="question.key" [formControlName]="question.key ? question.key : null"
+            [placeholder]="question.placeholder || question.label || ''"
+            [attr.disabled]="question.readOnly ? '' : null"
+            (focus)="hasFocus = true" (blur)="hasFocus = false">
+            <!-- [feedback]="false" -->
+
+            <ng-template pTemplate="header">
+                <h6>{{question.label}}</h6>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="mt-2">Suggestions</p>
+                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                    <li>Au moins une lettre en minuscule</li>
+                    <li>Au moins une lettre en majuscule</li>
+                    <li>Au moins un chiffre</li>
+                    <li>Au moins 8 caractères</li>
+                </ul>
+            </ng-template>
+
+        </p-password>
+
+        <p-calendar *ngSwitchCase="'datetime'" inputStyleClass="form-control form-control-lg form-control-solid"
+            [ngModel]="question.value"
+            dataType="string"
+            [showIcon]="true"
+            [showTime]="question.showTime"
+            [showSeconds]="question.showSeconds" 
+            [placeholder]="question.placeholder || question.label || ''"
+            [id]="question.key"
+            [formControlName]="question.key ? question.key : null"
+            [attr.disabled]="question.readOnly ? '' : null"
+            (focus)="hasFocus = true" (blur)="hasFocus = false">
+        </p-calendar>
+
+        <p-dropdown *ngSwitchCase="'dropdown'"
+            [options]="question.options"
+            [ngModel]="question.value"
+            optionLabel="key" optionValue="value"
+            [id]="question.key"
+            [formControlName]="question.key ?? null"
+            [attr.autofocus]="question.order == 1 ? '' : null"
+            [attr.readonly]="question.readOnly    ? '' : null"
+            (focus)="hasFocus = true" (blur)="hasFocus = false">
+        </p-dropdown>
+
+        <input *ngSwitchDefault class="form-control form-control-lg form-control-solid"
+                [id]="question.key"
+                [formControlName]="question.key ? question.key : null"
+                type="text"
+                [ngModel]="question.value"
+                [placeholder]="question.placeholder ? question.placeholder : question.label"
+                [minlength]="question.minLength ? question.minLength : null"
+                [maxlength]="question.maxLength ? question.maxLength : null"
+                [attr.autofocus]="question.order == 1 ? '' : null"
+                [attr.readonly]="question.readOnly    ? '' : null"
+                (focus)="hasFocus = true" (blur)="hasFocus = false" />
+    </div>
+
+    <div class="text-danger p-2 mt-2" *ngIf="hasFocus && question.type != 'checkbox' && !isValid || (crossValid$ | async) !== true">
+        <!-- <ng-container *ngIf="!question.value">
+            Ce champ [ {{question.label}} ] est obligatoire.
+        </ng-container> -->
+
+        <!-- <ng-container *ngIf="question.value"> -->
+            La valeur pour ce champ [ {{question.label}} ] est invalide.
+            <span [innerHTML]="error"></span>
+        <!-- </ng-container> -->
+    </div>
+</div>

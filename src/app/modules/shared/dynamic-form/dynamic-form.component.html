@@ -1,0 +1,30 @@
+<ng-container *ngFor="let question of questions; index as i">
+
+    <ng-container *ngIf="question.newRow">
+
+        <ng-container *ngIf="question.separator && i > 0">
+            <div class="separator separator-dashed mt-5 mb-10"></div>
+        </ng-container>
+
+        <div class="row" [ngClass]="question.order > 1 ? 'mt-5' : ''">
+
+            <ng-container *ngFor="let q of questions.slice(i, i + (question.rowColumns || 1))">
+
+                <df-question
+                    [question]="q"
+                    [form]="form"
+                    [multiCols]="true"
+                    [attr.class]="q.visible ? 'col-md' : 'd-none'">
+                </df-question>
+            </ng-container>
+
+        </div>
+
+    </ng-container>
+
+</ng-container>
+
+<!-- <div *ngFor="let question of questions" class="form-horizontal">
+    <df-question [question]="question" [form]="form" [attr.class]="question.visible ? null : 'd-none'">
+    </df-question>
+</div> -->

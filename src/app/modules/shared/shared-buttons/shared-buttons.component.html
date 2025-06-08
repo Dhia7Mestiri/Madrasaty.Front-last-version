@@ -1,0 +1,22 @@
+
+<div class="symbol symbol-40px me-3" style="margin-left: 26px; margin-bottom: 6px;"  *ngIf="!evaluationMode && !MoutounMode">
+  <button  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" (click)="onEditClick()" class="btn btn-icon btn-light-twitter btn-sm me-3"   matTooltip="Modifier">
+    <i class="fas fa-pencil fs-4"></i>
+  </button>
+  <button (click)="onDeleteClick()" class="btn btn-icon btn-light-facebook btn-sm"  matTooltip="Supprimer">
+    <i class="fas fa-trash fs-4"></i>
+  </button>
+  </div>
+<div  *ngIf="evaluationMode">
+  <button  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"  (click)="onEditClick()" class="btn btn-icon btn-light-twitter btn-sm me-3" matTooltip="Modifier">
+    <i class="fas fa-pencil fs-4"></i>
+  </button>
+  <button (click)="onDeleteClick()" class="btn btn-icon btn-light-facebook btn-sm"  matTooltip="Supprimer">
+    <i class="fas fa-trash fs-4"></i>
+  </button>
+</div>
+
+<div *ngIf="MoutounMode">
+  <button style="float: right;    width: 30px; height: 35px;"  matTooltip=" Ajouter Moutoun Poeme" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-lg p-button-secondary mb-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" (click)="onEditClick()"></button>
+</div>
+

@@ -1,0 +1,30 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table #dataTable [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="terms" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions"   (GridButtonClick)="buttonDataTableClicked($event)" >
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+
+    <app-card-view
+        apiUrlPath="terms" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions" [config]="config" [css]="css"
+        (btnClicked)="buttonClicked($event)"   (successEditCardEvent)="handleSuccess($event)">
+    </app-card-view>
+
+</ng-container>
+
+
+<app-generic-modal-dialog   [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="'general.ok' | translate" [backButtonCaption]="'general.cancel' | translate"
+    [page]="page" [saveAction]="saveAction">
+
+        <app-edit-term #edit></app-edit-term>
+
+</app-generic-modal-dialog>
+

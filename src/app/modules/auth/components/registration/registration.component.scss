@@ -1,0 +1,34 @@
+:host {
+  width: 100%;
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .p-calendar {
+  height: 3rem;
+  //width: 23rem;
+}
+#validationcolor {
+  color: red ; 
+  font-size: x-small;
+
+}
+.test-klass .p-datepicker {
+  scale: 0.9;
+}
+input.ng-invalid.ng-dirty {
+  border: red 2px solid;
+} 
+  .col-xl-4 {
+    flex : 0 0 auto ; 
+    width : auto !important ;
+  }
+  

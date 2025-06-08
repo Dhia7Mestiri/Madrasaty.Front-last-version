@@ -1,0 +1,21 @@
+<app-success-notification title="Succès">
+</app-success-notification>
+
+<p-pickList [source]="availablePermissions" [target]="selectedPermissions" [disabled]="!canManage"
+    sourceHeader="Toutes les permissions" targetHeader="Permissions Sélectionnées pour ce rôle"
+    filterBy="name" [dragdrop]="true" [responsive]="true"
+    (onMoveToTarget)="updatePermissions()" (onMoveAllToTarget)="updatePermissions()"
+    (onMoveToSource)="updatePermissions()" (onMoveAllToSource)="updatePermissions()">
+
+        <ng-template let-permission pTemplate="item">
+            <div [title]="permission.type" class="role">
+                <i class="fas fa-user-lock"></i>
+                <div class="role-name" [title]="'Rôle ' + permission.type"
+                    [id]="permission.id"
+                    [attr.value]="permission.value">
+                        {{permission.type}}
+                </div>
+            </div>
+        </ng-template>
+
+</p-pickList>

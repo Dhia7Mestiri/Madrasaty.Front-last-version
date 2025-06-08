@@ -1,0 +1,85 @@
+<app-error-notification [message]="error" [showToastr]="true">
+</app-error-notification>
+
+<app-success-notification [title]="'general.success' | translate">
+</app-success-notification>
+
+
+<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+        <!--begin::Header-->
+        <div id="kt_app_header" class="app-header">
+            <!--begin::Header container-->
+            <div class="app-container container-fluid d-flex align-items-stretch justify-content-between" id="kt_app_header_container">
+
+                <app-mobile-logo></app-mobile-logo>
+
+                <!--begin::Header wrapper-->
+                <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
+
+                    <app-topbar></app-topbar>
+                    <app-navbar></app-navbar>
+
+                </div>
+                <!--end::Header wrapper-->
+            </div>
+            <!--end::Header container-->
+        </div>
+        <!--end::Header-->
+
+        <!--begin::Wrapper-->
+        <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+            <!--begin::Sidebar-->
+            <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+                <app-logo [schoolId]="schoolId"></app-logo>
+                <app-aside-menu></app-aside-menu>
+                <app-aside-footer></app-aside-footer>
+            </div>
+            <!--end::Sidebar-->
+
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                <!--begin::Content wrapper-->
+                <div class="d-flex flex-column flex-column-fluid">
+                    <app-toolbar></app-toolbar>
+
+                    <!--begin::Content-->
+                    <div id="kt_app_content" class="app-content" [ngClass]="isFluidUI ? 'flex-column-fluid' : 'flex-column-xxl'">
+
+                        <!--begin::Content container-->
+                        <div id="kt_app_content_container" class="app-container container-fluid" [ngClass]="isFluidUI ? 'container-fluid' : 'container-xxl'">
+                            
+                            <router-outlet></router-outlet>
+                            <!-- Uncomment to show metronic demo1 files -->
+                            <!-- <app-home></app-home> -->
+
+                        </div>
+                        <!--end::Content container-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Content wrapper-->
+
+                <app-footer></app-footer>
+            </div>
+            <!--end:::Main-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+</div>
+
+<!--begin::Drawers-->
+<!-- <app-activities-drawer></app-activities-drawer> -->
+<!-- <app-chat-drawer></app-chat-drawer> -->
+<!-- <app-explore-drawer></app-explore-drawer> -->
+<!--end::Drawers-->
+
+<!--begin::Modals-->
+<!-- <app-invite-friends-modal></app-invite-friends-modal>
+<app-create-app-modal></app-create-app-modal>
+<app-upgrade-modal></app-upgrade-modal> -->
+<!--end::Modals-->
+
+<app-scrolltop></app-scrolltop>

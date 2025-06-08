@@ -1,0 +1,20 @@
+<!-- <div class="card p-10 g-8 text-primary text-center align-middle" [ngClass]="isLoading ? 'fade-out' : ''">
+    <div class="d-flex justify-content-center">
+        <div role="status" class="spinner-border">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        &nbsp;
+        <div role="status" class="spinner-grow">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <h2 class="mt-5 text-primary">
+        Loading...
+    </h2>
+</div> -->
+
+<div class="page-loader bg-dark bg-opacity-25 flex-column d-flex align-items-center justify-content-center" *ngIf="isLoading">
+    <span class="spinner-border text-primary" role="status"></span>
+    <span class="text-gray-800 fs-6 fw-semibold mt-5">Loading...</span>
+</div>

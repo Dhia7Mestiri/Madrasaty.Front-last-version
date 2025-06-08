@@ -1,0 +1,190 @@
+{
+    "general": {
+        "title": "Madrasaty",
+        "success": "Success",
+        "cancel": "Cancel",
+        "ok": "OK",
+        "delete": "Delete",
+        "edit": "Edit",
+        "paginator": "Showing entries from {first} to {last}.",
+        "logo": "Logo",
+        "SIGNUP_BUTTON":"Sign Up"
+    },
+    "auth":{
+        "new-account":"Create Account",
+        "auth-question":"Do you already have an account?",
+        "login-question":"Sign in?",
+        "check-message":"YOU ALREADY HAVE AN ACCOUNT",
+        "login":"Login",
+        "welcome":"Welcome to",
+        "new":"New Here ?"
+
+    },
+    "courses-list": {
+        "title": "Courses",
+        "new-button": "New Course",
+        "edit": "Edit Course",
+        "coefficient": "Coefficient",
+        "level": "Level",
+        "discipline": "Discipline",
+        "Lecturer":"Lecturer",
+        "Course":"Course",
+        "Coefficient":"Coefficient",
+        "Actif":"Actif"
+
+
+
+    },
+    "schools-list": {
+        "title": "Schools",
+        "new-button": "New School",
+        "edit": "Edit School",
+        "country": "Country",
+        "city": "City",
+        "Name":"Name",
+        "Adress":"Adress",
+        "TVA":"TVA Code",
+        "Siret":"SIRET",
+        "PostCode":"Postcode"
+
+    },
+    "terms-list": {
+        "title": "Terms | Periods",
+        "new-button": "New Period",
+        "edit": "Edit School",
+        "start-date": "Start Date",
+        "end-date": "End Date",
+        "Recurrence":"Recurrence",
+        "RelatedSchool":"School",
+        "Name":"Period Name"
+
+    },
+    "Exams-list": {
+        "title": "Exams",
+        "new-button": "New Exam",
+        "edit": "Edit Exam",
+        "start-date": "Start Date",
+        "end-date": "End Date",
+        "RelatedTerm":"Term",
+        "RelatedCourse":"Course",
+        "RelatedSupervisor":"Supervisor",
+        "ExamName":"ExamName",
+        "Coefficient":"Coefficient",
+        "ExamStatus":"ExamStatus"
+    },
+    "holidays-list": {
+        "title": "Holidays",
+        "new-button": "New Holiday",
+        "edit": "Edit Holiday",
+        "school": "School",
+        "start-date": "Start Date",
+        "end-date": "End Date",
+        "Holiday-name":"Holiday Name"
+    },
+    "list-members": {
+        "title": "Members",
+        "new-button": "New Member",
+        "edit": "Edit Member",
+        "school": "School",
+        "city": "City",
+        "zip-code": "Zip Code"
+    },
+    "classrooms-list": {
+        "title": "Classrooms",
+        "new-button": "New Classroom",
+        "edit": "Edit Classroom",
+        "RelatedSchool": "School",
+        "nbr-projectors": "Projectors",
+        "nbr-desks": "Desks",
+        "nbr-chairs": "Chairs",
+        "ClassroomCode":"Classroom"
+
+    },
+    "disciplines-list": {
+        "title": "Disciplines",
+        "new-button": "New Discipline",
+        "edit": "Edit Discipline",
+        "school": "School"
+    },
+    "dashboard-index": {
+        "statistics": "Statistics"
+    },
+    "aside-menu": {
+        "home": "Home",
+        "profile": "Profile",
+        "parameters": "Parameters",
+        "projects": "Projects",
+        "documents": "Documents",
+        "friends": "Friends",
+        "accounts": "Accounts",
+        "schools": "Schools",
+        "terms": "Terms",
+        "holidays": "Holidays",
+        "members": "Members",
+        "classrooms": "Classrooms",
+        "disciplines": "Disciplines",
+        "tajwid-mistakes": "Tajwid Mistakes",
+        "tasmii": "Tasmii",
+        "sessions-tasmii": "Tasmii Sessions",
+        "tasmii-history": "Previous Tasmii",
+        "moutouns": "Moutouns",
+        "sessions-moutouns": "Moutoun Sessions",
+        "moutouns-history": "Previous Moutouns",
+        "exams": "Exams",
+        "sessions-exams": "Exam Sessions",
+        "exams-history": "Previous Exams",
+        "courses": "Courses",
+        "sessions-courses": "Course Sessions",
+        "courses-history": "Courses Sessions History",
+        "calendar": "Calendar",
+        "chat": "Chat"
+    },
+    "aside-footer": {
+        "stats": "Stats",
+        "stats-title": "Performance Stats"
+    },
+    "contact": {
+        "contact-me": "Contact",
+        "send": "Send",
+        "close": "Close",
+        "error-title": "Oups...",
+        "error-message": "An error occured while sending your message :(",
+        "name": "Name",
+        "your-name": "Your Name",
+        "email": "Email",
+        "your-email": "Your email",
+        "subject": "Subject",
+        "message-subject": "Message Subject",
+        "message": "Message",
+        "write-message": "Write comment here..."
+    },
+    "navbar-language-dropdown": {
+        "language": "Language"
+    },
+    "navbar": {
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark"
+    },
+    "toolbar": {
+        "home": "Home",
+        "recently-updated": "Recently Updated"
+    },
+    "footer": {
+        "about": "About",
+        "all-rights-reserved": "All rights reserved.",
+        "contact": "Contact"
+    },
+    "dynamic-form-question": {
+        "is-required": " is required."
+    },
+    "misc": {
+    },
+    "topbar":{
+        "cours":"Courses",
+        "calendrier":"Calendar",
+        "exercices":"Exercices",
+        "resultats":"Results",
+        "aide":"Help"
+    }
+}

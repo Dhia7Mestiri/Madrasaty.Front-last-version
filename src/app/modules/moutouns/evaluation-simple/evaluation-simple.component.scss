@@ -1,0 +1,17 @@
+
+  ngb-rating {
+    color: #ffad0f;
+    font-size: 25px;
+}
+
+.table-responsive {
+  max-height:500px;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 42.5rem;
+}
+
+:host ::ng-deep .p-inputnumber {
+  width: 45rem;
+}

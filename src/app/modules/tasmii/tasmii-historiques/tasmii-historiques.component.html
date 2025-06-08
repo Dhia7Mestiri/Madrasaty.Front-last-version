@@ -1,0 +1,217 @@
+<p-toast></p-toast>
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <form [formGroup]="SearchForm">
+                <p-dropdown class="me-2" [options]="TasmiiRecitaionsSessions" optionValue="Id"
+                    formControlName="RecitationId" placeholder="Sélectionnez le nom de récitation..."
+                    optionLabel="Title"></p-dropdown>
+                <p-dropdown class="me-2" [options]="teachers" optionValue="Id" formControlName="TeacherId"
+                    placeholder="Sélectionnez le nom d'enseignant..." optionLabel="FullName"></p-dropdown>
+                <p-dropdown class="me-2" [options]="students" optionValue="Id" formControlName="StudentId"
+                    placeholder="Sélectionnez le nom d'élève..." optionLabel="FullName"></p-dropdown>
+                <p-dropdown class="me-2" [options]="EvaluationDates" optionValue="DateEvaluation"
+                    formControlName="evaluationDate" placeholder="Sélectionnez la date d'évaluation..."
+                    optionLabel="DateEvaluation"></p-dropdown>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <p-button pRipple label="Clear" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="ResetForm()"
+                class="me-2"></p-button>
+            <p-button pRipple label="Filter" icon="pi pi-filter" styleClass="p-button-outlined"
+                (click)="submitFilter()"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="Tasmiis" [rows]="7" responsiveLayout="scroll" [rowHover]="true" dataKey="Id"
+        rowExpandMode="single">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Gérer Tasmii Historiques</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem"> </th>
+                <th pSortableColumn="RecitationTitle">Titre de récitation <p-sortIcon
+                        field="RecitationTitle"></p-sortIcon></th>
+                <th pSortableColumn="Surah">Surah <p-sortIcon field="Surah"></p-sortIcon></th>
+                <th pSortableColumn="VerseDebut">Debut <p-sortIcon field="VerseDebut"></p-sortIcon></th>
+                <th pSortableColumn="VerseFin">Fin <p-sortIcon field="VerseFin"></p-sortIcon></th>
+                <th pSortableColumn="Rating">Commentaires <p-sortIcon field="Rating"></p-sortIcon></th>
+                <th pSortableColumn="Remarques">Remarques <p-sortIcon field="Remarques"></p-sortIcon></th>
+                <th pSortableColumn="DateEvaluation">Date d'évaluation <p-sortIcon field="DateEvaluation"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="item"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                        (click)="getErrors(item)"></button>
+                </td>
+                <td>{{item.RecitationTitle}}</td>
+                <td>{{getValue(item.Surah)}}</td>
+                <td>{{item.VerseDebut }}</td>
+                <td>{{item.VerseFin}}</td>
+                <td><p-rating [ngModel]="item.Rating" [readonly]="true" [cancel]="false" [stars]="max"></p-rating></td>
+                <td> <textarea rows="2.5" readonly="true" cols="30"
+                        pInputTextarea>{{item.Remarques  | TruncateHtml }}</textarea> </td>
+                <td>Le {{item.DateEvaluation | date}} à {{item.DateEvaluation| date:'HH:mm'}} </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success p-button-outlined mr-2"
+                        (click)="editItem(item)"></button>
+                    <button pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger p-button-outlined"
+                        (click)="deleteItem(item?.Id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="rowexpansion" let-item>
+            <tr>
+                <td colspan="9">
+                    <div class="pl-8">
+
+                        <p-table dataKey="Id" [value]="TajwidErrorsByRecitation" [scrollable]="true"
+                            scrollHeight="200px" styleClass="p-datatable-striped">
+                            <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="customer"> Fautes de Tajwid <p-sortIcon field="customer"></p-sortIcon></th>
+                <th></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>
+                    <div class="symbol symbol-50px me-2">
+                        <span class="symbol-label bg-light-danger">
+                            <span [inlineSVG]="
+                                              './assets/media/icons/duotune/general/gen024.svg'
+                                            " class="svg-icon svg-icon-2x svg-icon-danger"></span>
+                        </span>
+                    </div>
+
+                    <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">
+                        {{item.TajwidErrorId}}
+                    </a>
+                </td>
+                <td class="text-end text-muted fw-bold">
+
+                    <select class="form-select  form-select-lg-2">
+                        <option *ngFor="let item of getErrorName(item.TajwidErrorList,item.TajwidErrorId)"
+                            [value]="item.value">
+                            {{item}}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+</td>
+</tr>
+<tr>
+    <td colspan="9">
+        <div class="pl-8">
+            <p-table dataKey="Id" [value]="LearningErrorsByRecitation">
+                <ng-template pTemplate="header">
+<tr>
+    <th pSortableColumn="customer"> Fautes d'apprentisage <p-sortIcon field="customer"></p-sortIcon></th>
+    <th></th>
+    <th></th>
+</tr>
+</ng-template>
+<ng-template pTemplate="body" let-item>
+    <tr>
+        <td class="text-end text-muted fw-bold">
+
+            <select class="form-select  form-select-lg-2">
+                <option *ngFor="let item of getErrorLearningList(item.Wording)" [value]="item.value">
+                    Ayah numéro : {{item}}
+                </option>
+            </select>
+
+        </td>
+    </tr>
+</ng-template>
+</p-table>
+</div>
+</td>
+</tr>
+</ng-template>
+
+<ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+        Au total il y a {{Tasmiis ? Tasmiis.length : 0 }} Récitations de Tasmii.
+    </div>
+</ng-template>
+</p-table>
+</div>
+
+<p-dialog [(visible)]="tasmiitDialog" [style]="{width: '450px'}"
+    header="Modifier les Detailes de Tasmii pour {{getstudentName(studentId)}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="TasmiiForm">
+            <div class="field">
+                <label for="SurahId" class="block">Surah</label>
+                <p-dropdown [style]="{width: '32rem'}" [options]="surahList" formControlName="Surah" id="SurahId"
+                    optionLabel="name" optionValue="number"></p-dropdown>
+            </div>
+            <div class="field">
+                <label for="AyahDebutId" class="block">Ayah Debut</label>
+                <p-inputNumber mode="decimal" [showButtons]="true" formControlName="VerseDebut" inputId="AyahDebutId"
+                    [min]="0" [max]="100">
+                </p-inputNumber>
+            </div>
+            <div class="field">
+                <label for="AyahFin" class="block"> Ayah Fin</label>
+                <p-inputNumber mode="decimal" [showButtons]="true" formControlName="VerseFin" inputId="AyahFin"
+                    [min]="0" [max]="100">
+                </p-inputNumber>
+
+            </div>
+            <div class="field">
+                <label for="Remarques" class="block">Remarques</label>
+                <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="Remarques"
+                    id="Remarques"></textarea>
+            </div>
+            <div class="field" style="font-size: 40px; text-align: center ; color: #1ab394">
+                <p-rating [stars]="max" formControlName="Rating" tabindex="0"> </p-rating>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTasmii()"></button>
+    </ng-template>
+</p-dialog>
+
+
+
+
+<div class="mt-5">
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+        (onPageChange)="paginate($event)"></p-paginator>
+</div>
+
+
+<div class="card card-page">
+    <div class="card-body">
+
+        <app-data-table [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="tasmiis" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>

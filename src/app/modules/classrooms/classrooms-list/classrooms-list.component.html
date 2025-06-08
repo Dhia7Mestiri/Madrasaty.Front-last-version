@@ -1,0 +1,197 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table #dataTable [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="classrooms" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            (btnClicked)="buttonClicked($event)"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+
+    <app-card-view
+        apiUrlPath="classrooms" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions" [config]="config" [css]="css"
+        (btnClicked)="buttonClicked($event)">
+    </app-card-view>
+
+</ng-container>
+
+
+<app-generic-modal-dialog  [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="'general.ok' | translate" [backButtonCaption]="'general.cancel' | translate"
+    [page]="page" [saveAction]="saveAction">
+
+        <app-edit-classroom #edit></app-edit-classroom>
+
+</app-generic-modal-dialog>
+
+
+
+
+<ng-container *ngIf="false">
+
+    <app-settings-header-shared (SearchEvent)="searchResult($event)" [showSearch]="true" (btnClick)="OpenDiag(-1)"
+        (btnClickSwitchToCard)=" this.switchbtn =!this.switchbtn"></app-settings-header-shared>
+
+    <p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <app-shared-file-uploder (btnUploadClick)="uploadFile($event)"></app-shared-file-uploder>
+
+    <p-toast position="top-center"></p-toast>
+
+
+    <div class="row" *ngIf="switchbtn == false">
+        <div class="col-lg-3" *ngFor="let item of rowData">
+            <div class="card cardAnimation card-xl-stretch mb-5 mb-xl-6">
+                <div class="card-body d-flex align-items-center pt-3 pb-0">
+                    <div class="d-flex flex-column flex-grow-1 py-2 py-lg-13 me-2 parent">
+                        <a class="fw-bolder text-dark fs-4 mb-2 text-hover-primary">
+                            <h4>
+                                <strong>{{item.Name}}</strong>
+                            </h4>
+
+                            <h5>
+                                Nombre de projecteurs :
+                                <i><strong>{{item.NumberProjector}} </strong></i>
+                            </h5>
+                            <h5>
+                                Nombre de tables :
+                                <i>
+                                    <strong> {{item.NumberDesk}} </strong></i>
+                            </h5>
+
+                            <h5>
+                                Nombre de chaises :
+                                <i>
+                                    <strong> {{item.NumberChair}}</strong></i>
+                            </h5>
+                        </a>
+
+                        <div align="end" style="        
+                margin-top: 10px;
+                ">
+                            <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                                (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <app-shared-drawer [template]="callAPIDialog" [fonctionality]="DialogTitle"></app-shared-drawer>
+    <div class="card mb-5 mb-xl-8" *ngIf="switchbtn == true">
+
+
+        <p-toolbar styleClass="mb-3">
+            <ng-template pTemplate="left">
+                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                    (click)="OpenDiag(-1)" pButton pRipple type="button" icon="pi pi-plus"
+                    class="p-button-rounded p-button-outlined" pTooltip="Nouvelle salle de cour"></button>
+            </ng-template>
+
+        </p-toolbar>
+
+
+
+        <p-table [value]="rowData  " [resizableColumns]="true" responsiveLayout="scroll" [paginator]="true" [rows]="5"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,20]" class="me-5 ms-5">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="Name">Nom de Classe<p-sortIcon field="Name"></p-sortIcon></th>
+                    <th pSortableColumn="NumberProjector">Nombre de projecteur <p-sortIcon
+                            field="NumberProjector"></p-sortIcon> </th>
+                    <th pSortableColumn="NumberDesk">Nombre de bureau<p-sortIcon field="NumberDesk"></p-sortIcon></th>
+                    <th pSortableColumn="NumberChair">Nombre de chaise<p-sortIcon field="NumberChair"></p-sortIcon></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{item.Name }}</td>
+                    <td>{{item.NumberProjector}}</td>
+                    <td>{{item.NumberDesk}}</td>
+                    <td>{{item.NumberChair}}</td>
+                    <td>
+                        <app-shared-buttons [ismodified]="true" (btnEditClick)="OpenDiag(item.Id)"
+                            (btnDeleteClick)="deleteItem(item.Id)"></app-shared-buttons>
+                    </td>
+                </tr>
+            </ng-template>
+
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+
+                    Au total il y a {{ClassroomsCount }}
+                    Sales de cours.
+                </div>
+            </ng-template>
+        </p-table>
+
+
+
+
+    </div>
+
+
+    <!--formulaire pour l'ajout -->
+    <ng-template #callAPIDialog>
+        <form [formGroup]="classroomForm">
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="Name" required="false" formControlName="Name">
+                <label for="Name">Classe</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="NumberProjector" required="false"
+                    formControlName="NumberProjector">
+                <label for="NumberProjector">Nombre des projecteurs</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="NumberDesk" required="false" formControlName="NumberDesk">
+                <label for="NumberDesk">Nombre des tables</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="NumberChair" required="false" formControlName="NumberChair">
+                <label for="NumberChair">Nombre des chaises</label>
+            </div>
+
+            <br />
+            <div class="card-footer py-6">
+
+
+                <div class="col-lg-9">
+                    <button type="button" (click)="this.classroomForm.reset()"
+                        class=" btn btn-active-light btn-color-muted me-2">
+                        <span class="indicator-label">Dégager</span>
+                    </button>
+
+                    <button type="submit" (click)="saveClassroom()" [disabled]="classroomForm.invalid"
+                        data-bs-dismiss="offcanvas" class="btn btn-primary">
+                        <ng-container>
+                            <span class="indicator-label">Confirmer</span>
+                        </ng-container>
+
+
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <div class="mt-5">
+        <p-paginator *ngIf="switchbtn == false" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+            (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+
+</ng-container>

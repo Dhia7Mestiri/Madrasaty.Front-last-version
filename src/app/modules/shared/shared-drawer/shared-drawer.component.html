@@ -1,0 +1,50 @@
+<div class="offcanvas offcanvas-end bg-white" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+    data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true"
+    data-kt-drawer-width="{default:'400px', 'lg': '547px'}" data-kt-drawer-direction="end"
+    data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">
+
+    <div class="card shadow-none w-100">
+
+        <div class="card-header">
+            <h5 class="card-title fw-bold text-gray-600">
+                {{ fonctionality }}
+            </h5>
+
+            <div class="card-toolbar">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span [inlineSVG]="'./assets/media/icons/duotune/arrows/arr061.svg'"
+                        class="svg-icon svg-icon-2"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div id="kt_explore_scroll" class="scroll-y me-n5 pe-5" data-kt-scroll="true" data-kt-scroll-height="auto"
+                data-kt-scroll-wrappers="#kt_explore_body"
+                data-kt-scroll-dependencies="#kt_explore_header, #kt_explore_footer" data-kt-scroll-offset="5px">
+                <div class="mb-0">
+                    <div class="mb-7">
+                        <div class="card card-custom">
+
+
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <ng-template [ngTemplateOutlet]="template || defaultTemplate">
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<ng-template #defaultTemplate>
+    <p>no</p>
+</ng-template>

@@ -1,0 +1,96 @@
+<div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <span class="d-inline-block position-relative mb-2">
+                <!--begin::Label-->
+                <span class="d-inline-block mb-2 fs-2tx fw-bold text-dark">Utilisateurs dans ce Rôle</span>
+                <!--end::Label-->
+                <!--begin::Line-->
+                <span class="d-inline-block position-absolute h-3px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                <!--end::Line-->
+            </span>
+
+            <span class="float-end" *ngIf="canManage">
+                <a href="" class="btn btn-icon btn-primary" (click)="showAddUsersModal()"
+                    title="Ajouter un ou des utilisateur à ce rôle">
+                        <i class="fas fa-plus"></i>
+                </a>
+                <span class="ms-3"></span>
+                <a href="" class="btn btn-icon btn-danger" (click)="showRemoveUsersModal()"
+                     title="Enlever le(s) utilisateur(s) sélectionné(s) de ce rôle">
+                        <i class="fas fa-minus"></i>
+                </a>
+            </span>
+
+            <!-- <div class="border-0 pt-5 pb-3 px-0">
+                <h2 class="border-bottom-dashed border-1 border-gray-500 fw-bolder text-gray-800 pb-3">
+                    <span>Utilisateurs dans ce Rôle</span>
+
+                    <span class="float-end" *ngIf="canManage">
+                        <a href="" class="btn btn-icon btn-primary" (click)="showAddUsersModal()"
+                            title="Ajouter un ou des utilisateur à ce rôle">
+                                <i class="fas fa-plus"></i>
+                        </a>
+                        <span class="ms-3"></span>
+                        <a href="" class="btn btn-icon btn-danger" (click)="showRemoveUsersModal()"
+                             title="Enlever le(s) utilisateur(s) sélectionné(s) de ce rôle">
+                                <i class="fas fa-minus"></i>
+                        </a>
+                    </span>
+
+                </h2>
+            </div> -->
+
+            <app-data-table
+                [columns]="columns"
+                [page]="pageEnum.UsersInRole"
+                [permissions]="permissions"
+                dataKey="Id"
+                selectionMode="multiple"
+                [adaptColumns]="false"
+                colStorage="rbac.users-in-role"
+                [tackSelectionChange]="true"
+                (GridButtonClick)="onGridButtonClick($event)">
+            </app-data-table>
+        
+        </div>
+    </div>
+
+</div>
+
+<app-generic-modal-dialog [modalTitle]="modalTitle" [(showModal)]="modalIsVisible" [stepsCount]="1"
+    [saveButtonCaption]="saveBtnCaption" [backButtonCaption]="backBtnCaption" [page]="page"
+    [saveAction]="saveAction">
+
+        <div class="separator separator-dashed mb-10"></div>
+
+        <!-- <div [ngSwitch]="action"> -->
+
+            <app-user-roles-list [userId]="selectedUsers$.value[0]?.id || 0" [ngClass]="action == userRolesAction.ViewUserRoles ? '' : 'd-none'">
+            </app-user-roles-list>
+
+            <app-add-users-to-role [roleId]="roleId || 0" [ngClass]="action == userRolesAction.AddToRole ? '' : 'd-none'">
+            </app-add-users-to-role>
+
+            <div *ngIf="action == userRolesAction.RemoveFromRole">
+
+                Êtes-vous sûr de vouloir enlever les utilisateurs sélectionnés de ce rôle?
+
+                <ul class="mt-7 text-break">
+
+                    <li class="d-flex align-items-center py-2" *ngFor="let user of selectedUsers$ | async"
+                        [attr.id]="user.id" [title]="user.email">
+                            <span class="bullet bg-primary me-5"></span>
+                            &nbsp;
+                            {{user.firstName && user.lastName ? user.firstName + " " + user.lastName : user.email}}
+                    </li>
+
+                </ul>
+
+            </div>
+
+        <!-- </div> -->
+
+</app-generic-modal-dialog>

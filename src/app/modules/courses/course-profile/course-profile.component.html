@@ -1,0 +1,58 @@
+
+<div class="d-flex flex-column flex-xl-row">
+                <!--begin::prof details-->
+                <app-profile [Data]="ProfileDataTosend"  [Title]="courseData?.Name" [ImageSrc]="src"></app-profile>
+                <!--end::-->
+
+          
+    <!--begin::Content-->
+    <div class="flex-lg-row-fluid ms-lg-7">
+        <!--begin::tabs-->
+        <app-tabslist [TabsList]="TabsList" (BtnNavigateClick)="onClick($event)"></app-tabslist>
+        <!--end::-->
+
+        <div class="tab-content" id="myTabContent">
+            <!--begin::overview-->
+            <div class="tab-pane fade show active" id="kt_overview" role="tabpanel">
+                <app-overview-profile [Data]="courseDataTosend"></app-overview-profile>
+            </div>
+            <!--end::-->
+            <!--begin::settings-->
+            <div class="tab-pane fade" id="kt_settings" role="tabpanel">
+                <app-settings (BtnUpdateClick)="UpdateCourse()" [teachersList]="teachersList"
+                    [disciplinesList]="disciplinesList" [courseForm]="courseForm">
+                </app-settings>
+            </div>
+            <!--end::-->
+            <!--begin::Etudiants-->
+            <div class="tab-pane fade" id="kt_Etudiants" role="tabpanel">
+                <app-students *ngIf="selectedTab == 1" [CourseId]="CourseId"></app-students>
+            </div>
+            <!--end::-->
+            <!--begin::Examens-->
+            <div class="tab-pane fade" id="kt_Examens" role="tabpanel">
+                <app-examens [teachersList]="teachersList" [terms]="terms" [Course]="courseData"
+                    [TermId]="actualTearmId" *ngIf="selectedTab == 3"></app-examens>
+            </div>
+            <!--end::-->
+            <!--begin::Séances-->
+            <div class="tab-pane fade" id="kt_Séances" role="tabpanel">
+                <app-cour-sessions *ngIf="selectedTab == 2 && activeSeance < 1" [teachersList]="teachersList"
+                    [terms]="terms" [Course]="courseData" [TermId]="actualTearmId"
+                    (seanceSelected)="seanceChanged($event)"></app-cour-sessions>
+
+                <app-cour-session-details [SessionId]="activeSeance" *ngIf="selectedTab == 2 && activeSeance >= 1"
+                    [seance]="activeSeance">
+                </app-cour-session-details> 
+            </div>
+            <!--end::-->
+        </div>
+
+        <div class="clearfix">&nbsp;</div>
+
+        <p-paginator [hidden]="selectedTab < 1" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"
+            (onPageChange)="paginate($event)"></p-paginator>
+
+        <div class="clearfix mb-10">&nbsp;</div>
+    </div>
+</div>

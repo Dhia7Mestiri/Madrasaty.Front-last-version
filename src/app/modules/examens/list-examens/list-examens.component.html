@@ -1,0 +1,19 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table #dataTable [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="examens" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+    <app-card-view
+        apiUrlPath="examens" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions" [config]="config" [css]="css">
+    </app-card-view>
+</ng-container>
+
+

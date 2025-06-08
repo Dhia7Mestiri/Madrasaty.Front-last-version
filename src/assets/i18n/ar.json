@@ -1,0 +1,178 @@
+{
+    "general": {
+        "title": "مدرستي",
+        "success": "العملية تمت بنجاح",
+        "cancel": "إلغاء",
+        "ok": "موافق",
+        "delete": "حذف",
+        "edit": "تعديل",
+        "paginator": "عرض من {first} إلى {last}.",
+        "logo": "شعار"
+    },
+    "courses-list": {
+        "title": "المواد الدراسية",
+        "new-button": "مادة دراسية جديدة",
+        "edit": "تعديل المادة الدراسية",
+        "coefficient": "ضارب",
+        "level": "المستوى",
+        "discipline": "التخصص",
+        "Lecturer":"المحاضر",
+        "Coefficient":"المعامل",
+        "Actif":"نشيط"   ,
+        "Course":"المادة الدراسية"
+
+    },
+    "Exams-list": {
+        "title": "الامتحانات",
+        "new-button": "امتحان جديد",
+        "edit": "تعديل الامتحان",
+        "start-date": "تاريخ البدء",
+        "end-date": "تاريخ الانتهاء",
+        "RelatedTerm":"دورة",
+        "RelatedCourse": "المادة الدراسية",
+        "RelatedSupervisor":"المشرف",
+        "ExamName":"اسم الامتحان",
+        "Coefficient":"المعامل",
+        "ExamStatus":"ExamStatus"
+    },
+    "schools-list": {
+        "title": "المؤسسات التعليمية",
+        "new-button": "مؤسسة تعليمية جديدة",
+        "edit": "تعديل المؤسسة التعليمية",
+        "country": "الدولة",
+        "city": "المدينة",
+        "Name":"إسم المدرسة",
+        "Adress":"عنوان",
+        "TVA":"رمز TVA",
+        "Siret":"SIRET",
+        "PostCode":"الرقم البريدي"
+
+    },
+    "terms-list": {
+        "title": "الفصول الدراسية و الدورات",
+        "new-button": "دورة جديدة",
+        "edit": "تعديل الدورة",
+        "start-date": "تاريخ البدء",
+        "end-date": "تاريخ الانتهاء",
+        "Recurrence":"التكرار",
+        "RelatedSchool":"المدرسة",
+        "Name":"اسم الفترة"
+
+    },
+    "holidays-list": {
+        "title": "العطل",
+        "new-button": "عطلة جديدة",
+        "edit": "تعديل العطلة",
+        "school": "المؤسسة التعليمية",
+        "start-date": "تاريخ البدء",
+        "end-date": "تاريخ الانتهاء",
+        "Holiday-name":"العطلة"
+
+    },
+    "list-members": {
+        "title": "الأعضاء",
+        "new-button": "عضو جديد",
+        "edit": "تعديل العضو",
+        "school": "المؤسسة التعليمية",
+        "city": "المدينة",
+        "zip-code": "الرمز البريدي"
+    },
+    "classrooms-list": {
+        "title": "قاعات الدراسة",
+        "new-button": "إضافة قاعة",
+        "edit": "تعديل قاعة الدراسة",
+        "school": "المؤسسة التعليمية",
+        "nbr-projectors": "أجهزة العرض",
+        "nbr-desks": "طاولات",
+        "nbr-chairs": "كراسي",
+        "RelatedSchool": "المؤسسة التعليمية",
+        "ClassroomCode":"قاعةالدراسة"
+    },
+    "disciplines-list": {
+        "title": "التخصصات",
+        "new-button": "إضافة تخصص",
+        "edit": "تعديل التخصص",
+        "school": "المؤسسة التعليمية"
+    },
+    "dashboard-index": {
+        "statistics": "إحصائيات"
+    },
+    "aside-menu": {
+        "home": "الصفحة الرئيسية",
+        "profile": "الملف الشخصي",
+        "parameters": "الخيارات",
+        "projects": "المشاريع",
+        "documents": "الكتب والوثائق",
+        "friends": "أصدقاء",
+        "accounts": "الحسابات",
+        "schools": "المؤسسات التعليمية",
+        "terms": "الفصول الدراسية و الدورات",
+        "holidays": "العطل",
+        "members": "الأعضاء",
+        "classrooms": "قاعات الدراسة",
+        "disciplines": "التخصصات",
+        "tajwid-mistakes": "أخطاء التجويد",
+        "tasmii": "تسميع",
+        "sessions-tasmii": "إختبار التسميع",
+        "tasmii-history": "إختبارات التسميع السابقة",
+        "moutouns": "متون",
+        "sessions-moutouns": "إختبارات المتون",
+        "moutouns-history": "إختبارات المتون السابقة",
+        "exams": "الامتحانات",
+        "sessions-exams": "الإمتحانات",
+        "exams-history": "الإمتحانات السابقة",
+        "courses": "المواد الدراسية",
+        "sessions-courses": "حصص المواد",
+        "courses-history": "الحصص السابقة",
+        "calendar": "جدول الأوقات",
+        "chat": "دردشة"
+    },
+    "aside-footer": {
+        "stats": "احصائيات",
+        "stats-title": "المعدلات و الإحصائيات"
+    },
+    "contact": {
+        "contact-me": "Contact",
+        "send": "Send",
+        "close": "Close",
+        "error-title": "Oups...",
+        "error-message": "An error occured while sending your message :(",
+        "name": "Name",
+        "your-name": "Your Name",
+        "email": "Email",
+        "your-email": "Your email",
+        "subject": "Subject",
+        "message-subject": "Message Subject",
+        "message": "Message",
+        "write-message": "Write comment here..."
+    },
+    "navbar-language-dropdown": {
+        "language": "اللغة"
+    },
+    "navbar": {
+        "system": "حسب الجهاز",
+        "light": "وضع مضيء",
+        "dark": "وضع داكن"
+    },
+    "toolbar": {
+        "home": "الصفحة الرئيسية",
+        "recently-updated": "تم تحديثه مؤخرًا"
+    },
+    "footer": {
+        "about": "من نحن",
+        "all-rights-reserved": "كل الحقوق محفوظة",
+        "contact": "اتصل بنا"
+    },
+    "dynamic-form-question": {
+        "is-required": " هذه الخانة إجبارية"
+    },
+    "misc": {
+    },
+    "topbar":{
+        "cours":"دروس",
+        "calendrier":"جدول الأوقات",
+        "exercices":"تمارين",
+        "resultats":"نتائج",
+        "aide":"مساعدة"
+    }
+}

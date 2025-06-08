@@ -1,0 +1,29 @@
+<div class="card pt-4 mb-6 mb-xl-9">
+    <!--begin::Card header-->
+    <div class="card-header border-0">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2>Profile</h2>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body pt-0 pb-5">
+        <!--begin::Form-->
+        <form [formGroup]="profileForm" class="form-horizontal">
+
+            <app-dynamic-form [form]="profileForm" [questions]="questions">
+            </app-dynamic-form>
+            <div class="d-flex justify-content-end">
+                <!--start::Button-->
+                <button (click)="onUpdateClick()" class="btn btn-light-primary" id="kt_docs_sweetalert_basic">
+                    <span class="indicator-label">Save</span>
+                </button>
+                <!--end::Button-->
+            </div>
+        
+        </form>
+    </div>
+    <!--end::Card body-->
+</div>

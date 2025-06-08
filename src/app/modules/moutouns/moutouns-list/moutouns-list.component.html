@@ -1,0 +1,115 @@
+<div class="card card-page" *ngIf="tableView">
+    <div class="card-body">
+
+        <app-data-table [pageTitle]="pageTitle" [columns]="columns"
+            urlPath="moutouns" [urlParams]="urlParams" dataKey="Id" [page]="page"
+            [permissions]="permissions">
+        </app-data-table>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!tableView">
+    <app-card-view-user
+        apiUrlPath="moutouns" [apiUrlParams]="urlParams" dataKey="Id" [page]="page"
+        [permissions]="permissions"
+        (btnClicked)="buttonClicked($event)">
+    </app-card-view-user>
+</ng-container>
+
+
+
+
+
+
+
+<ng-container *ngIf="false">
+    <p-toast></p-toast>
+    <p-confirmDialog [position]="position" [style]="{width: '20vw'}" [baseZIndex]="10000"
+        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+    <p-dialog [header]="DialogTitle" [(visible)]="displayModal" position="top" [modal]="true" [style]="{width: '20vw'}"
+        [draggable]="false" [resizable]="false">
+
+        <form [formGroup]="MoutounPoemeForm">
+
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="Wording" required="false" formControlName="Title">
+                <label for="Wording">Titre</label>
+            </div>
+
+
+
+
+
+
+        </form>
+        <div class="col-lg-10">
+            <div class="mb-3">
+                <input class="form-control" name="file" #fileInput type="file" accept=".pdf">
+            </div>
+
+        </div>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple type="button" label="Dégager" class="p-button-raised p-button-secondary p-button-text"
+                (click)="ResetForm()"></button>
+            <button pButton pRipple type="button" label="Confirmer" class="p-button-raised p-button-text"
+                (click)="saveMoutoun()"></button>
+        </ng-template>
+    </p-dialog>
+
+
+    <div class="row">
+        <div>
+
+            <button style="float: right;    width: 30px; height: 35px;" matTooltip=" Ajouter Moutoun Poeme" pButton pRipple
+                type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined p-button-lg mb-3 "
+                (click)="OpenDialog(-1)"></button>
+        </div>
+        <div class="col-lg-3" *ngFor="let item of poemeList">
+            <div class="card  mb-4 mb-xl-6">
+                <div class="speed" style="  
+                margin-left: auto;
+                margin-right: 65px;
+                margin-top: 11px;">
+                    <p-speedDial pTooltip="options des paramétres" tooltipPosition="top" (click)="click(item)"
+                        [model]="items" radius="80" direction="down-left" type="quarter-circle" [transitionDelay]="80"
+                        showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined"></p-speedDial>
+                </div>
+                <div class="card-body d-flex justify-content-center text-center flex-column p-8 ">
+
+                    <a class="text-gray-800 text-hover-primary d-flex flex-column cursor-pointer ">
+                        <div class="symbol symbol-75px mb-6 ">
+                            <img *ngIf="item.File" matTooltip="Cliquez pour ouvrir le fichier"
+                                (click)="openDocment(item.File,item.Title)" src="./assets/media/svg/files/pdf.svg" alt="" />
+                            <img *ngIf="!item.File" matTooltip="Aucun fichier trouvé"
+                                (click)="openDocment(item.File,item.Title)"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAADpCAMAAABx2AnXAAAAllBMVEX///8REiQAAADa2tsvLDm0tLf6+volIjF6eoAxMDpeXWYyLzxDQk6Qj5MtKzfv7/A+PUhvbnWcnKAAABoAABc2NEArKDcAABULDCCLipBnZm2kpKeYl53Q0NFVU12sq6/m5eZMSlS+vsEgHS26urxCQEyBgIfi4uLJyMt3dnxbWWOOjZQZGypiY2vV1dkAAB8AAA4bFypxuXDeAAAIoklEQVR4nO2djXaiPBCGASMgwUDABFDkRysVUbd7/zf3gbbdtitYdfjZfnl6PKLUwAvJMJkMQZIEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAsFVrA98/fwN1L73v4YVTe13WCxJMbNvIqXLvjVcIuMTTN5Z65KUa+QmMONF3yr+JuAsDcd/KOuiNb6N6YZpYd86vnLUGH24jVgRWycAOwNJgDWAtp9gPLRTluIcohiK5xDFALLBU4hidGxAFAOICSXsAFEMIEJYM0JYZwhhzWQ4gigGECBhMcIDc4SBhFmMmc8QBYEBJEwarxnKnGbiEcimvgeUMGmh4WsQbnR3VsGESUlgXumQMszQEWhrV4ETdh1rUbbEruIIXQqTpCdO4o421a0wKWVddW86FhZgs6MtdSxsijcdbalzYT/2jAlhDyKEwSCEPYwQBoMQ9jBC2BdWq7t+Nnhho/X6rn7+8IUhJIR9RAh7mP+ZMNVIm4MuV4WpqXGphL6FPctXhl6vCptj+VIMsW9hUoBQ42j5NWEhQsGl73sXJhmMN12CrwhbcXZ5TLp/YRZjvCEe3SzsmTNmXVzTvzBpyVmDAWkUpqaM1wwqDUCYFPOGFJBGYTnmdfHeIQiTMswXdeuahC04zurWDUKYGjFtW7OuQdhWY1FtHR6EMCnBdTagQVhpdXBSW+QwhElbUnfwa4WVp5nUnWZpMMIkhxDn4ooR55eF1f7izFCESdS7bN8szi9X0nhGm8objDCppo1Jap19qPvBmeEIA0YIexghDAYh7GGEMBiEsLtRz5yEqZ1xEva2DI81zjfaK7bNtA5htv22uMnHzV7KzcQbjieodyYTvoFMrFLnnPF0euMNRy0wTcsdmYPVSCvC2GjoMHXJ0sA4gqqOc8wvRjLPqMvqCF66XRFo818IONTNPuOGQEsJ/Z1L0gJfSA4FuWfpbzLMxxDlqCZrzI+f/y4PYL4m/C8YxOYvEMHknK54Y+C6vBDU3cmYAGz9nj36Jhm+MjzUOWra2Da+iwFzfx8kOcQtdWo6aQoh9YIzAahEqtkYG+sFhwBYDzXCDRexfghwfUD8+wzv5lfpgBsDkd8kwClAKaCkIJUoRnZLztG9WDaCcPGX/L70jPYYobrBz9uKwXwgnv0bW44hDnV54msHKfthAdQ4YJoqIFDmbA5iXAGBugBNB+YFlz4wzOQtY4QGZe8thEA6mqUR0gZl70cakJlONALRrwNjRbQEpqQ1HpS9X+A1UEkmSIcVjAwslk8nO6CSQNhNoC4/DuZAJYHAMVTPd4zWA7L31hrI2lf+fU1KTS+MOIhvX2FpaED2foU0qPqj2mhA8RwH2WAenoF1qKIeB3KeLn1Is9tEgEc5xJ3NPHEV1QScC++JswSssAdJGH8CK6w2hbIHQPclYQTuKD3IEwGsParZfNdKl4QIsr3vhmPvdQzpkYMMSMEAO1znIHMgbrBlgnpBK1KTgN05FgeNUxzhPOoHKXsakPNvlf49VB/oQcZwvv0JuF7rg0D35qOhpA7kwP54NoBhzVFlNWBSPP6w6D+eY7Hf26pNwMY4V7z3GcFHWmmZEw0k2+hTqX0Pa644foYfR7B47/bewUwFt/bVmFSnKekXOI1jwo/VzXtPYzllrcDvRv9pLHYV64AfD4caqb+bk1fXQgYDUG7F/Rwra99CzskzJ/3690/VyMiSNM3ScBeW3dncr5dZYCxJMQFvEL2nLebV6CNMouJn+k5jiSrvt43cyTYO1i3gskfYSrVpoXrfQoLIuJ2GvkXgBukWTqOqzxzBu+Ij1Kt//4RwUl5MW8gJVVGvaSwhKr3fBUYttHMbKOfsPvLqkSEFtlsoul///jRa3M4udDfX9wXOkW2gp019IUYQTx27kwTzlaRqIGnpX9mSHtMWlxwdpZHWNLXO3YAHiG5hTJhVpa4kLZSt4lYqwvcIqwYeI9xKY4h6TFs8jWO29TClvMe0xdNB3U3aGUCYtnJ5/BZlM1hULkI7IcAY1U1+1jonw2Wxlhp5aXL7CntkrAp4wNyE9DeW3dMTPdWQVE0sxG31CGmLTymydFpLiplpVdlhbQUntrw9Bz/+3fCsLn6wKte+vQ4hZVpbYy5WXn/GgkrQWGPtRZMsm9XP5NkuC87ajLmMbIaiVedOvrqKELNbdcETgzNCDL1TDEIYN5I2dZXEZvVgvkmXYKyZXfjfSyc3OiV3BpLvJBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAMltEPRVJ+KJL8QxHC/jVehfmvL/nDuyy7ruz/+VQtuX8+DpyzMN/2ZZ/sz8vsbd1sF3nEfpOyT31Z27F/RdlZmDs/uLNi5s3kmacEe9/zXN9T4hLqKJ6i+L6iTJaKwgLz3xLm7wtvnelhpmRhnoU4DHXTiUapolBrNz0uuXk8plvzSMxOz1jZDs5txK+W/df3t29O79Vn1/dd3y3bTfkqFz8Kk72pPKf5jNK5ogS/prJC893LZjnKaMiXyiFe2QpJjq7vd6jLJ9RgmrtfmzPu+maR2uW7vM9KJROXlEtr72CG6cKkhR3KYXYIoixgxdz9KMw1jMAID3PddL3Ad168eZa6L8qvURamY8V+2r68kGSpdVsP/UCnCxqksZHnsVnYMc3nRfpEFd2gVC9KKboS2nnmKA7dRbTwc6fUST8Jk/2Fvi98zkN/bxyoIRe7yHXodGuP0Iiu8ulYN7fp6KVTYbMsy2lamKF+KBw+L5zgkDn2IuNFmh2m88B2opRSIwz0Q2aHRUazwjlkweyTMJdqLglynwf5y0GZBxrCfhRmM89If4UH74VOOVVyu9tTttc8U+ZsL9su8U2f/Np4GtMI89KZ6WpctstvPVv2N7NUY2vP9Ijmmp/b2OkK5c/c06v8m1WtyS2tZNUyvfJ/Xa9slT1cxXz5bDTe//y3z6cP70uvy/77Vfinex4/DyHsX+M/GrvX8l0h7TcAAAAASUVORK5CYII="
+                                alt="" />
+                        </div>
+                        <div class="fs-5 fw-bolder mb-2">{{item.Title}}</div>
+
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <p-dialog header={{PopHeader}} [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw',height:'80vw'}"
+        [maximizable]="true" [draggable]="true" [resizable]="true">
+        <div class="me-4">
+            <iframe [src]="fileURL | safe" width="100%" height="900px"></iframe>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Ok"
+                styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+    <div class="mt-5">
+        <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"
+            (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+</ng-container>

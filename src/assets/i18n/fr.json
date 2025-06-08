@@ -1,0 +1,192 @@
+{
+    "general": {
+        "title": "Madrasaty",
+        "success": "Succès",
+        "cancel": "Annuler",
+        "ok": "OK",
+        "delete": "Supprimer",
+        "edit": "Éditer",
+        "paginator": "Affichage des entrées {first} à {last}.",
+        "logo": "Logo",
+        "SIGNUP_BUTTON":"Sign Up"
+
+    },
+    "auth":{
+        "new-account":"Créer un compte",
+        "auth-question":"Vous avez déjà un compte?",
+        "login-question":"S'identifier?",
+        "check-message":"VOUS AVEZ DEJA UN COMPTE",
+        "login":"Se connecter",
+        "welcome":"Bienvenue à",
+        "new":"Nouveau ici ?"
+
+
+
+    },
+    "courses-list": {
+        "title": "Cours",
+        "new-button": "Nouveau Cours",
+        "edit": "Édition Cours",
+        "coefficient": "Coefficient",
+        "level": "Niveau",
+        "discipline": "Discipline",
+        "Lecturer":"Chargé de Cours",
+        "Course":"Cours",
+        "Coefficient":"Coefficient",
+        "Actif":"Actif"
+    },
+    "Exams-list": {
+        "title": "Examen",
+        "new-button": "Nouveau Examen",
+        "edit": "Edition Examen",
+        "start-date": "Date Début",
+        "end-date": "Date Fin",
+        "RelatedTerm":"Période",
+        "RelatedCourse":"Cours",
+        "RelatedSupervisor":"Superviseur",
+        "ExamName":"titre d'Examen",
+        "Coefficient":"Coefficient",
+        "ExamStatus":"Status d'Examen"
+    },
+    "schools-list": {
+        "title": "Écoles",
+        "new-button": "Nouvelle École",
+        "edit-school": "Édition École",
+        "country": "Pays",
+        "city": "Ville",
+        "Name":"Nom",
+        "Adress":"Adresse",
+        "TVA":"Code TVA",
+        "Siret":"SIRET",
+        "PostCode":"Code Postal"
+    },
+    "terms-list": {
+        "title": "Trimestres | Périodes",
+        "new-button": "Nouvelle Période",
+        "edit": "Edition Période",
+        "start-date": "Date Début",
+        "end-date": "Date Fin",
+        "Recurrence":"Récurrence",
+        "RelatedSchool":"École",
+        "Name":"Nom de Periode"
+
+
+    },
+    "holidays-list": {
+        "title": "Vacances Scolaires",
+        "new-button": "Nouvelle Vacance",
+        "edit": "Édition Vacance",
+        "school": "École",
+        "start-date": "Date Début",
+        "end-date": "Date Fin",
+        "Holiday-name":"Vacance"
+
+    },
+    "list-members": {
+        "title": "Membres",
+        "new-button": "Nouveau Membre",
+        "edit": "Edition Membre",
+        "school": "École",
+        "city": "Ville",
+        "zip-code": "Code Postal"
+    },
+    "classrooms-list": {
+        "title": "Salles de cours",
+        "new-button": "Nouvelle salle de cours",
+        "edit": "Édition salle de cours",
+        "nbr-projectors": "Projecteurs",
+        "nbr-desks": "Bureaux",
+        "nbr-chairs": "Chaises",
+        "RelatedSchool": "L'ecole",
+        "ClassroomCode":"La Classe"
+
+
+    },
+    "disciplines-list": {
+        "title": "Disciplines",
+        "new-button": "Nouvelle Discipline",
+        "edit": "Édition Discipline",
+        "school": "École"
+    },
+    "dashboard-index": {
+        "statistics": "Statistiques"
+    },
+    "aside-menu": {
+        "home": "Home",
+        "profile": "Profile",
+        "parameters": "Paramètres",
+        "projects": "Projets",
+        "documents": "Documents",
+        "friends": "Ami(e)s",
+        "accounts": "Comptes",
+        "schools": "Écoles",
+        "terms": "Trimestres | Périodes",
+        "holidays": "Vacances Scolaires",
+        "members": "Membres",
+        "classrooms": "Sales de Cours",
+        "disciplines": "Disciplines",
+        "tajwid-mistakes": "Fautes de Tajwid",
+        "tasmii": "Tasmii",
+        "sessions-tasmii": "Sessions Tasmii",
+        "tasmii-history": "Sessions Tasmii Précedantes",
+        "moutouns": "Moutouns",
+        "sessions-moutouns": "Sessions Moutouns",
+        "moutouns-history": "Sessions Moutouns Précedantes",
+        "exams": "Examens",
+        "sessions-exams": "Sessions des Examens",
+        "exams-history": "Examens Précedants",
+        "courses": "Cours",
+        "sessions-courses": "Sessions de Cours",
+        "courses-history": "Historique Sessions de Cours",
+        "calendar": "Calendrier",
+        "chat": "Chat"
+    },
+    "aside-footer": {
+        "stats": "Statistiques",
+        "stats-title": "Statistiques de Performance"
+    },
+    "contact": {
+        "contact-me": "Contact",
+        "send": "Envoyer",
+        "close": "Fermer",
+        "error-title": "Oups...",
+        "error-message": "Une erreur s'est produite lors de l'envoi de votre message :(",
+        "name": "Nom",
+        "your-name": "Votre nom",
+        "email": "Email",
+        "your-email": "Votre adresse email",
+        "subject": "Sujet",
+        "message-subject": "Sujet",
+        "message": "Message",
+        "write-message": "Commentaire..."
+    },
+    "navbar-language-dropdown": {
+        "language": "Langue"
+    },
+    "navbar": {
+        "system": "Système",
+        "light": "Clair",
+        "dark": "Sombre"
+    },
+    "toolbar": {
+        "home": "Accueil",
+        "recently-updated": "Dernière mise à jour"
+    },
+    "footer": {
+        "about": "À propos",
+        "all-rights-reserved": "Tous droits réservés.",
+        "contact": "Contact"
+    },
+    "dynamic-form-question": {
+        "is-required": " est requis."
+    },
+    "misc": {
+    },
+    "topbar":{
+        "cours":"Cours",
+        "calendrier":"Calendrier",
+        "exercices":"Exercices",
+        "resultats":"Résultats",
+        "aide":"Aide"
+    }
+}

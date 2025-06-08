@@ -1,0 +1,166 @@
+<div class="row gy-5 gx-xl-5">
+    <div class="card card-xxl-stretch mb-5 mb-xl-8">
+      <div class="card-header border-0 pt-5">
+        <div class="card-toolbar">
+          <h4>Evaluation Moutoun</h4>
+        </div>   
+      </div>
+  
+      <div class="card-body pb-5">
+     
+  
+        
+            <div class="row">
+              <div class="col-lg-3">
+               
+                    <!--begin::Body-->
+                
+                        <!--begin::Member-->
+                        <div class="d-flex flex-column text-center mb-9 px-9">
+                            <!--begin::Photo-->
+                            <div class="symbol symbol-80px symbol-lg-150px mb-4">
+                                <img src="/assets/media/avatars/300-3.jpg" class="" alt="">
+                            </div>
+                            <!--end::Photo-->
+                            <!--begin::Info-->
+                            <div class="text-center">
+                                <!--begin::Name-->
+                                <a class="text-gray-800 fw-bold text-hover-primary fs-4">{{selectedStudent? selectedStudent?.FullName:"Nom Prénom"}}</a>
+                                <!--end::Name-->
+                                <!--begin::Position-->
+                                <span class="text-muted d-block fw-semibold">{{selectedStudent? selectedStudent?.Email:"Gmail"}}</span>
+                                <!--end::Position-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Member-->
+                        <div class="d-flex flex-column text-center mb-9 px-9">
+                          <div class="symbol symbol-80px symbol-lg-150px mb-4">
+                            <img src="assets/media/svg/files/pdf.svg" class="" alt="">
+                        </div>
+                        <div class="text-center">
+                          <!--begin::Name-->
+                          <a class="text-gray-800 fw-bold text-hover-primary fs-4">{{selectedMoutounFile ? selectedMoutounFile?.Title:"Moutoun File"}}</a>
+                          <!--end::Name-->                     
+                      </div>
+                        </div>
+                 
+                    <!--end::Body-->
+               
+              </div>
+              <div class="col-lg-9">
+                <form [formGroup]="moutounForm" >
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold mb-2">Etudiants
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <select class="form-select form-select-solid" (change)="onSelectStudentChange($event.target.value)"  formControlName="StudentId" >                  
+                            <option *ngFor="let opt of StudentsBySeance" [value]="opt.Id">{{opt.FullName}}</option>  
+                        </select>  
+                        <!--end::Input -->
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container"> 
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-semibold mb-2">Poéme
+                          <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  data-kt-initialized="1"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <select class="form-select form-select-solid" (change)="onSelectPoemeChange($event.target.value)" data-control="select2" formControlName="PoemId" >                         
+                            <option *ngFor="let opt of PoemesList" [value]="opt.Id">{{opt.Title}}</option>  
+
+                        </select>
+                        
+                        <!--end::Input-->
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+              
+                    <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span >Début
+                                      <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"  data-kt-initialized="1"></i></span>
+
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" class="form-control form-control-solid" formControlName="VerseStart" value="">
+                                <!--end::Input-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span>Fin</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Enter the contact's phone number (optional)." data-bs-original-title="Enter the contact's phone number (optional)." data-kt-initialized="1"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" class="form-control form-control-solid" formControlName="VerseEnd"  value="">
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+  
+                    <div class="row">
+                      <div class="d-flex flex-column flex-grow-1 mb-5 mt-2">      
+                        <h3 class="mb-3" style="float: left;">Remarques</h3>          
+                        <p-editor formControlName="Remarques" [style]="{'height':'120px'}" >
+                
+                        </p-editor>
+                
+                      </div>
+                    </div>
+
+                    <div class="parent">
+                       
+                    <p-rating  formControlName="Rating"  [cancel]="false">
+
+
+                    </p-rating>
+              
+            </div>
+                    <div class="d-flex justify-content-end mt-5">
+                        <button (click)="saveMoutoun()" class="btn btn-primary me-2">
+                            <i class="fas fa-save" style="font-size: 20px"></i>
+                            Sauvegarder
+                          </button>
+                          <a  class="btn btn-primary"  (click)="initilizeForm()"
+                            ><i class="fa fa-refresh" style="font-size: 20px"></i>
+                            Reset
+                          </a>
+                        </div>
+                    
+                      </form>
+              </div>
+              </div>
+    
+        
+
+        </div>
+      </div>
+  
+    </div>
+
+
+ <app-historique-moutoun-seance [SeanceId]="SeanceData?.Id" [StudentsBySeance]="StudentsBySeance" ></app-historique-moutoun-seance>
+
+
+
+
+   

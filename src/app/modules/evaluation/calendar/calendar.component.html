@@ -1,0 +1,54 @@
+<p-toast></p-toast>
+<full-calendar #calendar height='auto' defaultView="dayGridMonth" events="rowData" deepChangeDetection="true"
+    minTime="08:00:00" maxTime="19:00:00" [options]="calendarOptions">
+</full-calendar>
+
+<p-confirmDialog position="top" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-dialog header="Header" position="top" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+    <form [formGroup]="eventForm" (ngSubmit)="SaveEvent()">
+        <h1 mat-dialog-title>{{title}}</h1>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Title</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="Title">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Role</label>
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="Role">
+                <option *ngFor="let opt of MemberStatusIdList; index as i" [selected]="i == 2" [value]="opt.Id">{{
+                    opt.Wording }}</option>
+            </select>
+        </div>
+
+
+        <div class="row mb-3 mt-5">
+            <div class=" col-6 form-floating ">
+                <span class="p-float-label">
+                    <p-calendar formControlName="StartDate" [showIcon]="true" inputId="StartDate"></p-calendar>
+                    <label for="StartDate">Date de début</label>
+                </span>
+            </div>
+            <div class=" col-6 form-floating">
+                <span class="p-float-label">
+                    <p-calendar formControlName="EndDate" [showIcon]="true" inputId="EndDate"></p-calendar>
+                    <label for="EndDate">Date de fin</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                formControlName="Description"></textarea>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <p-button *ngIf="eventType=='course' " (click)="deleteItem(selectedEventId)" label="Supprimer"
+            styleClass="p-button-text"></p-button>
+        <p-button (click)="displayResponsive=false" label="Annuler" styleClass="p-button-text"></p-button>
+        <p-button (click)="SaveEvent()" label="Confirmer" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
